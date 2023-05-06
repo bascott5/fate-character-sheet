@@ -66,16 +66,14 @@ const Dropdown: React.FC<Props> = ({chapter, index}: Props) => {
 	}
 
     return (
-        <div className="dropdownContainer">
+        <div>
 			<button onClick={() => isOpen(open => open = !open)} className="dropdown">{ chapter }</button>
-            <li>
             {
                 open ?
-					<ul>{ pages }</ul>                    
-                :
+					<div className="linkContainer">{ pages }</div>
+            	:
                 	null
             }
-            </li>
 		</div>
     );
 }

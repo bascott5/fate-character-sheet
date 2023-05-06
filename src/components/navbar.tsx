@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
 	}
 	
 	return (
-		<div>
+		<div className="dropdownContainer">
 			<h1>Fate Core</h1>
 			{ chapters }
 		</div>
