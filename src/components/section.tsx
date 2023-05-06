@@ -1,13 +1,13 @@
 import Link from "next/link";
 
 interface Props {
-    sections: string[]
+    sections: string
 }
 
 const Section: React.FC<Props> = ({ sections }: Props) => {
-    return sections.map((key: string) => (
-		<Link href={"/" + key + ".tsx"}>{key}</Link>
-	))
+    return (
+		<Link href={"./" + sections + ".tsx"}>{ sections }</Link>
+	)
 }
 
 export default Section;
