@@ -6,7 +6,7 @@ interface Props {
     index: number
 }
 
-const Dropdown: React.FC<Props> = ({chapter, index}: Props) => {
+const Dropdown: React.FC<Props> = ({ chapter, index }: Props) => {
     const [open, isOpen] = useState<boolean>(false);
 
 	let pages = [];

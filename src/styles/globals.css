@@ -1,26 +1,58 @@
-.dropdownContainer {
-  background-color: lightskyblue;
+body {
+  display: flexbox;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.logo {
+  background-color: cornflowerblue;
   color: white;
+  text-align: center;
   position: flex;
-  margin: 0vh 150vh 0vh 0vh;
-  padding: 2vh 10vh 5vh 10vh;
+  padding: 50px 50px 50px 50px;
+  margin: -25px;
+}
+
+.dropdownContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.dropdownContainer {
+  background-color: darkgray;
+  position: absolute;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  top: 0;
+  left: 0;
+  height: 100vh;
 }
 
 .dropdown {
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
+  background-color: darkgray;
+  color: white;
+  border-color: lightgray;
   font: inherit;
   cursor: pointer;
-  outline: inherit;
+  position: flex;
+  display: inline-flex;
+  padding: 5px 100px 5px 20px;
+  width: 100%;
 }
 
 .linkContainer {
+  background-color: lightgray;
+  margin: 0vh -10vh 0vh -10vh;
+}
 
+.section {
+  padding: 10px 0px 10px 75px;
+  margin: 0px 0px 0px 10px;
 }
 
 .link {
-  background-color: lightgray;
-  color: gray;
+  color: black;
 }

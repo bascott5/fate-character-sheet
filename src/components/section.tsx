@@ -6,7 +6,7 @@ interface Props {
 
 const Section: React.FC<Props> = ({ sections }: Props) => {
     return (
-        <ul>
+        <ul className="section">
             <Link href={"./" + sections + ".tsx"} className="link">{ sections }</Link>
         </ul>
 	)
