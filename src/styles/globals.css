@@ -20,6 +20,8 @@ body {
 }
 
 .dropdownContainer {
+  /*display: none;*/
+
   background-color: darkgray;
   position: absolute;
   overflow-y: scroll;
