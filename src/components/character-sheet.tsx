@@ -1,17 +1,20 @@
 import OptionContainer from "./option-container";
+import ContextProvider from "@/components/context-provider";
 
 const CharacterSheet: React.FC = () => {
     return (
         <div>
-            <OptionContainer />
-            <div className="firstColumn">
-                <p>Skills</p>
-                <p>Stunts</p>
-            </div>
-            <div className="secondColumn">
-                <p>Aspects</p>
-                <p>Stress</p>
-            </div>
+            <ContextProvider>
+                <OptionContainer />
+                <div className="firstColumn">
+                    <p>Skills</p>
+                    <p>Stunts</p>
+                </div>
+                <div className="secondColumn">
+                    <p>Aspects</p>
+                    <p>Stress</p>
+                </div>
+            </ContextProvider>
         </div>
     )
 }

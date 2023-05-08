@@ -1,6 +1,6 @@
 import Dropdown from './dropdown01';
 
-const Navbar: React.FC = ({ children }: any) => {
+const Navbar: React.FC = () => {
     let chapters = new Array(11);
 	const chapter = ["Basics", "Character Creation", "Aspects & Fate Points", "Skills & Stunts", "Actions & Outcomes", "Challenges, Contests, & Conflicts", "Running the Game", "Scenes, Sessions, & Scenarios", "The Long Game", "Extras"];
 
@@ -12,9 +12,6 @@ const Navbar: React.FC = ({ children }: any) => {
 		<div className="dropdownContainer">
 			<h1 className='logo'>Fate Core</h1>
 			{ chapters }
-			<div>
-				{ children }
-			</div>
 		</div>
 	);
 }

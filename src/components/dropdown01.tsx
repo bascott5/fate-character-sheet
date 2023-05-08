@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Section from './section';
 
 interface Props {
-    chapter: string[],
+    chapter: string,
     index: number
 }
 
