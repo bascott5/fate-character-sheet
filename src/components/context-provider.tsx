@@ -5,8 +5,8 @@ interface Props {
 }
 
 export type Action = 
-| { type: "toggle", payload: any } 
-| { type: "Save", payload: any };
+| { type: "Save", payload: any } 
+| { type: "Load", payload: any };
 
 export let initState: Object = {
     isAspects: false,
@@ -26,10 +26,9 @@ export const Context = createContext<[Object, React.Dispatch<Action>]>([initStat
 const ContextProvider: React.FC<Props> = ({ children }: Props) => {
     const reducer = (state: Object, action: Action) => {
         switch (action.type) {
-            case "toggle": //remove
-                console.log(state);
-                return {...state, payload: !action.payload}
             case "Save":
+                return {...state}
+            case "Load":
                 return {...state}
             default:
                 return {...state};
@@ -38,11 +37,13 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
 
     const [state, dispatch] = useReducer(reducer, initState);
     return (
-        //button for Save
-        //button for Load
-        <Context.Provider value={[state, dispatch]}>
-            { children }
-        </Context.Provider>
+        <div>
+            <Context.Provider value={[state, dispatch]}>
+                <button onClick={() => dispatch({ type: "Save", payload: 0})}>Save</button>
+                <button onClick={() => dispatch({ type: "Load", payload: 0})}>Load</button>
+                { children }
+            </Context.Provider>
+        </div>
     );
 }
 
