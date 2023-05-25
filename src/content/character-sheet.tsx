@@ -1,4 +1,4 @@
-import OptionContainer from "./option-container";
+import OptionContainer from "@/components/option-container";
 import ContextProvider from "@/components/context-provider";
 
 const CharacterSheet: React.FC = () => {

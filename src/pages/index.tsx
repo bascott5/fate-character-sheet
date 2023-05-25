@@ -1,11 +1,9 @@
-import CharacterSheet from "@/components/character-sheet";
+import CharacterSheet from '@/content/character-sheet';
 
-const Home: React.FC = () => {
-    return (
-        <div>
-            <CharacterSheet />
-        </div>
-    )
+const App: React.FC = () => {
+  return (
+    <CharacterSheet />
+  )
 }
 
-export default Home;
+export default App;

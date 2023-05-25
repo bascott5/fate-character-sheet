@@ -1,4 +1,4 @@
-import Dropdown from './dropdown01';
+import Dropdown from '@/components/dropdown01';
 
 const Navbar: React.FC = () => {
     let chapters = new Array(11);

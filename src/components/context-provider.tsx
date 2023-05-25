@@ -1,3 +1,4 @@
+"use client";
 import { useReducer, createContext } from "react"
 
 interface Props {

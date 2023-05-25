@@ -1,6 +1,8 @@
-import Notes from "./notes";
+"use client"
 import { useContext, useState } from "react";
 import { Context } from "./context-provider";
+import Skills from "@/components/skills";
+import Notes from "@/components/notes";
 
 const OptionContainer: React.FC = () => {
     let [options, setOptions] = useState({
@@ -20,7 +22,7 @@ const OptionContainer: React.FC = () => {
                 </button>
             ))}
             <div className="firstColumn">
-                {options.isSkills ? null : null}
+                {options.isSkills ? <Skills /> : null}
                 {options.isStunts ? null : null}
                 {options.isNotes ? <Notes /> : null}
             </div>
