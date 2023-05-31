@@ -1,7 +1,3 @@
-body {
-  display: flexbox;
-}
-
 ::-webkit-scrollbar {
   display: none;
 }
@@ -57,4 +53,20 @@ body {
 
 .link {
   color: black;
+}
+
+.characterSheetContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.characterSheetBox {
+  background-color: cornflowerblue;
+  color: white;
+  padding: 10px;
+  margin: 25px 150vh 25px 25px;
+}
+
+.stress {
+  border: 10px;
 }

@@ -11,20 +11,20 @@ const Skills: React.FC = () => {
 	//context["skills"] = [...skills];
 
 	return (
-        <div>
+        <div className="characterSheetBox">
             <h1>SKILLS</h1>
             <button onClick={() => setSkills([...skills, {text: "", modifier: 0}])}>+</button>
-            <button onClick={() => isEdit(edit => edit = !edit)}>Edit</button>
+            <button onClick={() => isEdit(!edit)}>Edit</button>
             <div>
                 {edit ? 
                     skills.map(key => (
                         <div>
                             <input type="text" value={ key.text } onChange={(e) => setSkills(skills => {
-                                skills = e.target.value;
+                                key.text = e.target.value;
                                 return [...skills];
                             })} />
-                            <input type="text" value={ key.modifier } onChange={(e) => setSkills(skills => {
-                                skills.modifier.toString = e.target.values;
+                            <input type="number" value={ key.modifier } min={-10} max={10} onChange={(e) => setSkills(skills => {
+                                key.modifier = e.target.valueAsNumber;
                                 return [...skills];
                             })} />
                         </div>
@@ -32,7 +32,12 @@ const Skills: React.FC = () => {
                 :
                     skills.map(key => (
                         <div>
-                            <button onClick={() => setSkills(Math.floor(Math.random() * 6) + key.modifier )}>{ key.text }: { key.modifier }</button>
+                            <button onClick={() => setSkills(skills => {
+                                Math.floor(Math.random() * 6) + key.modifier
+                                return [...skills];
+                                })}>
+                                { key.text }: { key.modifier }
+                            </button>
                         </div>
                     ))
             }

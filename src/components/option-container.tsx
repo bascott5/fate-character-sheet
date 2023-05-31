@@ -3,6 +3,9 @@ import { useContext, useState } from "react";
 import { Context } from "./context-provider";
 import Skills from "@/components/skills";
 import Notes from "@/components/notes";
+import Stress from "@/components/stress";
+import Aspects from "@/components/aspects";
+import Stunts from "@/components/stunts";
 
 const OptionContainer: React.FC = () => {
     let [options, setOptions] = useState({
@@ -23,12 +26,12 @@ const OptionContainer: React.FC = () => {
             ))}
             <div className="firstColumn">
                 {options.isSkills ? <Skills /> : null}
-                {options.isStunts ? null : null}
+                {options.isStunts ? <Stunts /> : null}
                 {options.isNotes ? <Notes /> : null}
             </div>
             <div className="secondColumn">
-                {options.isAspects ? null : null}
-                {options.isStress ? null : null}
+                {options.isAspects ? <Aspects /> : null}
+                {options.isStress ? <Stress /> : null}
             </div>
         </div>
     )
