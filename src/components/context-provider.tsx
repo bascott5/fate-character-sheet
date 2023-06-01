@@ -6,8 +6,8 @@ interface Props {
 }
 
 export type Action = 
-| { type: "Save", payload: any } 
-| { type: "Load", payload: any };
+| { type: "Save", payload: object } 
+| { type: "Load", payload: object }
 
 export let initState: Object = {
     isAspects: false,
@@ -28,7 +28,7 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
     const reducer = (state: Object, action: Action) => {
         switch (action.type) {
             case "Save":
-                return {...state}
+                return {...state, payload: action.payload}
             case "Load":
                 return {...state}
             default:
@@ -38,13 +38,9 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
 
     const [state, dispatch] = useReducer(reducer, initState);
     return (
-        <div>
-            <Context.Provider value={[state, dispatch]}>
-                <button onClick={() => dispatch({ type: "Save", payload: 0})}>Save</button>
-                <button onClick={() => dispatch({ type: "Load", payload: 0})}>Load</button>
-                { children }
-            </Context.Provider>
-        </div>
+        <Context.Provider value={[state, dispatch]}>
+            { children }
+        </Context.Provider>
     );
 }
 

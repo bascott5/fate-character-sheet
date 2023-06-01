@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Context } from "./context-provider";
 
 const Stunts: React.FC = () => {
     const [stunts, setStunts] = useState([{
@@ -6,13 +7,17 @@ const Stunts: React.FC = () => {
         description: ""
     }]);
     const [edit, isEdit] = useState<boolean>(false);
-    //context["stunts"] = [...stunts];
+    let [context, dispatch] = useContext(Context);
+
+    useEffect(() => {
+        dispatch({ type: "Save", payload: stunts });
+    }, [stunts]);
 
     return (
         <div className="characterSheetBox">
             <h1>STUNTS</h1>
-            <button onClick={() => setStunts([...stunts, { name: "", description: "" }])}>+</button>
-            <button onClick={() => isEdit(!edit)}>Edit</button>
+            <button className="characterSheetButton" onClick={() => setStunts([...stunts, { name: "", description: "" }])}>+</button>
+            <button className="characterSheetButton" onClick={() => isEdit(!edit)}>Edit</button>
             <div>
                 {edit ?
                     stunts.map(key => (

@@ -1,5 +1,6 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { Context } from "@/components/context-provider";
+import { dice } from "@/components/dice";
 
 const Skills: React.FC = () => {
 	const [skills, setSkills] = useState([{
@@ -8,13 +9,16 @@ const Skills: React.FC = () => {
 	}]);
     const [edit, isEdit] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
-	//context["skills"] = [...skills];
+
+    useEffect(() => {
+        dispatch({ type: "Save", payload: skills });
+    }, [skills]);
 
 	return (
         <div className="characterSheetBox">
             <h1>SKILLS</h1>
-            <button onClick={() => setSkills([...skills, {text: "", modifier: 0}])}>+</button>
-            <button onClick={() => isEdit(!edit)}>Edit</button>
+            <button className="characterSheetButton" onClick={() => setSkills([...skills, {text: "", modifier: 0}])}>+</button>
+            <button className="characterSheetButton" onClick={() => isEdit(!edit)}>Edit</button>
             <div>
                 {edit ? 
                     skills.map(key => (
@@ -32,10 +36,7 @@ const Skills: React.FC = () => {
                 :
                     skills.map(key => (
                         <div>
-                            <button onClick={() => setSkills(skills => {
-                                Math.floor(Math.random() * 6) + key.modifier
-                                return [...skills];
-                                })}>
+                            <button onClick={() => dice(key.modifier)}>
                                 { key.text }: { key.modifier }
                             </button>
                         </div>

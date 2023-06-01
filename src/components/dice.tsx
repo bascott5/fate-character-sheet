@@ -1,4 +1,4 @@
-export const dice = () => {
+export const dice = (modifier: number) => {
     let container: number[] = []
 
     for (let i = 0; i < 4; i++) {
@@ -26,5 +26,5 @@ export const dice = () => {
                 return [...container];
         }
     }
-    return container.reduce((sum, num) => sum + num);
+    return container.reduce((sum, num) => sum + num) + modifier;
 }

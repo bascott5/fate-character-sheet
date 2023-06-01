@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "./context-provider";
 import Skills from "@/components/skills";
 import Notes from "@/components/notes";
@@ -17,10 +17,14 @@ const OptionContainer: React.FC = () => {
     });
     let [context, dispatch] = useContext(Context);
 
+    useEffect(() => {
+        dispatch({ type: "Save", payload: options });
+    }, [options]);
+
     return (
         <div>
             {Object.entries(options).map(([key, value]) => (
-                <button onClick={() => setOptions(options => ({
+                <button className="characterSheetButton" onClick={() => setOptions(options => ({
                     ...options, [key]: !value}))}>{ key.substring(2) }: { value.toString() } 
                 </button>
             ))}
