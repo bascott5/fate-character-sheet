@@ -15,11 +15,11 @@ export let initState: Object = {
     isStunts: false,
     isStress: false,
     isNotes: false,
-    Aspect: {},
-    Skills: {},
-    Stunts: {},
-    Stress: {},
-    Notes: {}
+    aspect: {},
+    skills: {},
+    stunts: {},
+    stress: {},
+    notes: {}
 }
 
 export const Context = createContext<[Object, React.Dispatch<Action>]>([initState, () => initState]);
@@ -28,7 +28,10 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
     const reducer = (state: Object, action: Action) => {
         switch (action.type) {
             case "Save":
-                return {...state, payload: action.payload}
+                console.log(state);
+                Object.entries(state).map((key, value) => {
+                    return {...state, payload: action.payload}
+                })
             case "Load":
                 return {...state}
             default:

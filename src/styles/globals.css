@@ -16,7 +16,7 @@
 }
 
 .dropdownContainer {
-  /*display: none;*/
+  display: none;
 
   background-color: darkgray;
   position: absolute;
@@ -83,6 +83,7 @@
 }
 
 .stress {
+  position: sticky;
   display: inline-block;
   stroke: black;
   overflow: hidden;

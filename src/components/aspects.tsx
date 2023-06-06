@@ -4,10 +4,12 @@ import { dice } from "@/components/dice";
 
 const Aspects: React.FC = () => {
     const [aspects, setAspects] = useState([{
-        name: "",
+        categoryHeader: "",
+        label: "",
+        aspect: "",
         flagged: false,
         rollable: false,
-        value: 0
+        freeInvokes: 0
     }]);
     const [edit, isEdit] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
@@ -19,7 +21,7 @@ const Aspects: React.FC = () => {
     return (
         <div className="characterSheetBox">
             <h1>ASPECTS</h1>
-            <button className="characterSheetButton" onClick={() => setAspects([...aspects, { name: "", flagged: false, rollable: false, value: 0 }])}>+</button>
+            <button className="characterSheetButton" onClick={() => setAspects([...aspects, { categoryHeader: "", label: "", aspect: "", flagged: false, rollable: false, freeInvokes: 0 }])}>+</button>
             <button className="characterSheetButton" onClick={() => isEdit(!edit)}>Edit</button>
             <div>
                 {edit ?
@@ -28,13 +30,13 @@ const Aspects: React.FC = () => {
                             {aspects[aspects.indexOf(key)].rollable ?
                                 aspects.map(key => (
                                     <div>
-                                        <button onClick={() => dice(key.value)}>{ key.name }</button>
+                                        <button onClick={() => dice(key.freeInvokes)}>{ key.aspect }</button>
                                     </div>
                                 ))
                                 :
                                 aspects.map(key => (
                                     <div>
-                                        <p>{ key.name }</p>
+                                        <p>{ key.aspect }</p>
                                     </div>
                                 ))
                             }
@@ -43,7 +45,7 @@ const Aspects: React.FC = () => {
                 :
                     aspects.map(key => (
                         <div>
-                            <p>{ key.name }</p>
+                            <p>{ key.aspect }</p>
                         </div>
                     ))
                 }
