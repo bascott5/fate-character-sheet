@@ -15,8 +15,18 @@ const Stress: React.FC = () => {
     const [edit, isEdit] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
 
+    const changeBox = () => {
+        stress.map(key => (
+            {...key, boxes: [...key.boxes].map(box => (
+                !box
+            ))}
+        ))
+        return [...stress]
+    }
+
     useEffect(() => {
         dispatch({ type: "Save", payload: stress });
+        console.log(stress);
     }, [stress]);
 
     return (
@@ -26,17 +36,38 @@ const Stress: React.FC = () => {
             <button className="characterSheetButton" onClick={() => isEdit(!edit)}>Edit</button>
             <div>
                 {edit ?
-                    stress.map((key: Stress, index1: number) => (
+                    stress.map((key: Stress, stressIndex: number) => (
                         <div>
                             <input type="text" value={ key.label } />
-                            {key.boxes.map((box: boolean, index2: number) => (
+                            {key.boxes.map((box: boolean, boxIndex: number) => (
                                 <div>
                                     <svg>
-                                        <rect className="stress" style={{ fill: box ? "red" : "white" }} height={25} width={25} onClick={() => setStress(stress.map((key, index) => ({...stress[index1], boxes: [...key.boxes].map(box => (key.boxes[index2] ? !box : box))})))} />
+                                        <rect className="stress" style={{ fill: box ? "red" : "white" }} height={25} width={25} onClick={() => setStress((current) =>
+                                            current.map((stress, localStressIndex) => {
+                                                if (localStressIndex === stressIndex) {
+                                                    return {
+                                                        ...stress,
+                                                        boxes: stress.boxes.map(
+                                                            (box, localBoxIndex) => {
+                                                                if (localBoxIndex === boxIndex) {
+                                                                    return !box;
+                                                                }
+                                                            return box;
+                                                        }
+                                                    ),
+                                                };
+                                            }
+                                            return stress;
+                                        })
+                                    )} />
                                     </svg>
                                 </div>
                             ))}
-                            <button onClick={() => setStress(stress.map((key, index) => ({...stress[index], boxes: [...key.boxes, false]})))}>+block</button>
+                            <button onClick={() => setStress((current) =>
+                                current.map((stress, index) =>
+                                    index === stressIndex ? { ...stress, boxes: [...stress.boxes, false] } : stress
+                                )
+                            )}>+block</button>
                         </div>
                     ))
                 :

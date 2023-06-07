@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext, useRef, useEffect } from "react"
 import { Context } from "@/components/context-provider";
 import { dice } from "@/components/dice";
 import DragNDrop from "@/components/drag-n-drop";
@@ -12,6 +12,8 @@ const Skills: React.FC = () => {
     // add feature that allows user to change the place of a skill in an array via drag-and-drop
     let [context, dispatch] = useContext(Context);
 
+    const box = useRef(null);
+
     useEffect(() => {
         dispatch({ type: "Save", payload: skills });
     }, [skills]);
@@ -24,8 +26,8 @@ const Skills: React.FC = () => {
             <div>
                 {edit ? 
                     skills.map((key, index) => (
-                        <div>
-                            <DragNDrop arr={ skills } key={ key } initIndex={ index } />
+                        <div ref={ box }>
+                            <DragNDrop arr={ skills } key={ key } initIndex={ index } box={ box } />
                             <input type="text" value={ key.text } onChange={(e) => setSkills(skills => {
                                 key.text = e.target.value;
                                 return [...skills];

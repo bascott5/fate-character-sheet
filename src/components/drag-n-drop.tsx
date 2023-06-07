@@ -13,33 +13,30 @@ interface Props {
             //replace the index with the element
             //realign the object container's position so that is relative to the array again
 
-const DragNDrop: React.FC<Props> = ({ arr, key, initIndex }: Props) => {
+const DragNDrop: React.FC<any> = ({ arr, key, initIndex, box }: any) => {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [mouseDown, setMouseDown] = useState(false);
 
     const mouseDownHandler = (e: any) => setCursorPosition({ x: e.screenX, y: e.screenY });
-    
-    const box = useRef(null);
     useEffect(() => {
-        window.addEventListener("mousedown", mouseDownHandler)
-        return (() => (
-            window.addEventListener("mouseup", mouseDownHandler)
-        ))
-    }, []);
-
-    /*const box = useRef(null)
-    useEffect((e) => {
-        onclick()
-        if (box.current.e.target.position) {
-            arr.splice(initIndex, 1);
-            arr.splice(b, 0, key);
+        if (mouseDown) {
+            if (cursorPosition.y > box.current[initIndex + 1].offsetTop && cursorPosition.y < box.current[initIndex - 1].offsetTop) {
+                arr.splice(initIndex, 1);
+                const b = initIndex - 1;
+                arr.splice(b, 0, key);
+            }
         }
-    }, [arr]);*/
+
+        /*window.addEventListener("mousedown", mouseDownHandler)
+        return (() => (
+            //window.addEventListener("mouseup", mouseDownHandler)
+        ))*/
+    }, [mouseDown]);
 
     return (
         <div>
             <svg>
-                <rect height={ 5 } width={ 5 } fill="black" style={ mouseDown ? { position: "absolute", ...cursorPosition } : { position: "absolute" }} onMouseOver={mouseDownHandler} onMouseDown={() => setMouseDown(!mouseDown)} />
+                <rect ref={ box } height={ 15 } width={ 15 } fill="black" style={ mouseDown ? { position: "absolute", ...cursorPosition } : { position: "static" }} onMouseOver={mouseDownHandler} onMouseDown={() => setMouseDown(mouseDown => mouseDown = true)} onMouseUp={() => setMouseDown(mouseDown => mouseDown = false)} />
             </svg>
         </div>
     )
