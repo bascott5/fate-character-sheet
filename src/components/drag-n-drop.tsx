@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { SkillsInterface } from "@/components/skills";
 
 interface Props {
-    arr: Array<any>,
-    key: any,
-    initIndex: number
+    arr: Array<SkillsInterface>,
+    initIndex: number,
+    children: JSX.Element[]
 }
+
 //if the user is holding down the mouse button at the top most part of the object container:
     //the object container's position is aligned with the mouse cursor
     //if the mouse cursor is above or below the position of another array element:
@@ -13,31 +15,49 @@ interface Props {
             //replace the index with the element
             //realign the object container's position so that is relative to the array again
 
-const DragNDrop: React.FC<any> = ({ arr, key, initIndex, box }: any) => {
+const DragNDrop: React.FC<Props> = ({ arr, initIndex, children }: Props) => {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [mouseDown, setMouseDown] = useState(false);
 
-    const mouseDownHandler = (e: any) => setCursorPosition({ x: e.screenX, y: e.screenY });
-    useEffect(() => {
-        if (mouseDown) {
-            if (cursorPosition.y > box.current[initIndex + 1].offsetTop && cursorPosition.y < box.current[initIndex - 1].offsetTop) {
-                arr.splice(initIndex, 1);
-                const b = initIndex - 1;
-                arr.splice(b, 0, key);
-            }
-        }
+    const box = useRef<Array<HTMLDivElement | null>>([]);
 
-        /*window.addEventListener("mousedown", mouseDownHandler)
-        return (() => (
-            //window.addEventListener("mouseup", mouseDownHandler)
-        ))*/
+    useEffect(() => {
+        box.current = box.current.slice(0, arr.length);
+    }, [arr]);
+
+    const mouseDownHandler = (e: MouseEvent) => {
+        setCursorPosition({ x: e.clientX - 51, y: e.clientY - 315 });
+    }
+
+    useEffect(() => {
+        window.addEventListener("mousemove", mouseDownHandler);
+        return(() => {
+            window.removeEventListener("mousemove", mouseDownHandler);
+        })
+    }, []);
+
+    useEffect(() => {
+        /*if (mouseDown) {
+            if (cursorPosition.y > box.current[initIndex + 1]!.offsetTop && cursorPosition.y < box.current[initIndex - 1]!.offsetTop) {
+                let temp = arr[initIndex - 1];
+                arr[initIndex - 1] = arr[initIndex];
+                arr[initIndex] = temp;
+            }
+        }*/
     }, [mouseDown]);
 
     return (
-        <div>
+        <div ref={ex => box.current[initIndex] = ex} onMouseUp={() => setMouseDown(false)} >
             <svg>
-                <rect ref={ box } height={ 15 } width={ 15 } fill="black" style={ mouseDown ? { position: "absolute", ...cursorPosition } : { position: "static" }} onMouseOver={mouseDownHandler} onMouseDown={() => setMouseDown(mouseDown => mouseDown = true)} onMouseUp={() => setMouseDown(mouseDown => mouseDown = false)} />
+                <rect 
+                    height={ 15 } 
+                    width={ 15 } 
+                    fill="black" 
+                    style={ mouseDown ? { position: "absolute", ...cursorPosition } : { position: "static" } } 
+                    onMouseDown={() => setMouseDown(true)} 
+                />
             </svg>
+            { children }
         </div>
     )
 }

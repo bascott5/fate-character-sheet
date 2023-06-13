@@ -38,7 +38,11 @@ const Stress: React.FC = () => {
                 {edit ?
                     stress.map((key: Stress, stressIndex: number) => (
                         <div>
-                            <input type="text" value={ key.label } />
+                            <input type="text" value={ key.label } onChange={(e) => setStress(stress => {
+                                let stressCopy = [...stress];
+                                stressCopy[stressIndex].label = e.target.value;
+                                return [...stressCopy];
+                            })} />
                             {key.boxes.map((box: boolean, boxIndex: number) => (
                                 <div>
                                     <svg>
