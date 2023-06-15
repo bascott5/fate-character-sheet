@@ -28,7 +28,6 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
     const reducer = (state: Object, action: Action) => {
         switch (action.type) {
             case "Save":
-                console.log(state);
                 Object.entries(state).map((key, value) => {
                     return {...state, payload: action.payload}
                 })

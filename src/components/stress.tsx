@@ -46,7 +46,7 @@ const Stress: React.FC = () => {
                             {key.boxes.map((box: boolean, boxIndex: number) => (
                                 <div>
                                     <svg>
-                                        <rect className="stress" style={{ fill: box ? "red" : "white" }} height={25} width={25} onClick={() => setStress((current) =>
+                                        <rect className="box" style={{ fill: box ? "red" : "white" }} height={25} width={25} onClick={() => setStress(current =>
                                             current.map((stress, localStressIndex) => {
                                                 if (localStressIndex === stressIndex) {
                                                     return {

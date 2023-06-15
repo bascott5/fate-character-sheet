@@ -47,14 +47,17 @@ const DragNDrop: React.FC<Props> = ({ arr, initIndex, children }: Props) => {
     }, [mouseDown]);
 
     return (
-        <div ref={ex => box.current[initIndex] = ex} onMouseUp={() => setMouseDown(false)} >
+        <div 
+            ref={ex => box.current[initIndex] = ex} 
+            style={ mouseDown ? { position: "absolute", ...cursorPosition, zIndex: 5 } : { position: "static" } }
+        >
             <svg>
                 <rect 
                     height={ 15 } 
                     width={ 15 } 
                     fill="black" 
-                    style={ mouseDown ? { position: "absolute", ...cursorPosition } : { position: "static" } } 
-                    onMouseDown={() => setMouseDown(true)} 
+                    onMouseDown={() => setMouseDown(true)}
+                    onMouseUp={() => setMouseDown(false)}
                 />
             </svg>
             { children }
