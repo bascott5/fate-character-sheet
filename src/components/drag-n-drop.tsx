@@ -26,7 +26,7 @@ const DragNDrop: React.FC<Props> = ({ arr, initIndex, children }: Props) => {
     }, [arr]);
 
     const mouseDownHandler = (e: MouseEvent) => {
-        setCursorPosition({ x: e.clientX - 51, y: e.clientY - 315 });
+        setCursorPosition({ x: e.clientX - 51, y: e.clientY - 100 });
     }
 
     useEffect(() => {
@@ -48,8 +48,9 @@ const DragNDrop: React.FC<Props> = ({ arr, initIndex, children }: Props) => {
 
     return (
         <div 
-            ref={ex => box.current[initIndex] = ex} 
-            style={ mouseDown ? { position: "absolute", ...cursorPosition, zIndex: 5 } : { position: "static" } }
+            ref={ex => box.current[initIndex] = ex}
+            onMouseUp={() => setMouseDown(false)}
+            style={ mouseDown ? { zIndex: 1, position: "absolute", left: 0, top: cursorPosition.y } : { position: "static" } }
         >
             <svg>
                 <rect 
@@ -57,7 +58,6 @@ const DragNDrop: React.FC<Props> = ({ arr, initIndex, children }: Props) => {
                     width={ 15 } 
                     fill="black" 
                     onMouseDown={() => setMouseDown(true)}
-                    onMouseUp={() => setMouseDown(false)}
                 />
             </svg>
             { children }

@@ -30,7 +30,7 @@ const Aspects: React.FC = () => {
     }, [aspects]);
 
     return (
-        <div>
+        <div className="characterSheetBox">
             <h1>ASPECTS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -64,38 +64,47 @@ const Aspects: React.FC = () => {
                                 />
                                 <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
                                 <input type="text" value={ aspect.label } onChange={(e) => setAspects(aspects => {
-                                    let aspectsCopy = [...aspects];
-                                    aspectsCopy.map(aspect => { aspect.label = e.target.value });
-                                    return [...aspectsCopy];
+                                    aspects.map((aspect, localAspectIndex) => { 
+                                        if (localAspectIndex === aspectIndex) {
+                                            return aspect.label = e.target.value
+                                        }
+                                    })
+                                    return [...aspects];
                                 })} 
                                 />
                                 <h3 style={{ fontWeight: "bold" }}>ASPECT</h3>
                                 <input type="text" value={ aspect.aspect } onChange={(e) => setAspects(aspects => {
-                                    let aspectsCopy = [...aspects];
-                                    aspectsCopy.map(aspect => { aspect.aspect = e.target.value });
-                                    return [...aspectsCopy];
+                                    aspects.map((aspect, localAspectIndex) => { 
+                                        if (localAspectIndex === aspectIndex) {
+                                            return aspect.aspect = e.target.value
+                                        }
+                                    })
+                                    return [...aspects];
                                 })} 
                                 />
                                 <h3 style={{ fontWeight: "bold" }}>FLAGS</h3>
                                 <input type="text" value={ aspect.flags } onChange={(e) => setAspects(aspects => {
-                                    let aspectsCopy = [...aspects];
-                                    aspectsCopy.map(aspect => { aspect.flags = e.target.value });
-                                    return [...aspectsCopy];
+                                    aspects.map((aspect, localAspectIndex) => { 
+                                        if (localAspectIndex === aspectIndex) {
+                                            return aspect.flags = e.target.value
+                                        }
+                                    })
+                                    return [...aspects];
                                 })} 
                                 />
                                 <h3 style={{ fontWeight: "bold" }}>FREE INVOKES</h3>
                                 <input type="number" value={ aspect.freeInvokes.length } max={10} min={0} onChange={(e) => setAspects(aspects => {
-                                    let aspectsCopy = [...aspects];
-                                    aspectsCopy.map(aspect => { 
-                                        aspect.freeInvokes.length = e.target.valueAsNumber
-                                        for (let i = 0; i < aspect.freeInvokes.length; i++) {
-                                            /*if (aspect.freeInvokes[i] == undefined) {
-                                                aspects.replace(i, 0, [...aspect.freeInvokes, false]);
-                                            }*/
+                                    aspects.map((aspect, localAspectIndex) => { 
+                                        if (localAspectIndex === aspectIndex) {
+                                            return aspect.freeInvokes.length = e.target.valueAsNumber;
                                         }
-                                        return [...aspect.freeInvokes];
+                                        /*for (let i = 0; i < aspect.freeInvokes.length; i++) {
+                                            if (aspect.freeInvokes[i] == undefined) {
+                                                aspect.freeInvokes.replace(i, 0, [...aspect.freeInvokes, false]);
+                                            }
+                                        }*/
                                     });
-                                    return [...aspectsCopy];
+                                    return [...aspects];
                                 })} 
                                 />
                                 <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
