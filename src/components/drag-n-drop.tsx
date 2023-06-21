@@ -4,7 +4,7 @@ import { SkillsInterface } from "@/components/skills";
 interface Props {
     arr: Array<SkillsInterface>,
     initIndex: number,
-    children: JSX.Element[]
+    children: JSX.Element | null
 }
 
 //if the user is holding down the mouse button at the top most part of the object container:

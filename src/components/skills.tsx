@@ -15,11 +15,49 @@ const Skills: React.FC = () => {
 		modifier: 0
 	}]);
     const [edit, isEdit] = useState<boolean>(false);
+    const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
 
     useEffect(() => {
         dispatch({ type: "Save", payload: skills });
     }, [skills]);
+
+    return (
+        <div className="characterSheetBox">
+            <h1 style={{ fontWeight: "bold" }}>SKILLS</h1>
+            <div>
+                {edit ? (
+                    <div>
+                        <h2>EDIT SKILLS</h2>
+                        {skills.map((skill, skillIndex) => (
+                            <div>
+                                <DragNDrop arr={ skills } initIndex={ skillIndex }>
+                                {modify ? (
+                                    <div>
+                                        <svg>
+                                            <rect 
+                                                fill="red" 
+                                                height={15} 
+                                                width={15} 
+                                                onClick={() => setSkills(skills.filter(skillCopy => skillCopy != skill))} 
+                                            />
+                                        </svg>
+                                    </div>
+                                )
+                                :
+                                null
+                                }
+                                </DragNDrop>
+                            </div>
+                        ))}
+                    </div>
+                )
+                    :
+                    null
+                }
+            </div>
+        </div>
+    )
 
 	return (
         <div className="characterSheetBox">

@@ -6,6 +6,7 @@ import Notes from "@/components/notes";
 import Stress from "@/components/stress";
 import Aspects from "@/components/aspects";
 import Stunts from "@/components/stunts";
+import { Action, InitStateTypes } from "./context-provider";
 
 const OptionContainer: React.FC = () => {
     let [options, setOptions] = useState({
@@ -18,24 +19,27 @@ const OptionContainer: React.FC = () => {
     let [context, dispatch] = useContext(Context);
 
     useEffect(() => {
-        dispatch({ type: "Save", payload: options });
-    }, [options]);
+        console.log(context.options.isAspects)
+    }, [context]);
 
     return (
         <div>
-            {Object.entries(options).map(([key, value]) => (
-                <button className="characterSheetButton" onClick={() => setOptions(options => ({
-                    ...options, [key]: !value}))}>{ key.substring(2) }: { value.toString() } 
+            {Object.entries(context.options).map(([key, value]) => (
+                <button className="characterSheetButton" onClick={() => dispatch({ 
+                    type: "TOGGLE", 
+                    key: key, 
+                    value: value })}>
+                    { key.substring(2) }: { value.toString() } 
                 </button>
             ))}
             <div className="firstColumn">
-                {options.isSkills ? <Skills /> : null}
-                {options.isStunts ? <Stunts /> : null}
-                {options.isNotes ? <Notes /> : null}
+                {context.options.isSkills ? <Skills /> : null}
+                {context.options.isStunts ? <Stunts /> : null}
+                {context.options.isNotes ? <Notes /> : null}
             </div>
             <div className="secondColumn">
-                {options.isAspects ? <Aspects /> : null}
-                {options.isStress ? <Stress /> : null}
+                {context.options.isAspects ? <Aspects /> : null}
+                {context.options.isStress ? <Stress /> : null}
             </div>
         </div>
     )
