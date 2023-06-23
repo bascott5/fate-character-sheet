@@ -1,18 +1,19 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
 import { dice } from "@/components/dice";
+import DragNDrop from "./drag-n-drop";
 
-interface AspectTypes {
-    categoryHeader: string,
-    label: string,
-    aspect: string,
-    flags: string,
-    freeInvokes: boolean[],
-    notes: string
+export interface AspectTypes {
+    "categoryHeader": string,
+    "label": string,
+    "aspect": string,
+    "flags": string,
+    "freeInvokes": boolean[],
+    "notes": string
 }
 
 const Aspects: React.FC = () => {
-    const [aspects, setAspects] = useState<Array<AspectTypes>>([{
+    const [aspects, setAspects] = useState<AspectTypes[]>([{
         categoryHeader: "",
         label: "",
         aspect: "",
@@ -25,9 +26,20 @@ const Aspects: React.FC = () => {
     let [context, dispatch] = useContext(Context);
 
     useEffect(() => {
-        dispatch({ type: "Save", payload: aspects });
-        console.log(aspects);
-    }, [aspects]);
+        context.aspects.map((aspect, aspectIndex) => {
+            for (let i = 0; i < aspect.freeInvokes.length; i++) {
+                if (aspect.freeInvokes[i] == undefined) {
+                    dispatch({ 
+                        type: "ADD BOX",
+                        key: "aspects",
+                        value: context.aspects,
+                        propertyIndex: aspectIndex
+                    })
+                    //aspect.freeInvokes.replace(i, 0, [...aspect.freeInvokes, false]);
+                }
+            } 
+        })
+    }, [context.aspects])
 
     return (
         <div className="characterSheetBox">
@@ -36,103 +48,105 @@ const Aspects: React.FC = () => {
                 {edit ? (
                     <div>
                         <h2>EDIT ASPECTS</h2>
-                        {aspects.map((aspect, aspectIndex) => (
+                        {context.aspects.map((aspect, aspectIndex) => (
                             <div>
                                 {modify ? 
                                     <div>
-                                        <svg>
-                                            <rect 
-                                                fill="red" 
-                                                height={15} 
-                                                width={15} 
-                                                onClick={() => setAspects(aspects.filter(aspectCopy => aspectCopy != aspect))} 
-                                            />
-                                        </svg>
+                                        <DragNDrop arr={ context.aspects } initIndex={ aspectIndex }>
+                                            <svg>
+                                                <rect 
+                                                    fill="red" 
+                                                    height={15} 
+                                                    width={15} 
+                                                    onClick={() => dispatch({
+                                                        type: "DELETE OBJECT",
+                                                        key: "aspects",
+                                                        value: context.aspects,
+                                                        propertyKey: aspect
+                                                    })}
+                                                />
+                                            </svg>
+                                        </DragNDrop>
                                     </div>
                                     :
                                     null
                                 }
                                 <h3 style={{ fontWeight: "bold" }}>CATEGORY HEADER &#40;OPTIONAL&#41;</h3>
-                                <input type="text" value={ aspect.categoryHeader } onChange={(e) => setAspects(aspects => {
-                                    aspects.map((aspect, localAspectIndex) => { 
-                                        if (localAspectIndex === aspectIndex) {
-                                            return aspect.categoryHeader = e.target.value
-                                        }
-                                    })
-                                    return [...aspects];
-                                })}
-                                />
+                                <input type="text" value={ aspect.categoryHeader } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "categoryHeader",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
                                 <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
-                                <input type="text" value={ aspect.label } onChange={(e) => setAspects(aspects => {
-                                    aspects.map((aspect, localAspectIndex) => { 
-                                        if (localAspectIndex === aspectIndex) {
-                                            return aspect.label = e.target.value
-                                        }
-                                    })
-                                    return [...aspects];
-                                })} 
-                                />
+                                <input type="text" value={ aspect.label } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "label",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
                                 <h3 style={{ fontWeight: "bold" }}>ASPECT</h3>
-                                <input type="text" value={ aspect.aspect } onChange={(e) => setAspects(aspects => {
-                                    aspects.map((aspect, localAspectIndex) => { 
-                                        if (localAspectIndex === aspectIndex) {
-                                            return aspect.aspect = e.target.value
-                                        }
-                                    })
-                                    return [...aspects];
-                                })} 
-                                />
+                                <input type="text" value={ aspect.aspect } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "aspect",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
                                 <h3 style={{ fontWeight: "bold" }}>FLAGS</h3>
-                                <input type="text" value={ aspect.flags } onChange={(e) => setAspects(aspects => {
-                                    aspects.map((aspect, localAspectIndex) => { 
-                                        if (localAspectIndex === aspectIndex) {
-                                            return aspect.flags = e.target.value
-                                        }
-                                    })
-                                    return [...aspects];
-                                })} 
-                                />
+                                <input type="text" value={ aspect.flags } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "flags",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
                                 <h3 style={{ fontWeight: "bold" }}>FREE INVOKES</h3>
-                                <input type="number" value={ aspect.freeInvokes.length } max={10} min={0} onChange={(e) => setAspects(aspects => {
-                                    aspects.map((aspect, localAspectIndex) => { 
-                                        if (localAspectIndex === aspectIndex) {
-                                            return aspect.freeInvokes.length = e.target.valueAsNumber;
-                                        }
-                                        /*for (let i = 0; i < aspect.freeInvokes.length; i++) {
-                                            if (aspect.freeInvokes[i] == undefined) {
-                                                aspect.freeInvokes.replace(i, 0, [...aspect.freeInvokes, false]);
-                                            }
-                                        }*/
-                                    });
-                                    return [...aspects];
-                                })} 
-                                />
+                                <input type="number" value={ aspect.freeInvokes.length } max={10} min={0} onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "freeInvokes",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.valueAsNumber
+                                })}/>
                                 <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
-                                <input type="text" value={ aspect.notes } onChange={(e) => setAspects(aspects => {
-                                    let aspectsCopy = [...aspects];
-                                    aspectsCopy.map(aspect => { aspect.notes = e.target.value });
-                                    return [...aspectsCopy];
-                                })} 
-                                />
+                                <input type="text" value={ aspect.notes } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "notes",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
                             </div>
                         ))}
                         <button 
                     className="characterSheetButton" 
-                    onClick={() => setAspects([...aspects, { 
-                        categoryHeader: "", 
-                        label: "", 
-                        aspect: "", 
-                        flags: "", 
-                        freeInvokes: [], 
-                        notes: ""
-                    }])} 
-                >
+                    onClick={() => dispatch({
+                        type: "ADD OBJECT",
+                        key: "aspects",
+                        value: context.aspects,
+                        addedValue: {
+                            categoryHeader: "",
+                            label: "",
+                            aspect: "",
+                            flags: "",
+                            freeInvokes: [],
+                            notes: ""
+                        }
+                    })}>
                     +Add
                 </button>
                 <button 
                     className="characterSheetButton"
-                    onClick={() => isModify(!modify)}
-                >
+                    onClick={() => isModify(!modify)}>
                     Modify
                 </button>
                     </div>
@@ -140,7 +154,7 @@ const Aspects: React.FC = () => {
                     :
                     null
                 }
-            {aspects.map((aspect, aspectIndex) => (
+            {context.aspects.map((aspect, aspectIndex) => (
                 <div>
                     <h3 style={{ fontWeight: "bold" }}>{ aspect.categoryHeader.toUpperCase() }</h3>
                     <p style={{ color: "blue", fontWeight: "bold" }}>{ aspect.label.toUpperCase() }</p>
@@ -148,25 +162,14 @@ const Aspects: React.FC = () => {
                     <p>{ aspect.notes.toUpperCase() }</p>
                     {aspect.freeInvokes.map((invoke, invokeIndex) => (
                     <svg>
-                        <rect className="box" style={{ fill: invoke ? "blue" : "white" }} height={25} width={25} onClick={() => setAspects(aspects =>
-                            aspects.map((aspect, localAspectIndex) => {
-                            if (localAspectIndex === aspectIndex) {
-                                return {
-                                    ...aspect,
-                                    boxes: aspect.freeInvokes.map(
-                                    (invoke, localInvokeIndex) => {
-                                        if (localInvokeIndex === invokeIndex) {
-                                            return !invoke;
-                                        }
-                                    return invoke;
-                                        }
-                                    ),
-                                };
-                            }
-                            return aspect;
-                        })
-                    )} 
-                    />
+                        <rect className="box" style={{ fill: invoke ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
+                            type: "TOGGLE BOX",
+                            key: "aspects",
+                            value: context.aspects,
+                            propertyKey: "freeInvokes",
+                            propertyIndex: invokeIndex,
+                            propertyValue: invoke
+                        })}/>
                     </svg>
                 ))}
                 </div>

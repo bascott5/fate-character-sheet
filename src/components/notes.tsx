@@ -1,30 +1,121 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { Context } from "@/components/context-provider";
+import DragNDrop from "./drag-n-drop";
+
+export interface NoteTypes {
+    title: string,
+    description: string
+}
 
 const Notes: React.FC = () => {
-    const [notes, setNotes] = useState<string[]>([""]);
+    const [notes, setNotes] = useState<NoteTypes[]>([{ 
+        title: "",
+        description: ""
+    }]);
     const [edit, isEdit] = useState<boolean>(false);
+    const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
-    
-    useEffect(() => {
-        dispatch({ type: "Save", payload: notes });
-    }, [notes]);
 
     return (
+        <div className="characterSheetBox">
+            <h1>NOTES</h1> <button onClick={() => isEdit(!edit)} />
+            <div>
+                {edit ? (
+                    <div>
+                        <h2>EDIT NOTES</h2>
+                        {context.notes.map((note, noteIndex) => (
+                           <div>
+                                {modify ? (
+                                    <div>
+                                    <DragNDrop arr={ context.skills } initIndex={ noteIndex }>
+                                        <svg>
+                                            <rect 
+                                                fill="red" 
+                                                height={15} 
+                                                width={15} 
+                                                onClick={() => dispatch({
+                                                    type: "DELETE OBJECT",
+                                                    key: "notes",
+                                                    value: context.notes,
+                                                    propertyKey: note
+                                                })} 
+                                            />
+                                            </svg>
+                                        </DragNDrop>
+                                    </div>
+                                )
+                                :
+                                    null
+                                }
+                                <input type="text" value={ note.title } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "notes",
+                                    value: context.notes,
+                                    propertyKey: "title",
+                                    propertyIndex: noteIndex,
+                                    event: e.target.value
+                                })}/>
+                                <input type="text" value={ note.description } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "notes",
+                                    value: context.notes,
+                                    propertyKey: "description",
+                                    propertyIndex: noteIndex,
+                                    event: e.target.value
+                                })}/>
+                           </div> 
+                        ))}
+                        <button 
+                            className="characterSheetButton" 
+                            onClick={() => dispatch({
+                                type: "ADD OBJECT",
+                                key: "notes",
+                                value: context.notes,
+                                addedValue: {
+                                    title: "",
+                                    description: ""
+                                }
+                            })}>
+                            +Add
+                        </button>
+                        <button 
+                            className="characterSheetButton"
+                            onClick={() => isModify(!modify)}>
+                            Modify
+                        </button>
+                    </div>
+                )
+                :
+                null
+                }
+                {context.notes.map((note, noteIndex) => (
+                    <div>
+                        <p style={{ fontWeight: "bold" }}>{ note.title }</p>
+                        <p>{ note.description }</p>  
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+
+    /*return (
         <div className="characterSheetBox">
             <h1>NOTES</h1>
             <div>
                 <button className="characterSheetButton" onClick={() => setNotes([...notes, ""])}>+</button>
                 <button className="characterSheetButton" onClick={() => isEdit(!edit)}>Edit</button>
                 {edit ?
-                    notes.map((key, index) => (
+                    context.notes.map((note, noteIndex) => (
                         <div>
                             <button onClick={() => setNotes(notes.filter(note => note != key))}>-</button>
-                            <input type="text" value={ key } onChange={(e) => setNotes(notes => {
-                                let notesCopy = [...notes];
-                                notesCopy[index] = e.target.value;
-                                return [...notesCopy];
-                            })} />
+                            <input type="text" value={ note.description } onChange={(e) => dispatch({
+                                type: "HANDLE INPUT",
+                                key: "notes",
+                                value: context.notes,
+                                propertyKey: "label",
+                                propertyIndex: noteIndex,
+                                event: e.target.value
+                            })}/>
                         </div>
                     ))
                     :
@@ -36,7 +127,7 @@ const Notes: React.FC = () => {
                 }
             </div>
         </div>
-    )
+    )*/
 }
 
 export default Notes;

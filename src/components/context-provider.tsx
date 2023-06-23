@@ -1,11 +1,16 @@
 "use client";
 import { useReducer, createContext } from "react"
+import { AspectTypes } from "./aspects";
+import { SkillTypes } from "./skills";
+import { StuntTypes } from "./stunts";
+import { StressTypes } from "./stress";
+import { NoteTypes } from "./notes";
 
 interface Props {
     children: JSX.Element
 }
 
-export interface InitStateTypes {
+interface InitStateTypes {
     "options": {
         "isAspects": boolean,
         "isSkills": boolean,
@@ -13,21 +18,21 @@ export interface InitStateTypes {
         "isStress": boolean,
         "isNotes": boolean
     }
-    "aspects": Array<Object>,
-    "skills": Array<Object>,
-    "stunts": Array<Object>,
-    "stress": Array<Object>,
-    "notes": Array<Object>,
+    "aspects": AspectTypes[],
+    "skills": SkillTypes[],
+    "stunts": StuntTypes[],
+    "stress": StressTypes[],
+    "notes": NoteTypes[],
 }
 
 export type Action = 
     | { type: "TOGGLE", key: string, value: boolean }
-    | { type: "TOGGLE BOX", key: string, value: object[], propertyIndex: number, keyProperty: string, valueProperty: boolean }
-    | { type: "HANDLE INPUT", key: string, value: object[], keyProperty: string, propertyIndex: number, event: HTMLInputElement }
-    | { type: "ADD OBJECT", key: string, value: object[], addedValue: string | number }
-    | { type: "DELETE OBJECT", key: string, value: object[], propertyIndex: number }
-    | { type: "Save", payload: object } 
-    | { type: "Load", payload: object }
+    | { type: "TOGGLE BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean }
+    | { type: "ADD BOX", key: string, value: AspectTypes[], propertyIndex: number }
+    | { type: "HANDLE INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, event: string | number }
+    | { type: "ADD OBJECT", key: string, value: object[], addedValue: string | object }
+    | { type: "DELETE OBJECT", key: string, value: object[], propertyKey: object }
+    | { type: "CHANGE INDEX", key: string, indexA: number, indexB: number }
 
 export let initState: InitStateTypes = {
     options: {
@@ -60,56 +65,48 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
             case "TOGGLE BOX":
                 return {
                     ...state,
-                    [action.key]: action.value.map((key: any, keyIndex: number) => {
-                        if (keyIndex === action.propertyIndex) {
-                            return {
-                                ...key,
-                                [action.keyProperty]: !action.keyProperty
-                            }
-                            /*return {...key, [action.keyProperty]: action.keyProperty.map((key, keyIndex) => {
-                                if (keyIndex === action.propertyIndex2) {
-                                    return {...key, [action.box]: !action.box}
-                                }
-                            })}*/
-                        }
+                    [action.key]: action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            ...key,
+                            [action.propertyKey]: !action.propertyValue
+                        } : {...key}
+                    })
+                }
+            case "ADD BOX":
+                return {
+                    ...state,
+                    [action.key]: action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            ...key,
+                            freeInvokes: [...key.freeInvokes, false]
+                        } : {...key}
                     })
                 }
             case "HANDLE INPUT":
                 return {
                     ...state,
-                    [action.key]: action.value.map((key: any, keyIndex: number) => {
-                        if (keyIndex === action.propertyIndex) {
-                            return {
-                                ...key, 
-                                [action.keyProperty]: action.event 
-                            }
-                        }
+                    [action.key]: action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            ...key, 
+                            [action.propertyKey]: action.event 
+                        } : {...key}
                     })
                 }
             case "ADD OBJECT":
-                //Object.entries(state).map(([key, value]) => {
-                    //if (key === action.name) {
-                        return {
-                            ...state,
-                            [action.key]: [...action.value, action.addedValue]
-                        }
-                    //}
-                //});
+                return {
+                    ...state,
+                    [action.key]: [...action.value, action.addedValue]
+                }
             case "DELETE OBJECT":
                 return {
                     ...state,
-                    [action.key]: action.value.map((key: object[], keyIndex: number) => {
-                        if (keyIndex === action.propertyIndex) {
-                            return [...key, key.filter((keyCopy: object) => keyCopy != key)];
-                        }
-                    })
+                    [action.key]: action.value.filter(keyCopy => keyCopy != action.propertyKey)
                 }
-            case "Save":
-                Object.entries(state).map((key, value) => {
-                    return {...state, payload: action.payload}
-                })
-            case "Load":
-                return {...state};
+            case "CHANGE INDEX":
+                return {
+                    ...state,
+                    [action.key] : action.key.replace(action.indexB, 0, action.indexA)
+                }
             default:
                 return {...state};
         }

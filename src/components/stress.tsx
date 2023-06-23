@@ -1,14 +1,14 @@
 //TODO: turn altering key.boxes into a function so it can be more easily understood which box is being referred to by the computer
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { Context } from "./context-provider";
 
-interface Stress {
+export interface StressTypes {
     label: string
     boxes: boolean[]
 }
 
 const Stress: React.FC = () => {
-    const [stress, setStress] = useState<Array<Stress>>([{
+    const [stress, setStress] = useState<StressTypes[]>([{
             label: "",
             boxes: [false]
         }]);
@@ -24,11 +24,6 @@ const Stress: React.FC = () => {
         return [...stress]
     }
 
-    useEffect(() => {
-        dispatch({ type: "Save", payload: stress });
-        console.log(stress);
-    }, [stress]);
-
     return (
         <div className="characterSheetBox">
             <h1>STRESS</h1>
@@ -36,7 +31,7 @@ const Stress: React.FC = () => {
             <button className="characterSheetButton" onClick={() => isEdit(!edit)}>Edit</button>
             <div>
                 {edit ?
-                    stress.map((key: Stress, stressIndex: number) => (
+                    stress.map((key: StressTypes, stressIndex: number) => (
                         <div>
                             <input type="text" value={ key.label } onChange={(e) => setStress(stress => {
                                 let stressCopy = [...stress];

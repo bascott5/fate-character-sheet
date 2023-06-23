@@ -6,7 +6,6 @@ import Notes from "@/components/notes";
 import Stress from "@/components/stress";
 import Aspects from "@/components/aspects";
 import Stunts from "@/components/stunts";
-import { Action, InitStateTypes } from "./context-provider";
 
 const OptionContainer: React.FC = () => {
     let [options, setOptions] = useState({
@@ -17,10 +16,6 @@ const OptionContainer: React.FC = () => {
         isNotes: false
     });
     let [context, dispatch] = useContext(Context);
-
-    useEffect(() => {
-        console.log(context.options.isAspects)
-    }, [context]);
 
     return (
         <div>
