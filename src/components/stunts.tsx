@@ -33,10 +33,10 @@ const Stunts: React.FC = () => {
                     <div>
                         <h2>EDIT STUNTS</h2>
                         {context.stunts.map((stunt, stuntIndex) => (
-                            <div>
-                                {modify ? 
-                                    <div>
-                                        <DragNDrop arr={ context.stunts } initIndex={ stuntIndex } isVisible={ modify }>
+                            <DragNDrop arr={ context.stunts } initIndex={ stuntIndex } isVisible={ modify }>
+                                <div>
+                                    {modify ? 
+                                        <div>
                                             <svg>
                                                 <rect 
                                                     fill="red" 
@@ -50,64 +50,64 @@ const Stunts: React.FC = () => {
                                                     })} 
                                                 />
                                             </svg>
-                                        </DragNDrop>
-                                    </div>
-                                    :
-                                    null
-                                }
-                                <p style={{ fontWeight: "bold" }}>NAME</p>
-                                <input type="text" value={ stunt.name } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "stunts",
-                                    value: context.stunts,
-                                    propertyKey: "name",
-                                    propertyIndex: stuntIndex,
-                                    event: e.target.value
-                                })}/>
-                                <p style={{ fontWeight: "bold" }}>ROLLABLE</p>
-                                <input type="checkbox" checked={ stunt.rollable } onChange={() => dispatch({
-                                    type: "TOGGLE BOX",
-                                    key: "stunts",
-                                    value: context.stunts,
-                                    propertyKey: "rollable",
-                                    propertyIndex: stuntIndex,
-                                    propertyValue: stunt.rollable
-                                })}/>
-                                {stunt.rollable ? (
-                                    <div>
-                                        <p style={{ fontWeight: "bold" }}>BONUS</p>
-                                        <input type="number" value={ stunt.bonus } onChange={(e) => dispatch({
-                                            type: "HANDLE INPUT",
-                                            key: "stunts",
-                                            value: context.stunts,
-                                            propertyKey: "bonus",
-                                            propertyIndex: stuntIndex,
-                                            event: e.target.valueAsNumber
-                                        })}/>
-                                        <p style={{ fontWeight: "bold" }}>SKILL</p>
-                                        <input type="text" value={ stunt.skill } onChange={(e) => dispatch({
-                                            type: "HANDLE INPUT",
-                                            key: "stunts",
-                                            value: context.stunts,
-                                            propertyKey: "skill",
-                                            propertyIndex: stuntIndex,
-                                            event: e.target.value
-                                        })}/>
-                                    </div>
-                                )
-                                    :
-                                    null
-                                }
-                                <p style={{ fontWeight: "bold" }}>DESCRIPTION</p>
-                                <input type="text" value={ stunt.description } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "stunts",
-                                    value: context.stunts,
-                                    propertyKey: "description",
-                                    propertyIndex: stuntIndex,
-                                    event: e.target.value
-                                })}/>
-                            </div>
+                                        </div>
+                                        :
+                                        null
+                                    }
+                                    <p style={{ fontWeight: "bold" }}>NAME</p>
+                                    <input type="text" value={ stunt.name } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "stunts",
+                                        value: context.stunts,
+                                        propertyKey: "name",
+                                        propertyIndex: stuntIndex,
+                                        event: e.target.value
+                                    })}/>
+                                    <p style={{ fontWeight: "bold" }}>ROLLABLE</p>
+                                    <input type="checkbox" checked={ stunt.rollable } onChange={() => dispatch({
+                                        type: "TOGGLE BOX",
+                                        key: "stunts",
+                                        value: context.stunts,
+                                        propertyKey: "rollable",
+                                        propertyIndex: stuntIndex,
+                                        propertyValue: stunt.rollable
+                                    })}/>
+                                    {stunt.rollable ? (
+                                        <div>
+                                            <p style={{ fontWeight: "bold" }}>BONUS</p>
+                                            <input type="number" value={ stunt.bonus } onChange={(e) => dispatch({
+                                                type: "HANDLE INPUT",
+                                                key: "stunts",
+                                                value: context.stunts,
+                                                propertyKey: "bonus",
+                                                propertyIndex: stuntIndex,
+                                                event: e.target.valueAsNumber
+                                            })}/>
+                                            <p style={{ fontWeight: "bold" }}>SKILL</p>
+                                            <input type="text" value={ stunt.skill } onChange={(e) => dispatch({
+                                                type: "HANDLE INPUT",
+                                                key: "stunts",
+                                                value: context.stunts,
+                                                propertyKey: "skill",
+                                                propertyIndex: stuntIndex,
+                                                event: e.target.value
+                                            })}/>
+                                        </div>
+                                    )
+                                        :
+                                        null
+                                    }
+                                    <p style={{ fontWeight: "bold" }}>DESCRIPTION</p>
+                                    <input type="text" value={ stunt.description } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "stunts",
+                                        value: context.stunts,
+                                        propertyKey: "description",
+                                        propertyIndex: stuntIndex,
+                                        event: e.target.value
+                                    })}/>
+                                </div>
+                            </DragNDrop>
                         ))}
                         <button 
                             className="characterSheetButton" 

@@ -26,10 +26,10 @@ const Skills: React.FC = () => {
                     <div>
                         <h2>EDIT SKILLS</h2>
                         {context.skills.map((skill, skillIndex) => (
-                            <div>
-                                {modify ? (
-                                    <div>
-                                        <DragNDrop arr={ context.skills } initIndex={ skillIndex } isVisible={ modify }>
+                            <DragNDrop arr={ context.skills } initIndex={ skillIndex } isVisible={ modify }>
+                                <div>
+                                    {modify ? (
+                                        <div>
                                             <svg>
                                                 <rect 
                                                     fill="red" 
@@ -43,46 +43,46 @@ const Skills: React.FC = () => {
                                                     })} 
                                                 />
                                             </svg>
-                                        </DragNDrop>
-                                    </div>
-                                )
-                                :
-                                null
-                                }
-                                <input type="text" value={ skill.text } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "skills",
-                                    value: context.skills,
-                                    propertyKey: "text",
-                                    propertyIndex: skillIndex,
-                                    event: e.target.value
-                                })}/>
-                                <input type="number" value={ skill.modifier } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "skills",
-                                    value: context.skills,
-                                    propertyKey: "modifier",
-                                    propertyIndex: skillIndex,
-                                    event: e.target.valueAsNumber
-                                })}/>
-                                <p>
-                                    {
-                                        skill.modifier === -4 ? "Horrifying (-4)" :
-                                        skill.modifier === -3 ? "Catastrophic (-3)" :
-                                        skill.modifier === -2 ? "Terrible (-2)" :
-                                        skill.modifier === -1 ? "Poor (-1)" :
-                                        skill.modifier === 0 ? "Mediocre (0)" :
-                                        skill.modifier === 1 ? "Average (+1)" :
-                                        skill.modifier === 2 ? "Fair (+2)" :
-                                        skill.modifier === 3 ? "Good (+3)" :
-                                        skill.modifier === 4 ? "Great (+4)" :
-                                        skill.modifier === 5 ? "Superb (+5)" :
-                                        skill.modifier === 6 ? "Fantastic (+6)" :
-                                        skill.modifier === 7 ? "Epic (+7)" :
-                                        skill.modifier === 8 ? "Legendary (+8)" : null
+                                        </div>
+                                    )
+                                    :
+                                    null
                                     }
-                                </p>
-                            </div>
+                                    <input type="text" value={ skill.text } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "skills",
+                                        value: context.skills,
+                                        propertyKey: "text",
+                                        propertyIndex: skillIndex,
+                                        event: e.target.value
+                                    })}/>
+                                    <input type="number" value={ skill.modifier } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "skills",
+                                        value: context.skills,
+                                        propertyKey: "modifier",
+                                        propertyIndex: skillIndex,
+                                        event: e.target.valueAsNumber
+                                    })}/>
+                                    <p>
+                                        {
+                                            skill.modifier === -4 ? "Horrifying (-4)" :
+                                            skill.modifier === -3 ? "Catastrophic (-3)" :
+                                            skill.modifier === -2 ? "Terrible (-2)" :
+                                            skill.modifier === -1 ? "Poor (-1)" :
+                                            skill.modifier === 0 ? "Mediocre (0)" :
+                                            skill.modifier === 1 ? "Average (+1)" :
+                                            skill.modifier === 2 ? "Fair (+2)" :
+                                            skill.modifier === 3 ? "Good (+3)" :
+                                            skill.modifier === 4 ? "Great (+4)" :
+                                            skill.modifier === 5 ? "Superb (+5)" :
+                                            skill.modifier === 6 ? "Fantastic (+6)" :
+                                            skill.modifier === 7 ? "Epic (+7)" :
+                                            skill.modifier === 8 ? "Legendary (+8)" : null
+                                        }
+                                    </p>
+                                </div>
+                            </DragNDrop>
                         ))}
                         <button 
                             className="characterSheetButton" 

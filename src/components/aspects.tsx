@@ -50,10 +50,10 @@ const Aspects: React.FC = () => {
                     <div>
                         <h2>EDIT ASPECTS</h2>
                         {context.aspects.map((aspect, aspectIndex) => (
-                            <div>
-                                {modify ? 
-                                    <div>
-                                        <DragNDrop arr={ context.aspects } initIndex={ aspectIndex } isVisible={ modify }>
+                            <DragNDrop arr={ context.stress } initIndex={ aspectIndex } isVisible={ modify }>
+                                <div>
+                                    {modify ? 
+                                        <div>
                                             <svg>
                                                 <rect 
                                                     fill="red" 
@@ -67,66 +67,66 @@ const Aspects: React.FC = () => {
                                                     })}
                                                 />
                                             </svg>
-                                        </DragNDrop>
-                                    </div>
-                                    :
-                                    null
-                                }
-                                <h3 style={{ fontWeight: "bold" }}>CATEGORY HEADER &#40;OPTIONAL&#41;</h3>
-                                <input type="text" value={ aspect.categoryHeader } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "aspects",
-                                    value: context.aspects,
-                                    propertyKey: "categoryHeader",
-                                    propertyIndex: aspectIndex,
-                                    event: e.target.value
-                                })}/>
-                                <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
-                                <input type="text" value={ aspect.label } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "aspects",
-                                    value: context.aspects,
-                                    propertyKey: "label",
-                                    propertyIndex: aspectIndex,
-                                    event: e.target.value
-                                })}/>
-                                <h3 style={{ fontWeight: "bold" }}>ASPECT</h3>
-                                <input type="text" value={ aspect.aspect } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "aspects",
-                                    value: context.aspects,
-                                    propertyKey: "aspect",
-                                    propertyIndex: aspectIndex,
-                                    event: e.target.value
-                                })}/>
-                                <h3 style={{ fontWeight: "bold" }}>FLAGS</h3>
-                                <input type="text" value={ aspect.flags } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "aspects",
-                                    value: context.aspects,
-                                    propertyKey: "flags",
-                                    propertyIndex: aspectIndex,
-                                    event: e.target.value
-                                })}/>
-                                <h3 style={{ fontWeight: "bold" }}>FREE INVOKES</h3>
-                                <input type="number" value={ aspect.freeInvokes.length } max={10} min={0} onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "aspects",
-                                    value: context.aspects,
-                                    propertyKey: "freeInvokes",
-                                    propertyIndex: aspectIndex,
-                                    event: e.target.valueAsNumber
-                                })}/>
-                                <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
-                                <input type="text" value={ aspect.notes } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "aspects",
-                                    value: context.aspects,
-                                    propertyKey: "notes",
-                                    propertyIndex: aspectIndex,
-                                    event: e.target.value
-                                })}/>
-                            </div>
+                                        </div>
+                                        :
+                                        null
+                                    }
+                                    <h3 style={{ fontWeight: "bold" }}>CATEGORY HEADER &#40;OPTIONAL&#41;</h3>
+                                    <input type="text" value={ aspect.categoryHeader } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "aspects",
+                                        value: context.aspects,
+                                        propertyKey: "categoryHeader",
+                                        propertyIndex: aspectIndex,
+                                        event: e.target.value
+                                    })}/>
+                                    <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
+                                    <input type="text" value={ aspect.label } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "aspects",
+                                        value: context.aspects,
+                                        propertyKey: "label",
+                                        propertyIndex: aspectIndex,
+                                        event: e.target.value
+                                    })}/>
+                                    <h3 style={{ fontWeight: "bold" }}>ASPECT</h3>
+                                    <input type="text" value={ aspect.aspect } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "aspects",
+                                        value: context.aspects,
+                                        propertyKey: "aspect",
+                                        propertyIndex: aspectIndex,
+                                        event: e.target.value
+                                    })}/>
+                                    <h3 style={{ fontWeight: "bold" }}>FLAGS</h3>
+                                    <input type="text" value={ aspect.flags } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "aspects",
+                                        value: context.aspects,
+                                        propertyKey: "flags",
+                                        propertyIndex: aspectIndex,
+                                        event: e.target.value
+                                    })}/>
+                                    <h3 style={{ fontWeight: "bold" }}>FREE INVOKES</h3>
+                                    <input type="number" value={ aspect.freeInvokes.length } max={10} min={0} onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "aspects",
+                                        value: context.aspects,
+                                        propertyKey: "freeInvokes",
+                                        propertyIndex: aspectIndex,
+                                        event: e.target.valueAsNumber
+                                    })}/>
+                                    <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
+                                    <input type="text" value={ aspect.notes } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "aspects",
+                                        value: context.aspects,
+                                        propertyKey: "notes",
+                                        propertyIndex: aspectIndex,
+                                        event: e.target.value
+                                    })}/>
+                                </div>
+                            </DragNDrop>
                         ))}
                     <button 
                         className="characterSheetButton" 

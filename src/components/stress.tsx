@@ -44,11 +44,11 @@ const Stress: React.FC = () => {
                     <div>
                         <h2>EDIT STRESS</h2>
                         {context.stress.map((stressElement, stressIndex) => (
-                            <div>
-                                {modify ?
-                                    <div>
+                            <DragNDrop arr={ context.stress } initIndex={ stressIndex } isVisible={ modify }>
+                                <div>
+                                    {modify ?
                                         <div>
-                                            <DragNDrop arr={ context.stress } initIndex={ stressIndex } isVisible={ modify }>
+                                            <div>
                                                 <svg>
                                                     <rect 
                                                         fill="red" 
@@ -62,41 +62,41 @@ const Stress: React.FC = () => {
                                                         })}
                                                     />
                                                 </svg>
-                                            </DragNDrop>
+                                            </div>
                                         </div>
-                                    </div>
-                                :
-                                    null
-                                }
-                                <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
-                                <input type="text" value={ stressElement.label } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "stress",
-                                    value: context.stress,
-                                    propertyKey: "label",
-                                    propertyIndex: stressIndex,
-                                    event: e.target.value
-                                })}/>
-                                <h3 style={{ fontWeight: "bold" }}>TRACK LENGTH</h3>
-                                <input type="number" value={ stressElement.boxes.length } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "stress",
-                                    value: context.stress,
-                                    propertyKey: "boxes",
-                                    propertyIndex: stressIndex,
-                                    event: e.target.valueAsNumber
-                                })}/>
-                                <h3 style={{ fontWeight: "bold" }}>BOX VALUES</h3>
-                                <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
-                                <input type="text" value={ stressElement.notes } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "stress",
-                                    value: context.stress,
-                                    propertyKey: "notes",
-                                    propertyIndex: stressIndex,
-                                    event: e.target.value
-                                })}/>
-                            </div>
+                                    :
+                                        null
+                                    }
+                                    <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
+                                    <input type="text" value={ stressElement.label } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "stress",
+                                        value: context.stress,
+                                        propertyKey: "label",
+                                        propertyIndex: stressIndex,
+                                        event: e.target.value
+                                    })}/>
+                                    <h3 style={{ fontWeight: "bold" }}>TRACK LENGTH</h3>
+                                    <input type="number" value={ stressElement.boxes.length } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "stress",
+                                        value: context.stress,
+                                        propertyKey: "boxes",
+                                        propertyIndex: stressIndex,
+                                        event: e.target.valueAsNumber
+                                    })}/>
+                                    <h3 style={{ fontWeight: "bold" }}>BOX VALUES</h3>
+                                    <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
+                                    <input type="text" value={ stressElement.notes } onChange={(e) => dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "stress",
+                                        value: context.stress,
+                                        propertyKey: "notes",
+                                        propertyIndex: stressIndex,
+                                        event: e.target.value
+                                    })}/>
+                                </div>
+                            </DragNDrop>
                         ))}
                         <button 
                             className="characterSheetButton" 
@@ -143,63 +143,6 @@ const Stress: React.FC = () => {
                         ))}
                     </div>
                 ))}
-            </div>
-        </div>
-    )
-
-    return (
-        <div className="characterSheetBox">
-            <h1>STRESS</h1>
-            <button className="characterSheetButton" onClick={() => setStress([...stress, { label: "", boxes: [false] }])}>+blocks</button>
-            <button className="characterSheetButton" onClick={() => isEdit(!edit)}>Edit</button>
-            <div>
-                {edit ?
-                    stress.map((key: StressTypes, stressIndex: number) => (
-                        <div>
-                            <input type="text" value={ key.label } onChange={(e) => setStress(stress => {
-                                let stressCopy = [...stress];
-                                stressCopy[stressIndex].label = e.target.value;
-                                return [...stressCopy];
-                            })} />
-                            {key.boxes.map((box: boolean, boxIndex: number) => (
-                                <div>
-                                    <svg>
-                                        <rect className="box" style={{ fill: box ? "red" : "white" }} height={25} width={25} onClick={() => setStress(current =>
-                                            current.map((stress, localStressIndex) => {
-                                                if (localStressIndex === stressIndex) {
-                                                    return {
-                                                        ...stress,
-                                                        boxes: stress.boxes.map(
-                                                            (box, localBoxIndex) => {
-                                                                if (localBoxIndex === boxIndex) {
-                                                                    return !box;
-                                                                }
-                                                            return box;
-                                                        }
-                                                    ),
-                                                };
-                                            }
-                                            return stress;
-                                        })
-                                    )} />
-                                    </svg>
-                                </div>
-                            ))}
-                            <button onClick={() => setStress((current) =>
-                                current.map((stress, index) =>
-                                    index === stressIndex ? { ...stress, boxes: [...stress.boxes, false] } : stress
-                                )
-                            )}>+block</button>
-                        </div>
-                    ))
-                :
-                    stress.map(key => (
-                        <div>
-                            <p>{ key.label }</p>
-                            { key.boxes }
-                        </div>
-                    ))
-                }
             </div>
         </div>
     )
