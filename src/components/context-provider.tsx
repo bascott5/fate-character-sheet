@@ -28,11 +28,12 @@ interface InitStateTypes {
 export type Action = 
     | { type: "TOGGLE", key: string, value: boolean }
     | { type: "TOGGLE BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean }
-    | { type: "ADD BOX", key: string, value: AspectTypes[], propertyIndex: number }
+    | { type: "TOGGLE NESTED BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean[], nestedPropertyIndex: number }
+    | { type: "ADD BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] }
     | { type: "HANDLE INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, event: string | number }
     | { type: "ADD OBJECT", key: string, value: object[], addedValue: string | object }
     | { type: "DELETE OBJECT", key: string, value: object[], propertyKey: object }
-    | { type: "CHANGE INDEX", key: string, indexA: number, indexB: number }
+    | { type: "CHANGE INDEX", key: string, value: object[], indexA: number, indexB: number }
 
 export let initState: InitStateTypes = {
     options: {
@@ -72,13 +73,27 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         } : {...key}
                     })
                 }
+            case "TOGGLE NESTED BOX":
+                return {
+                    ...state,
+                    [action.key]: action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            ...key,
+                            [action.propertyKey]: action.propertyValue.map((nestedKey, nestedKeyIndex) => {
+                                return nestedKeyIndex === action.nestedPropertyIndex ? {
+                                    nestedKey: !nestedKey
+                                } : nestedKey
+                            })
+                        } : {...key}
+                    })
+                }
             case "ADD BOX":
                 return {
                     ...state,
                     [action.key]: action.value.map((key, keyIndex) => {
                         return keyIndex === action.propertyIndex ? {
                             ...key,
-                            freeInvokes: [...key.freeInvokes, false]
+                            [action.propertyKey]: [...action.propertyValue, false]
                         } : {...key}
                     })
                 }
@@ -105,7 +120,13 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
             case "CHANGE INDEX":
                 return {
                     ...state,
-                    [action.key] : action.key.replace(action.indexB, 0, action.indexA)
+                    [action.key] : (() => {
+                        let temp = action.value[action.indexB];
+                        action.value[action.indexB] = action.value[action.indexA];
+                        action.value[action.indexA] = temp;
+
+                        return [...action.value];
+                    }) //action.value.splice(action.indexB, 0, action.indexA)
                 }
             default:
                 return {...state};

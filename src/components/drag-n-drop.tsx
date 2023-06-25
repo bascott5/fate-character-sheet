@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { SkillsInterface } from "@/components/skills";
 
 interface Props {
-    arr: Array<SkillsInterface>,
+    arr: object[],
     initIndex: number,
+    isVisible: boolean,
     children: JSX.Element | null
 }
 
@@ -15,7 +15,7 @@ interface Props {
             //replace the index with the element
             //realign the object container's position so that is relative to the array again
 
-const DragNDrop: React.FC<Props> = ({ arr, initIndex, children }: Props) => {
+const DragNDrop: React.FC<Props> = ({ arr, initIndex, isVisible, children }: Props) => {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [mouseDown, setMouseDown] = useState(false);
 
@@ -50,7 +50,7 @@ const DragNDrop: React.FC<Props> = ({ arr, initIndex, children }: Props) => {
         <div 
             ref={ex => box.current[initIndex] = ex}
             onMouseUp={() => setMouseDown(false)}
-            style={ mouseDown ? { zIndex: 1, position: "absolute", left: 0, top: cursorPosition.y } : { position: "static" } }
+            style={ mouseDown ? { zIndex: 1, position: "absolute", left: 0, top: cursorPosition.y } : { position: "static" } && isVisible ? { display: "block" } : { display: "none" } }
         >
             <svg>
                 <rect 

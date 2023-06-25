@@ -33,9 +33,10 @@ const Aspects: React.FC = () => {
                         type: "ADD BOX",
                         key: "aspects",
                         value: context.aspects,
-                        propertyIndex: aspectIndex
+                        propertyKey: "freeInvokes",
+                        propertyIndex: aspectIndex,
+                        propertyValue: aspect.freeInvokes
                     })
-                    //aspect.freeInvokes.replace(i, 0, [...aspect.freeInvokes, false]);
                 }
             } 
         })
@@ -52,7 +53,7 @@ const Aspects: React.FC = () => {
                             <div>
                                 {modify ? 
                                     <div>
-                                        <DragNDrop arr={ context.aspects } initIndex={ aspectIndex }>
+                                        <DragNDrop arr={ context.aspects } initIndex={ aspectIndex } isVisible={ modify }>
                                             <svg>
                                                 <rect 
                                                     fill="red" 
@@ -127,9 +128,9 @@ const Aspects: React.FC = () => {
                                 })}/>
                             </div>
                         ))}
-                        <button 
-                    className="characterSheetButton" 
-                    onClick={() => dispatch({
+                    <button 
+                        className="characterSheetButton" 
+                        onClick={() => dispatch({
                         type: "ADD OBJECT",
                         key: "aspects",
                         value: context.aspects,
@@ -142,13 +143,13 @@ const Aspects: React.FC = () => {
                             notes: ""
                         }
                     })}>
-                    +Add
-                </button>
-                <button 
-                    className="characterSheetButton"
-                    onClick={() => isModify(!modify)}>
-                    Modify
-                </button>
+                        +Add
+                    </button>
+                    <button 
+                        className="characterSheetButton"
+                        onClick={() => isModify(!modify)}>
+                        Modify
+                    </button>
                     </div>
                 )
                     :
@@ -163,12 +164,13 @@ const Aspects: React.FC = () => {
                     {aspect.freeInvokes.map((invoke, invokeIndex) => (
                     <svg>
                         <rect className="box" style={{ fill: invoke ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
-                            type: "TOGGLE BOX",
+                            type: "TOGGLE NESTED BOX",
                             key: "aspects",
                             value: context.aspects,
                             propertyKey: "freeInvokes",
-                            propertyIndex: invokeIndex,
-                            propertyValue: invoke
+                            propertyIndex: aspectIndex,
+                            propertyValue: aspect.freeInvokes,
+                            nestedPropertyIndex: invokeIndex
                         })}/>
                     </svg>
                 ))}

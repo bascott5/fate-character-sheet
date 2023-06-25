@@ -29,7 +29,7 @@ const Skills: React.FC = () => {
                             <div>
                                 {modify ? (
                                     <div>
-                                        <DragNDrop arr={ context.skills } initIndex={ skillIndex }>
+                                        <DragNDrop arr={ context.skills } initIndex={ skillIndex } isVisible={ modify }>
                                             <svg>
                                                 <rect 
                                                     fill="red" 

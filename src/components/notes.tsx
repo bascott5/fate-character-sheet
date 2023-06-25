@@ -27,7 +27,7 @@ const Notes: React.FC = () => {
                            <div>
                                 {modify ? (
                                     <div>
-                                    <DragNDrop arr={ context.skills } initIndex={ noteIndex }>
+                                    <DragNDrop arr={ context.skills } initIndex={ noteIndex } isVisible={ modify }>
                                         <svg>
                                             <rect 
                                                 fill="red" 
@@ -47,6 +47,7 @@ const Notes: React.FC = () => {
                                 :
                                     null
                                 }
+                                <p style={{ fontWeight: "bold" }}>TITLE</p>
                                 <input type="text" value={ note.title } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "notes",
@@ -55,6 +56,7 @@ const Notes: React.FC = () => {
                                     propertyIndex: noteIndex,
                                     event: e.target.value
                                 })}/>
+                                <p style={{ fontWeight: "bold" }}>NOTE</p>
                                 <input type="text" value={ note.description } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "notes",

@@ -36,7 +36,7 @@ const Stunts: React.FC = () => {
                             <div>
                                 {modify ? 
                                     <div>
-                                        <DragNDrop arr={ context.stunts } initIndex={ stuntIndex }>
+                                        <DragNDrop arr={ context.stunts } initIndex={ stuntIndex } isVisible={ modify }>
                                             <svg>
                                                 <rect 
                                                     fill="red" 
