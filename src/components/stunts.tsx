@@ -13,17 +13,19 @@ export interface StuntTypes {
 }
 
 const Stunts: React.FC = () => {
-    const [stunts, setStunts] = useState<StuntTypes[]>([{
-        name: "",
-        rollable: false,
-        bonus: 0,
-        skill: "",
-        skillBonus: 0,
-        description: ""
-    }]);
     const [edit, isEdit] = useState<boolean>(false);
     const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
+
+    useEffect(() => {
+        for (let i = 0; i < context.skills.length; i++) {
+            if (context.skills[i].text == context.stunts[i].skill) {
+                context.stunts[i].skillBonus = context.skills[i].modifier;
+            } else {
+                context.stunts[i].skillBonus = 0;
+            }
+        }
+    }, [context.skills, context.stunts]);
 
     return (
         <div className="characterSheetBox">

@@ -8,10 +8,6 @@ export interface NoteTypes {
 }
 
 const Notes: React.FC = () => {
-    const [notes, setNotes] = useState<NoteTypes[]>([{ 
-        title: "",
-        description: ""
-    }]);
     const [edit, isEdit] = useState<boolean>(false);
     const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);

@@ -50,9 +50,9 @@ const DragNDrop: React.FC<Props> = ({ arr, initIndex, isVisible, children }: Pro
         <div 
             ref={ex => box.current[initIndex] = ex}
             onMouseUp={() => setMouseDown(false)}
-            style={ mouseDown ? { zIndex: 1, position: "absolute", left: 0, top: cursorPosition.y } : { position: "static" } && isVisible ? { display: "block" } : { display: "none" } }
+            style={ mouseDown ? { zIndex: 1, position: "absolute", left: 0, top: cursorPosition.y } : { position: "static" } }
         >
-            <svg>
+            <svg style={ isVisible ? { display: "block" } : { display: "none" } }>
                 <rect 
                     height={ 15 } 
                     width={ 15 } 

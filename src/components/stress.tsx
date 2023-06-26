@@ -4,25 +4,21 @@ import { Context } from "./context-provider";
 import DragNDrop from "./drag-n-drop";
 
 export interface StressTypes {
-    label: string,
-    boxes: boolean[], //TODO: change to also accept numbers as an input
-    notes: string
+    "label": string,
+    "boxes": boolean[], //TODO: change to also accept numbers as an input
+    "boxesLength": number,
+    "notes": string
 }
 
 const Stress: React.FC = () => {
-    const [stress, setStress] = useState<StressTypes[]>([{
-            label: "",
-            boxes: [false],
-            notes: ""
-        }]);
     const [edit, isEdit] = useState<boolean>(false);
     const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
 
     useEffect(() => {
         context.stress.map((stressElement, stressIndex) => {
-            for (let i = 0; i < stressElement.boxes.length; i++) {
-                if (stressElement.boxes[i] == undefined) {
+            for (let i = 0; i < stressElement.boxesLength; i++) {
+                if (stressElement.boxesLength > stressElement.boxes.length) {
                     dispatch({ 
                         type: "ADD BOX",
                         key: "stress",
@@ -31,10 +27,19 @@ const Stress: React.FC = () => {
                         propertyIndex: stressIndex,
                         propertyValue: stressElement.boxes
                     })
+                } else if (stressElement.boxesLength < stressElement.boxes.length) {
+                    dispatch({
+                        type: "DELETE BOX",
+                        key: "stress",
+                        value: context.stress,
+                        propertyKey: "boxes",
+                        propertyIndex: stressIndex,
+                        propertyValue: stressElement.boxes
+                    })
                 }
-            } 
+            }
         })
-    }, [context.stress])
+    }, [context.stress]);
 
     return (
         <div className="characterSheetBox">
@@ -77,14 +82,19 @@ const Stress: React.FC = () => {
                                         event: e.target.value
                                     })}/>
                                     <h3 style={{ fontWeight: "bold" }}>TRACK LENGTH</h3>
-                                    <input type="number" value={ stressElement.boxes.length } onChange={(e) => dispatch({
-                                        type: "HANDLE INPUT",
-                                        key: "stress",
-                                        value: context.stress,
-                                        propertyKey: "boxes",
-                                        propertyIndex: stressIndex,
-                                        event: e.target.valueAsNumber
-                                    })}/>
+                                    <input type="number" value={ stressElement.boxesLength } min={0} max={10} onChange={(e) => {
+                                        dispatch({
+                                            type: "HANDLE INPUT",
+                                            key: "stress",
+                                            value: context.stress,
+                                            propertyKey: "boxesLength",
+                                            propertyIndex: stressIndex,
+                                            event: e.target.valueAsNumber
+                                        })
+                                    }}/>
+                                    {
+
+                                    }
                                     <h3 style={{ fontWeight: "bold" }}>BOX VALUES</h3>
                                     <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
                                     <input type="text" value={ stressElement.notes } onChange={(e) => dispatch({
@@ -107,6 +117,7 @@ const Stress: React.FC = () => {
                             addedValue: {
                                 label: "",
                                 boxes: [],
+                                boxesLength: 0,
                                 notes: ""
                             }
                         })}>
@@ -126,9 +137,9 @@ const Stress: React.FC = () => {
                     <div>
                         <h3 style={{ fontWeight: "bold" }}>{ stressElement.label }</h3>
                         <p>{ stressElement.notes }</p>
-                        {stressElement.boxes.map((box, boxIndex) => ( //TODO: map stressElement object as an array, then map the boxes property
+                        {stressElement.boxes.map((box, boxIndex) => (
                             <div>
-                                <svg>
+                                <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none" }}>
                                     <rect className="box" style={{ fill: box ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
                                         type: "TOGGLE NESTED BOX",
                                         key: "stress",

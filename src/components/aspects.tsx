@@ -9,26 +9,19 @@ export interface AspectTypes {
     "aspect": string,
     "flags": string,
     "freeInvokes": boolean[],
+    "freeInvokesLength": number,
     "notes": string
 }
 
 const Aspects: React.FC = () => {
-    const [aspects, setAspects] = useState<AspectTypes[]>([{
-        categoryHeader: "",
-        label: "",
-        aspect: "",
-        flags: "",
-        freeInvokes: [],
-        notes: ""
-    }]);
     const [edit, isEdit] = useState<boolean>(false);
     const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
 
     useEffect(() => {
         context.aspects.map((aspect, aspectIndex) => {
-            for (let i = 0; i < aspect.freeInvokes.length; i++) {
-                if (aspect.freeInvokes[i] == undefined) {
+            for (let i = 0; i < aspect.freeInvokesLength; i++) {
+                if (aspect.freeInvokesLength > aspect.freeInvokes.length) {
                     dispatch({ 
                         type: "ADD BOX",
                         key: "aspects",
@@ -37,10 +30,19 @@ const Aspects: React.FC = () => {
                         propertyIndex: aspectIndex,
                         propertyValue: aspect.freeInvokes
                     })
+                } else if (aspect.freeInvokesLength < aspect.freeInvokes.length) {
+                    dispatch({
+                        type: "DELETE BOX",
+                        key: "aspects",
+                        value: context.aspects,
+                        propertyKey: "freeInvokes",
+                        propertyIndex: aspectIndex,
+                        propertyValue: aspect.freeInvokes
+                    })
                 }
-            } 
+            }
         })
-    }, [context.aspects])
+    }, [context.aspects]);
 
     return (
         <div className="characterSheetBox">
@@ -52,7 +54,7 @@ const Aspects: React.FC = () => {
                         {context.aspects.map((aspect, aspectIndex) => (
                             <DragNDrop arr={ context.stress } initIndex={ aspectIndex } isVisible={ modify }>
                                 <div>
-                                    {modify ? 
+                                    {modify ? (
                                         <div>
                                             <svg>
                                                 <rect 
@@ -68,6 +70,7 @@ const Aspects: React.FC = () => {
                                                 />
                                             </svg>
                                         </div>
+                                        )
                                         :
                                         null
                                     }
@@ -108,11 +111,11 @@ const Aspects: React.FC = () => {
                                         event: e.target.value
                                     })}/>
                                     <h3 style={{ fontWeight: "bold" }}>FREE INVOKES</h3>
-                                    <input type="number" value={ aspect.freeInvokes.length } max={10} min={0} onChange={(e) => dispatch({
+                                    <input type="number" value={ aspect.freeInvokesLength } max={10} min={0} onChange={(e) => dispatch({
                                         type: "HANDLE INPUT",
                                         key: "aspects",
                                         value: context.aspects,
-                                        propertyKey: "freeInvokes",
+                                        propertyKey: "freeInvokesLength",
                                         propertyIndex: aspectIndex,
                                         event: e.target.valueAsNumber
                                     })}/>
@@ -139,7 +142,8 @@ const Aspects: React.FC = () => {
                             label: "",
                             aspect: "",
                             flags: "",
-                            freeInvokes: [],
+                            freeInvokes: [false],
+                            freeInvokesLength: 0,
                             notes: ""
                         }
                     })}>
@@ -162,7 +166,7 @@ const Aspects: React.FC = () => {
                     <p style={{ fontStyle: "italic", fontWeight: "bold" }}>{ aspect.aspect }</p> <p style={aspect.flags.length == 0 ? { display: "none" } : { display: "inline-block" } }>&#40;{ aspect.flags }&#41;</p>
                     <p>{ aspect.notes.toUpperCase() }</p>
                     {aspect.freeInvokes.map((invoke, invokeIndex) => (
-                    <svg>
+                    <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }}>
                         <rect className="box" style={{ fill: invoke ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
                             type: "TOGGLE NESTED BOX",
                             key: "aspects",

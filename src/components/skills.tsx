@@ -10,10 +10,6 @@ export interface SkillTypes {
 }
 
 const Skills: React.FC = () => {
-	const [skills, setSkills] = useState<SkillTypes[]>([{
-		text: "",
-		modifier: 0
-	}]);
     const [edit, isEdit] = useState<boolean>(false);
     const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);

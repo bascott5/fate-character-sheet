@@ -30,6 +30,7 @@ export type Action =
     | { type: "TOGGLE BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean }
     | { type: "TOGGLE NESTED BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean[], nestedPropertyIndex: number }
     | { type: "ADD BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] }
+    | { type: "DELETE BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] }
     | { type: "HANDLE INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, event: string | number }
     | { type: "ADD OBJECT", key: string, value: object[], addedValue: string | object }
     | { type: "DELETE OBJECT", key: string, value: object[], propertyKey: object }
@@ -80,9 +81,7 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         return keyIndex === action.propertyIndex ? {
                             ...key,
                             [action.propertyKey]: action.propertyValue.map((nestedKey, nestedKeyIndex) => {
-                                return nestedKeyIndex === action.nestedPropertyIndex ? {
-                                    nestedKey: !nestedKey
-                                } : nestedKey
+                                return nestedKeyIndex === action.nestedPropertyIndex ? !nestedKey : nestedKey
                             })
                         } : {...key}
                     })
@@ -94,6 +93,16 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         return keyIndex === action.propertyIndex ? {
                             ...key,
                             [action.propertyKey]: [...action.propertyValue, false]
+                        } : {...key}
+                    })
+                }
+            case "DELETE BOX":
+                return {
+                    ...state,
+                    [action.key]: action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            ...key,
+                            [action.propertyKey]: action.propertyValue.splice(action.propertyValue.length - 1, 1)
                         } : {...key}
                     })
                 }
