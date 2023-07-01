@@ -25,6 +25,8 @@ interface InitStateTypes {
     "notes": NoteTypes[],
 }
 
+export type ObjectTypes = AspectTypes | SkillTypes | StuntTypes | StressTypes | NoteTypes
+
 export type Action = 
     | { type: "TOGGLE", key: string, value: boolean }
     | { type: "TOGGLE BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean }
@@ -34,7 +36,8 @@ export type Action =
     | { type: "HANDLE INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, event: string | number }
     | { type: "ADD OBJECT", key: string, value: object[], addedValue: string | object }
     | { type: "DELETE OBJECT", key: string, value: object[], propertyKey: object }
-    | { type: "CHANGE INDEX", key: string, value: object[], indexA: number, indexB: number }
+    | { type: "CHANGE INDEX", key: string, value: ObjectTypes[], propertyIndex: number, propertyValue: ObjectTypes, indexB: number }
+    | { type: "CHANGE HEIGHT", key: string, value: object[], boxHeight: number | undefined, propertyIndex: number,  }
 
 export let initState: InitStateTypes = {
     options: {
@@ -127,15 +130,27 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                     [action.key]: action.value.filter(keyCopy => keyCopy != action.propertyKey)
                 }
             case "CHANGE INDEX":
+                //if (action.propertyValue["height"] > action.value[action.propertyIndex + 1].height && action.propertyValue["height"] < action.value[action.propertyIndex - 1].height) {
+                    return {
+                        ...state,
+                        [action.key]: (() => {
+                            let temp = action.value[action.indexB];
+                            action.value[action.indexB] = action.value[action.propertyIndex];
+                            action.value[action.propertyIndex] = temp;
+            
+                            return [...action.value];
+                        })
+                    }
+                //}
+            case "CHANGE HEIGHT":
                 return {
                     ...state,
-                    [action.key] : (() => {
-                        let temp = action.value[action.indexB];
-                        action.value[action.indexB] = action.value[action.indexA];
-                        action.value[action.indexA] = temp;
-
-                        return [...action.value];
-                    }) //action.value.splice(action.indexB, 0, action.indexA)
+                    [action.key]: action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            ...key,
+                            ["height"]: action.boxHeight
+                        } : {...key}
+                    })
                 }
             default:
                 return {...state};

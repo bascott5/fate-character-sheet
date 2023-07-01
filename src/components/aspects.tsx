@@ -4,13 +4,14 @@ import { dice } from "@/components/dice";
 import DragNDrop from "./drag-n-drop";
 
 export interface AspectTypes {
-    "categoryHeader": string,
-    "label": string,
-    "aspect": string,
-    "flags": string,
-    "freeInvokes": boolean[],
-    "freeInvokesLength": number,
-    "notes": string
+    categoryHeader: string,
+    label: string,
+    aspect: string,
+    flags: string,
+    freeInvokes: boolean[],
+    freeInvokesLength: number,
+    notes: string,
+    height: number
 }
 
 const Aspects: React.FC = () => {
@@ -52,7 +53,7 @@ const Aspects: React.FC = () => {
                     <div>
                         <h2>EDIT ASPECTS</h2>
                         {context.aspects.map((aspect, aspectIndex) => (
-                            <DragNDrop arr={ context.stress } initIndex={ aspectIndex } isVisible={ modify }>
+                            <DragNDrop arr={ context.aspects } arrKey={ "aspects" } element={ aspect } initIndex={ aspectIndex } isVisible={ modify }>
                                 <div>
                                     {modify ? (
                                         <div>

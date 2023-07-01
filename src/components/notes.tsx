@@ -4,7 +4,8 @@ import DragNDrop from "./drag-n-drop";
 
 export interface NoteTypes {
     title: string,
-    description: string
+    description: string,
+    height: number
 }
 
 const Notes: React.FC = () => {
@@ -20,7 +21,7 @@ const Notes: React.FC = () => {
                     <div>
                         <h2>EDIT NOTES</h2>
                         {context.notes.map((note, noteIndex) => (
-                            <DragNDrop arr={ context.skills } initIndex={ noteIndex } isVisible={ modify }>
+                            <DragNDrop arr={ context.notes } arrKey={ "notes" } element={ note } initIndex={ noteIndex } isVisible={ modify }>
                                 <div>
                                     {modify ? (
                                         <div>

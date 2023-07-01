@@ -1,13 +1,13 @@
-//TODO: turn altering key.boxes into a function so it can be more easily understood which box is being referred to by the computer
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
 import DragNDrop from "./drag-n-drop";
 
 export interface StressTypes {
-    "label": string,
-    "boxes": boolean[], //TODO: change to also accept numbers as an input
-    "boxesLength": number,
-    "notes": string
+    label: string,
+    boxes: boolean[], //TODO: change to also accept numbers as an input
+    boxesLength: number,
+    notes: string,
+    height: number
 }
 
 const Stress: React.FC = () => {
@@ -49,7 +49,7 @@ const Stress: React.FC = () => {
                     <div>
                         <h2>EDIT STRESS</h2>
                         {context.stress.map((stressElement, stressIndex) => (
-                            <DragNDrop arr={ context.stress } initIndex={ stressIndex } isVisible={ modify }>
+                            <DragNDrop arr={ context.stress } arrKey={ "stress" } element={ stressElement } initIndex={ stressIndex } isVisible={ modify }>
                                 <div>
                                     {modify ?
                                         <div>

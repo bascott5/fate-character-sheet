@@ -9,7 +9,8 @@ export interface StuntTypes {
     bonus: number,
     skill: string,
     skillBonus: number,
-    description: string
+    description: string,
+    height: number
 }
 
 const Stunts: React.FC = () => {
@@ -35,7 +36,7 @@ const Stunts: React.FC = () => {
                     <div>
                         <h2>EDIT STUNTS</h2>
                         {context.stunts.map((stunt, stuntIndex) => (
-                            <DragNDrop arr={ context.stunts } initIndex={ stuntIndex } isVisible={ modify }>
+                            <DragNDrop arr={ context.stunts } arrKey={ "stunts" } element={ stunt } initIndex={ stuntIndex } isVisible={ modify }>
                                 <div>
                                     {modify ? 
                                         <div>

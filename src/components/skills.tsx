@@ -6,7 +6,8 @@ import DragNDrop from "@/components/drag-n-drop";
 
 export interface SkillTypes {
     text: string,
-    modifier: number
+    modifier: number,
+    height: number
 }
 
 const Skills: React.FC = () => {
@@ -22,7 +23,7 @@ const Skills: React.FC = () => {
                     <div>
                         <h2>EDIT SKILLS</h2>
                         {context.skills.map((skill, skillIndex) => (
-                            <DragNDrop arr={ context.skills } initIndex={ skillIndex } isVisible={ modify }>
+                            <DragNDrop arr={ context.skills } arrKey={ "skills" } element={ skill } initIndex={ skillIndex } isVisible={ modify }>
                                 <div>
                                     {modify ? (
                                         <div>
