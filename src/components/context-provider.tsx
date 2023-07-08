@@ -5,9 +5,10 @@ import { SkillTypes } from "./skills";
 import { StuntTypes } from "./stunts";
 import { StressTypes } from "./stress";
 import { NoteTypes } from "./notes";
+import { IdentityTypes } from "./identity"
 
 interface Props {
-    children: JSX.Element
+    children: JSX.Element[]
 }
 
 interface InitStateTypes {
@@ -18,6 +19,7 @@ interface InitStateTypes {
         "isStress": boolean,
         "isNotes": boolean
     }
+    "identity": IdentityTypes,
     "aspects": AspectTypes[],
     "skills": SkillTypes[],
     "stunts": StuntTypes[],
@@ -33,11 +35,14 @@ export type Action =
     | { type: "TOGGLE NESTED BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean[], nestedPropertyIndex: number }
     | { type: "ADD BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] }
     | { type: "DELETE BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] }
+    | { type: "HANDLE INPUT IDENTITY", key: string, event: string | number}
     | { type: "HANDLE INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, event: string | number }
     | { type: "ADD OBJECT", key: string, value: object[], addedValue: string | object }
     | { type: "DELETE OBJECT", key: string, value: object[], propertyKey: object }
-    | { type: "CHANGE INDEX", key: string, value: ObjectTypes[], propertyIndex: number, propertyValue: ObjectTypes, indexB: number }
-    | { type: "CHANGE HEIGHT", key: string, value: object[], boxHeight: number | undefined, propertyIndex: number,  }
+    | { type: "CHANGE INDEX", key: string, value: ObjectTypes[], propertyIndex: number, indexB: number }
+    | { type: "CHANGE HEIGHT", key: string, value: object[], boxHeight: number | undefined, propertyIndex: number }
+    | { type: "WRITE JSON", name: string }
+    | { type: "LOAD JSON", name: string }
 
 export let initState: InitStateTypes = {
     options: {
@@ -46,6 +51,12 @@ export let initState: InitStateTypes = {
         isStunts: false,
         isStress: false,
         isNotes: false
+    },
+    identity: {
+        name: "",
+        pronouns: "",
+        fatePoints: 3,
+        refresh: 3
     },
     aspects: [],
     skills: [],
@@ -109,6 +120,14 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         } : {...key}
                     })
                 }
+            case "HANDLE INPUT IDENTITY":
+                return {
+                    ...state,
+                    identity: {
+                        ...state.identity,
+                        [action.key]: action.event 
+                    }
+                }
             case "HANDLE INPUT":
                 return {
                     ...state,
@@ -130,18 +149,29 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                     [action.key]: action.value.filter(keyCopy => keyCopy != action.propertyKey)
                 }
             case "CHANGE INDEX":
-                //if (action.propertyValue["height"] > action.value[action.propertyIndex + 1].height && action.propertyValue["height"] < action.value[action.propertyIndex - 1].height) {
-                    return {
-                        ...state,
-                        [action.key]: (() => {
-                            let temp = action.value[action.indexB];
-                            action.value[action.indexB] = action.value[action.propertyIndex];
-                            action.value[action.propertyIndex] = temp;
-            
-                            return [...action.value];
+                return {
+                    ...state,
+                    [action.key]: action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            key: action.value.splice(keyIndex, 1, action.value[keyIndex + 1])//[0]
+                        } : {...key}
+                    })
+                    
+                    /*action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            key: action.value.splice(keyIndex, 1, action.value[keyIndex + 1])//[0]
+                        } : {...key}*/
+                            /*(() => {
+                                let value = [...action.value]
+
+                        let temp = value[action.indexB];
+                        value[action.indexB] = value[action.indexA];
+                        value[action.indexA] = temp;
+
+                        return { value }
                         })
-                    }
-                //}
+                    })*/
+                }
             case "CHANGE HEIGHT":
                 return {
                     ...state,
@@ -152,6 +182,10 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         } : {...key}
                     })
                 }
+            case "WRITE JSON":
+                return localStorage.setItem(action.name, JSON.stringify(state))
+            case "LOAD JSON":
+                return JSON.parse(localStorage.getItem(action.name))
             default:
                 return {...state};
         }

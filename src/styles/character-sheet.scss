@@ -1,0 +1,13 @@
+.identity {
+    color: cornflowerblue;
+    float: left;
+    padding: 10px;
+    margin: 25px 150vh 25px 25px;
+    .input {
+        display: block;
+        visibility: hidden;
+    }
+    .type {
+        display: block;
+    }
+}

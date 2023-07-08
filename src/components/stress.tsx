@@ -2,6 +2,11 @@ import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
 import DragNDrop from "./drag-n-drop";
 
+interface BoxTypes {
+    highlighted: boolean,
+    value: number
+}
+
 export interface StressTypes {
     label: string,
     boxes: boolean[], //TODO: change to also accept numbers as an input

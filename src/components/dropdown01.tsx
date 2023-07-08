@@ -10,10 +10,18 @@ const Dropdown: React.FC<Props> = ({ chapter, index }: Props) => {
     const [open, isOpen] = useState<boolean>(false);
 
 	let pages = [];
+	let sectionTitles = new Array();
     let sections = new Array();
+	let content = new Array();
     switch (index) {
 		case 0:
+			sectionTitles.push
 			sections = ["What You Need To Play", "Players & Gamemasters", "The Character Sheet", "Taking Action, Dice, & the Ladder", "Fate Points", "Start Playing"];
+			content.push((
+				<div>
+
+				</div>
+			));
 			break;
 
 		case 1:
@@ -67,7 +75,7 @@ const Dropdown: React.FC<Props> = ({ chapter, index }: Props) => {
 
     return (
         <div>
-			<button onClick={() => isOpen(open => open = !open)} className="dropdown">{ chapter }</button>
+			<button className="dropdown" onClick={() => isOpen(!open)}>{ chapter }</button>
             {
                 open ?
 					<div className="linkContainer">{ pages }</div>
