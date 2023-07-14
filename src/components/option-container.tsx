@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Context } from "./context-provider";
 import Skills from "@/components/skills";
 import Notes from "@/components/notes";

@@ -44,7 +44,6 @@ const Stress: React.FC = () => {
                 }
             }
         })
-        console.log(context.stress)
     }, [context.stress]);
 
     return (

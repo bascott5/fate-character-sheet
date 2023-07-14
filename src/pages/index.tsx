@@ -1,4 +1,4 @@
-import CharacterSheet from '@/content/character-sheet';
+import CharacterSheet from './content/character-sheet';
 
 const App: React.FC = () => {
   return (
