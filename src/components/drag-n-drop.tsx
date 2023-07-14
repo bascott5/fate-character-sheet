@@ -17,7 +17,7 @@ const DragNDrop: React.FC<Props> = ({ arr, arrKey, element, initIndex, isVisible
     const box = useRef<HTMLDivElement | null>(null);
 
     const mouseMoveHandler = (e: MouseEvent) => {
-        setCursorPosition({ x: e.clientX - 51, y: e.clientY - 100 });
+        setCursorPosition({ x: e.clientX - 51, y: e.clientY - 80 });
     }
 
     const handleClickOutside = (e: any) => {
@@ -46,9 +46,9 @@ const DragNDrop: React.FC<Props> = ({ arr, arrKey, element, initIndex, isVisible
         })
     }, [mouseDown])
 
-    useEffect(() => {
-        if (arr.length > 1 && element != arr[arr.length - 1] /*&& element != arr[0]*/) {
-            if (element.height < arr[initIndex + 1].height) {
+    /*useEffect(() => {
+        if (arr.length > 1) {
+            if (element != arr[arr.length - 1] && element.height < arr[initIndex + 1].height) {
                 dispatch({ 
                     type: "CHANGE INDEX",
                     key: arrKey,
@@ -56,7 +56,7 @@ const DragNDrop: React.FC<Props> = ({ arr, arrKey, element, initIndex, isVisible
                     propertyIndex: initIndex,
                     indexB: initIndex + 1 //element.height > arr[index.plusOne].height ? 1 : 0
                 })
-            } /*else if (element.height > arr[initIndex - 1].height) {
+            } else if (element != arr[0] && element.height > arr[initIndex - 1].height) {
                 dispatch({ 
                     type: "CHANGE INDEX",
                     key: arrKey,
@@ -64,9 +64,11 @@ const DragNDrop: React.FC<Props> = ({ arr, arrKey, element, initIndex, isVisible
                     propertyIndex: initIndex,
                     indexB: initIndex - 1 //element.height > arr[index.minusOne].height ? 1 : 0
                 })
-            }*/
+            } else {
+                [...arr]
+            }
         }
-    }, [arr])
+    }, [arr])*/
 
     return (
         <div 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Section from '@/components/section';
+import Link from "next/link";
 
 interface Props {
     chapter: string,
@@ -75,7 +76,12 @@ const Dropdown: React.FC<Props> = ({ chapter, index }: Props) => {
 
     return (
         <div>
-			<button className="dropdown" onClick={() => isOpen(!open)}>{ chapter }</button>
+			<div className="dropdown">
+				<Link href={"./" + sections + ".tsx"}>
+						<h4 style={{ zIndex: 1 }}>{ chapter }</h4>
+				</Link>
+				<button onClick={() => isOpen(!open)}><h4>{open ? "-" : "+"}</h4></button>
+			</div>
             {
                 open ?
 					<div className="linkContainer">{ pages }</div>

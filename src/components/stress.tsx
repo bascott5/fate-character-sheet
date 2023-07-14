@@ -9,7 +9,7 @@ interface BoxTypes {
 
 export interface StressTypes {
     label: string,
-    boxes: boolean[], //TODO: change to also accept numbers as an input
+    boxes: BoxTypes[],
     boxesLength: number,
     notes: string,
     height: number
@@ -30,7 +30,7 @@ const Stress: React.FC = () => {
                         value: context.stress,
                         propertyKey: "boxes",
                         propertyIndex: stressIndex,
-                        propertyValue: stressElement.boxes
+                        propertyValue: [...stressElement.boxes, { highlighted: false, value: 1 }]
                     })
                 } else if (stressElement.boxesLength < stressElement.boxes.length) {
                     dispatch({
@@ -44,6 +44,7 @@ const Stress: React.FC = () => {
                 }
             }
         })
+        console.log(context.stress)
     }, [context.stress]);
 
     return (
@@ -97,10 +98,38 @@ const Stress: React.FC = () => {
                                             event: e.target.valueAsNumber
                                         })
                                     }}/>
-                                    {
-
-                                    }
-                                    <h3 style={{ fontWeight: "bold" }}>BOX VALUES</h3>
+                                    {stressElement.boxesLength != 0 ? (
+                                        <div>
+                                            <h3 style={{ fontWeight: "bold" }}>BOX VALUES</h3>
+                                            {context.stress[stressIndex].boxes.map((box, boxIndex) => (
+                                                <input type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
+                                                    type: "HANDLE NESTED INPUT",
+                                                    key: "stress",
+                                                    value: context.stress,
+                                                    propertyKey: "boxes",
+                                                    propertyIndex: stressIndex,
+                                                    propertyValue: stressElement.boxes,
+                                                    nestedPropertyIndex: boxIndex,
+                                                    nestedPropertyKey: "value",
+                                                    event: e.target.valueAsNumber
+                                                })} />
+                                            ))
+                                            
+                                            /*stressElement.boxes.map((box, boxIndex) => ( //map with more detail, start by mapping stress again, then compare that index to its parent index, then map that to boxes,
+                                                <input type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
+                                                    type: "HANDLE NESTED INPUT",
+                                                    key: "stress",
+                                                    value: context.stress,
+                                                    propertyKey: "boxes",
+                                                    propertyIndex: stressIndex,
+                                                    propertyValue: stressElement.boxes,
+                                                    nestedPropertyIndex: boxIndex,
+                                                    nestedPropertyKey: "value",
+                                                    event: e.target.valueAsNumber
+                                                })} />
+                                            ))*/}*/
+                                        </div>
+                                    ) : null}
                                     <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
                                     <input type="text" value={ stressElement.notes } onChange={(e) => dispatch({
                                         type: "HANDLE INPUT",
@@ -145,15 +174,18 @@ const Stress: React.FC = () => {
                         {stressElement.boxes.map((box, boxIndex) => (
                             <div>
                                 <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none" }}>
-                                    <rect className="box" style={{ fill: box ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
-                                        type: "TOGGLE NESTED BOX",
+                                    <rect className="box" style={{ fill: box.highlighted ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
+                                        type: "TOGGLE STRESS",
                                         key: "stress",
                                         value: context.stress,
                                         propertyKey: "boxes",
                                         propertyIndex: stressIndex,
                                         propertyValue: stressElement.boxes,
-                                        nestedPropertyIndex: boxIndex
+                                        nestedPropertyIndex: boxIndex,
+                                        nestedPropertyKey: "highlighted",
+                                        nestedPropertyValue: box.highlighted
                                     })}/>
+                                    <text x="8" y="17" style={{ pointerEvents: "none" }} font-family="Verdana" font-size="15" fill="grey">{ box.value.toString() }</text>
                                 </svg>
                             </div>
                         ))}

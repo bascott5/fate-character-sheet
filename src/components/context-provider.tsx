@@ -33,15 +33,16 @@ export type Action =
     | { type: "TOGGLE", key: string, value: boolean }
     | { type: "TOGGLE BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean }
     | { type: "TOGGLE NESTED BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean[], nestedPropertyIndex: number }
-    | { type: "ADD BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] }
-    | { type: "DELETE BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] }
+    | { type: "TOGGLE STRESS", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: object[], nestedPropertyIndex: number, nestedPropertyKey: string, nestedPropertyValue: boolean }
+    | { type: "ADD BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] | object[] }
+    | { type: "DELETE BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] | object[] }
     | { type: "HANDLE INPUT IDENTITY", key: string, event: string | number}
     | { type: "HANDLE INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, event: string | number }
+    | { type: "HANDLE NESTED INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: object[], nestedPropertyKey: string, nestedPropertyIndex: number, event: string | number }
     | { type: "ADD OBJECT", key: string, value: object[], addedValue: string | object }
     | { type: "DELETE OBJECT", key: string, value: object[], propertyKey: object }
     | { type: "CHANGE INDEX", key: string, value: ObjectTypes[], propertyIndex: number, indexB: number }
     | { type: "CHANGE HEIGHT", key: string, value: object[], boxHeight: number | undefined, propertyIndex: number }
-    | { type: "WRITE JSON", name: string }
     | { type: "LOAD JSON", name: string }
 
 export let initState: InitStateTypes = {
@@ -100,13 +101,28 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         } : {...key}
                     })
                 }
+            case "TOGGLE STRESS":
+                return {
+                    ...state,
+                    [action.key]: action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            ...key,
+                            [action.propertyKey]: action.propertyValue.map((nestedKey, nestedKeyIndex) => {
+                                return nestedKeyIndex === action.nestedPropertyIndex ? {
+                                    ...nestedKey,
+                                    [action.nestedPropertyKey]: !action.nestedPropertyValue
+                                } : {...nestedKey}
+                            })
+                        } : {...key}
+                    })
+                }
             case "ADD BOX":
                 return {
                     ...state,
                     [action.key]: action.value.map((key, keyIndex) => {
                         return keyIndex === action.propertyIndex ? {
                             ...key,
-                            [action.propertyKey]: [...action.propertyValue, false]
+                            [action.propertyKey]: action.propertyValue
                         } : {...key}
                     })
                 }
@@ -135,6 +151,21 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         return keyIndex === action.propertyIndex ? {
                             ...key, 
                             [action.propertyKey]: action.event 
+                        } : {...key}
+                    })
+                }
+            case "HANDLE NESTED INPUT":
+                return {
+                    ...state,
+                    [action.key]: action.value.map((key, keyIndex) => {
+                        return keyIndex === action.propertyIndex ? {
+                            ...key, 
+                            [action.propertyKey]: action.propertyValue.map((nestedKey, nestedKeyIndex) => {
+                                return nestedKeyIndex === action.nestedPropertyIndex ? {
+                                    ...nestedKey,
+                                    [action.nestedPropertyKey]: action.event
+                                } : {...nestedKey}
+                            })
                         } : {...key}
                     })
                 }
@@ -182,8 +213,6 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         } : {...key}
                     })
                 }
-            case "WRITE JSON":
-                return localStorage.setItem(action.name, JSON.stringify(state))
             case "LOAD JSON":
                 return JSON.parse(localStorage.getItem(action.name))
             default:

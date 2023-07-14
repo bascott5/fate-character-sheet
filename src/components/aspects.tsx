@@ -29,7 +29,7 @@ const Aspects: React.FC = () => {
                         value: context.aspects,
                         propertyKey: "freeInvokes",
                         propertyIndex: aspectIndex,
-                        propertyValue: aspect.freeInvokes
+                        propertyValue: [...aspect.freeInvokes, false]
                     })
                 } else if (aspect.freeInvokesLength < aspect.freeInvokes.length) {
                     dispatch({
@@ -143,7 +143,7 @@ const Aspects: React.FC = () => {
                             label: "",
                             aspect: "",
                             flags: "",
-                            freeInvokes: [false],
+                            freeInvokes: [],
                             freeInvokesLength: 0,
                             notes: ""
                         }
