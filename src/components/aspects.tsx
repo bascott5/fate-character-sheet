@@ -145,7 +145,8 @@ const Aspects: React.FC = () => {
                             flags: "",
                             freeInvokes: [],
                             freeInvokesLength: 0,
-                            notes: ""
+                            notes: "",
+                            height: 0
                         }
                     })}>
                         +Add

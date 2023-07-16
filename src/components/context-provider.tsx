@@ -6,6 +6,8 @@ import { StuntTypes } from "./stunts";
 import { StressTypes } from "./stress";
 import { NoteTypes } from "./notes";
 import { IdentityTypes } from "./identity"
+import { ConsequenceTypes } from "./consequences";
+import { ConditionTypes } from "./conditions";
 
 interface Props {
     children: JSX.Element[]
@@ -17,6 +19,8 @@ interface InitStateTypes {
         "isSkills": boolean,
         "isStunts": boolean,
         "isStress": boolean,
+        "isConsequences": boolean,
+        "isConditions": boolean,
         "isNotes": boolean
     }
     "identity": IdentityTypes,
@@ -24,10 +28,12 @@ interface InitStateTypes {
     "skills": SkillTypes[],
     "stunts": StuntTypes[],
     "stress": StressTypes[],
+    "consequences": ConsequenceTypes[],
+    "conditions": ConditionTypes[],
     "notes": NoteTypes[],
 }
 
-export type ObjectTypes = AspectTypes | SkillTypes | StuntTypes | StressTypes | NoteTypes
+export type ObjectTypes = AspectTypes | SkillTypes | StuntTypes | StressTypes | ConsequenceTypes | NoteTypes
 
 export type Action = 
     | { type: "TOGGLE", key: string, value: boolean }
@@ -51,6 +57,8 @@ export let initState: InitStateTypes = {
         isSkills: false,
         isStunts: false,
         isStress: false,
+        isConsequences: false,
+        isConditions: false,
         isNotes: false
     },
     identity: {
@@ -63,6 +71,8 @@ export let initState: InitStateTypes = {
     skills: [],
     stunts: [],
     stress: [],
+    consequences: [],
+    conditions: [],
     notes: []
 }
 

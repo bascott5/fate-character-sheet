@@ -7,7 +7,7 @@ interface BoxTypes {
     value: number
 }
 
-export interface StressTypes {
+export interface ConditionTypes {
     label: string,
     boxes: BoxTypes[],
     boxesLength: number,
@@ -15,46 +15,46 @@ export interface StressTypes {
     height: number
 }
 
-const Stress: React.FC = () => {
+const Conditions: React.FC = () => {
     const [edit, isEdit] = useState<boolean>(false);
     const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
 
     useEffect(() => {
-        context.stress.map((stressElement, stressIndex) => {
-            for (let i = 0; i < stressElement.boxesLength; i++) {
-                if (stressElement.boxesLength > stressElement.boxes.length) {
+        context.conditions.map((condition, conditionIndex) => {
+            for (let i = 0; i < condition.boxesLength; i++) {
+                if (condition.boxesLength > condition.boxes.length) {
                     dispatch({ 
                         type: "ADD BOX",
-                        key: "stress",
-                        value: context.stress,
+                        key: "conditions",
+                        value: context.conditions,
                         propertyKey: "boxes",
-                        propertyIndex: stressIndex,
-                        propertyValue: [...stressElement.boxes, { highlighted: false, value: 1 }]
+                        propertyIndex: conditionIndex,
+                        propertyValue: [...condition.boxes, { highlighted: false, value: 1 }]
                     })
-                } else if (stressElement.boxesLength < stressElement.boxes.length) {
+                } else if (condition.boxesLength < condition.boxes.length) {
                     dispatch({
                         type: "DELETE BOX",
-                        key: "stress",
-                        value: context.stress,
+                        key: "conditions",
+                        value: context.conditions,
                         propertyKey: "boxes",
-                        propertyIndex: stressIndex,
-                        propertyValue: stressElement.boxes
+                        propertyIndex: conditionIndex,
+                        propertyValue: condition.boxes
                     })
                 }
             }
         })
-    }, [context.stress]);
+    }, [context.conditions]);
 
     return (
         <div className="characterSheetBox">
-            <h1>STRESS</h1> <button onClick={() => isEdit(!edit)} />
+            <h1>CONDITIONS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
                     <div>
-                        <h2>EDIT STRESS</h2>
-                        {context.stress.map((stressElement, stressIndex) => (
-                            <DragNDrop arr={ context.stress } arrKey={ "stress" } element={ stressElement } initIndex={ stressIndex } isVisible={ modify }>
+                        <h2>EDIT CONDITIONS</h2>
+                        {context.conditions.map((condition, conditionIndex) => (
+                            <DragNDrop arr={ context.conditions } arrKey={ "conditions" } element={ condition } initIndex={ conditionIndex } isVisible={ modify }>
                                 <div>
                                     {modify ?
                                         <div>
@@ -66,9 +66,9 @@ const Stress: React.FC = () => {
                                                         width={15} 
                                                         onClick={() => dispatch({
                                                             type: "DELETE OBJECT",
-                                                            key: "stress",
-                                                            value: context.stress,
-                                                            propertyKey: stressElement
+                                                            key: "conditions",
+                                                            value: context.conditions,
+                                                            propertyKey: condition
                                                         })}
                                                     />
                                                 </svg>
@@ -78,36 +78,36 @@ const Stress: React.FC = () => {
                                         null
                                     }
                                     <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
-                                    <input type="text" value={ stressElement.label } onChange={(e) => dispatch({
+                                    <input type="text" value={ condition.label } onChange={(e) => dispatch({
                                         type: "HANDLE INPUT",
-                                        key: "stress",
-                                        value: context.stress,
+                                        key: "conditions",
+                                        value: context.conditions,
                                         propertyKey: "label",
-                                        propertyIndex: stressIndex,
+                                        propertyIndex: conditionIndex,
                                         event: e.target.value
                                     })}/>
                                     <h3 style={{ fontWeight: "bold" }}>TRACK LENGTH</h3>
-                                    <input type="number" value={ stressElement.boxesLength } min={0} max={10} onChange={(e) => {
+                                    <input type="number" value={ condition.boxesLength } min={0} max={10} onChange={(e) => {
                                         dispatch({
                                             type: "HANDLE INPUT",
-                                            key: "stress",
-                                            value: context.stress,
+                                            key: "conditions",
+                                            value: context.conditions,
                                             propertyKey: "boxesLength",
-                                            propertyIndex: stressIndex,
+                                            propertyIndex: conditionIndex,
                                             event: e.target.valueAsNumber
                                         })
                                     }}/>
-                                    {stressElement.boxesLength != 0 ? (
+                                    {condition.boxesLength != 0 ? (
                                         <div>
                                             <h3 style={{ fontWeight: "bold" }}>BOX VALUES</h3>
-                                            {context.stress[stressIndex].boxes.map((box, boxIndex) => (
+                                            {condition.boxes.map((box, boxIndex) => (
                                                 <input type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
                                                     type: "HANDLE NESTED INPUT",
-                                                    key: "stress",
-                                                    value: context.stress,
+                                                    key: "conditions",
+                                                    value: context.conditions,
                                                     propertyKey: "boxes",
-                                                    propertyIndex: stressIndex,
-                                                    propertyValue: stressElement.boxes,
+                                                    propertyIndex: conditionIndex,
+                                                    propertyValue: condition.boxes,
                                                     nestedPropertyIndex: boxIndex,
                                                     nestedPropertyKey: "value",
                                                     event: e.target.valueAsNumber
@@ -117,12 +117,12 @@ const Stress: React.FC = () => {
                                         </div>
                                     ) : null}
                                     <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
-                                    <input type="text" value={ stressElement.notes } onChange={(e) => dispatch({
+                                    <input type="text" value={ condition.notes } onChange={(e) => dispatch({
                                         type: "HANDLE INPUT",
-                                        key: "stress",
-                                        value: context.stress,
+                                        key: "conditions",
+                                        value: context.conditions,
                                         propertyKey: "notes",
-                                        propertyIndex: stressIndex,
+                                        propertyIndex: conditionIndex,
                                         event: e.target.value
                                     })}/>
                                 </div>
@@ -132,8 +132,8 @@ const Stress: React.FC = () => {
                             className="characterSheetButton" 
                             onClick={() => dispatch({
                             type: "ADD OBJECT",
-                            key: "stress",
-                            value: context.stress,
+                            key: "conditions",
+                            value: context.conditions,
                             addedValue: {
                                 label: "",
                                 boxes: [],
@@ -154,20 +154,20 @@ const Stress: React.FC = () => {
                 :
                     null
                 }
-                {context.stress.map((stressElement, stressIndex) => (
+                {context.conditions.map((condition, conditionIndex) => (
                     <div>
-                        <h3 style={{ fontWeight: "bold" }}>{ stressElement.label }</h3>
-                        <p>{ stressElement.notes }</p>
-                        {stressElement.boxes.map((box, boxIndex) => (
+                        <h3 style={{ fontWeight: "bold" }}>{ condition.label }</h3>
+                        <p>{ condition.notes }</p>
+                        {condition.boxes.map((box, boxIndex) => (
                             <div>
-                                <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none" }}>
+                                <svg style={{ display: condition.boxesLength != 0 ? "block" : "none" }}>
                                     <rect className="box" style={{ fill: box.highlighted ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
                                         type: "TOGGLE STRESS",
-                                        key: "stress",
-                                        value: context.stress,
+                                        key: "conditions",
+                                        value: context.conditions,
                                         propertyKey: "boxes",
-                                        propertyIndex: stressIndex,
-                                        propertyValue: stressElement.boxes,
+                                        propertyIndex: conditionIndex,
+                                        propertyValue: condition.boxes,
                                         nestedPropertyIndex: boxIndex,
                                         nestedPropertyKey: "highlighted",
                                         nestedPropertyValue: box.highlighted
@@ -183,4 +183,4 @@ const Stress: React.FC = () => {
     )
 }
 
-export default Stress;
+export default Conditions;

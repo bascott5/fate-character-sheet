@@ -6,15 +6,10 @@ import Notes from "@/components/notes";
 import Stress from "@/components/stress";
 import Aspects from "@/components/aspects";
 import Stunts from "@/components/stunts";
+import Consequences from "./consequences";
+import Conditions from "./conditions";
 
 const OptionContainer: React.FC = () => {
-    let [options, setOptions] = useState({
-        isAspects: false,
-        isSkills: false,
-        isStunts: false,
-        isStress: false,
-        isNotes: false
-    });
     let [context, dispatch] = useContext(Context);
 
     return (
@@ -34,7 +29,10 @@ const OptionContainer: React.FC = () => {
             </div>
             <div className="secondColumn">
                 {context.options.isAspects ? <Aspects /> : null}
+                {context.options.isConsequences ? <Consequences /> : null}
+                {context.options.isConditions ? <Conditions /> : null}
                 {context.options.isStress ? <Stress /> : null}
+                {}
             </div>
         </div>
     )
