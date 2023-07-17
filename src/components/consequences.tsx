@@ -16,7 +16,7 @@ const Consequences: React.FC = () => {
     let [context, dispatch] = useContext(Context);
 
     return (
-        <div className="characterSheetBox">
+        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>CONSEQUENCES</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -67,6 +67,7 @@ const Consequences: React.FC = () => {
                         ))}
                         <button 
                             className="characterSheetButton" 
+                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
                             onClick={() => dispatch({
                             type: "ADD OBJECT",
                             key: "consequences",
@@ -83,6 +84,7 @@ const Consequences: React.FC = () => {
                         </button>
                         <button 
                             className="characterSheetButton"
+                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
                             onClick={() => isModify(!modify)}>
                             Modify
                         </button>

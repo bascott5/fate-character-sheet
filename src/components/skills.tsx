@@ -1,4 +1,3 @@
-//https://stackoverflow.com/questions/54633690/how-can-i-use-multiple-refs-for-an-array-of-elements-with-hooks
 import { useState, useContext } from "react"
 import { Context } from "@/components/context-provider";
 import { dice } from "@/components/dice";
@@ -16,7 +15,7 @@ const Skills: React.FC = () => {
     let [context, dispatch] = useContext(Context);
 
     return (
-        <div className="characterSheetBox">
+        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>SKILLS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -83,6 +82,7 @@ const Skills: React.FC = () => {
                         ))}
                         <button 
                             className="characterSheetButton" 
+                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
                             onClick={() => dispatch({
                                 type: "ADD OBJECT",
                                 key: "skills",
@@ -96,6 +96,7 @@ const Skills: React.FC = () => {
                         </button>
                         <button 
                             className="characterSheetButton"
+                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
                             onClick={() => isModify(!modify)}>
                             Modify
                         </button>

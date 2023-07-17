@@ -8,20 +8,37 @@ import Aspects from "@/components/aspects";
 import Stunts from "@/components/stunts";
 import Consequences from "./consequences";
 import Conditions from "./conditions";
+import SituationAspects from "./situation-aspects";
+import DropdownTwo from "./dropdown02";
+
+export interface ThemeTypes {
+    theme: string,
+    color: string
+} //edit dispatch action
 
 const OptionContainer: React.FC = () => {
     let [context, dispatch] = useContext(Context);
+    const themes = [
+        {theme: "Blue", color: "cornflowerblue" }, 
+        {theme: "Red", color: "tomato" }, 
+        {theme: "Green", color: "lightgreen" }, 
+        {theme: "Purple", color: "plum" }
+    ]
 
     return (
         <div>
             {Object.entries(context.options).map(([key, value]) => (
-                <button className="characterSheetButton" onClick={() => dispatch({ 
+                <button className="characterSheetButton" style={{ color: context.theme.color, outlineColor: context.theme.color }} onClick={() => dispatch({ 
                     type: "TOGGLE", 
                     key: key, 
                     value: value })}>
                     { key.substring(2) }: { value.toString() } 
                 </button>
             ))}
+            <DropdownTwo title={ "Themes" } arr={ themes } func={(element) => dispatch({
+                type: "SET THEME",
+                payload: { theme: element.theme, color: element.color }
+            })} />
             <div className="firstColumn">
                 {context.options.isSkills ? <Skills /> : null}
                 {context.options.isStunts ? <Stunts /> : null}
@@ -29,10 +46,10 @@ const OptionContainer: React.FC = () => {
             </div>
             <div className="secondColumn">
                 {context.options.isAspects ? <Aspects /> : null}
+                {context.options.isStress ? <Stress /> : null}
                 {context.options.isConsequences ? <Consequences /> : null}
                 {context.options.isConditions ? <Conditions /> : null}
-                {context.options.isStress ? <Stress /> : null}
-                {}
+                {context.options.isSituationAspects ? <SituationAspects /> : null}
             </div>
         </div>
     )

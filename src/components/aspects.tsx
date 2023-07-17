@@ -46,7 +46,7 @@ const Aspects: React.FC = () => {
     }, [context.aspects]);
 
     return (
-        <div className="characterSheetBox">
+        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>ASPECTS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -133,7 +133,8 @@ const Aspects: React.FC = () => {
                             </DragNDrop>
                         ))}
                     <button 
-                        className="characterSheetButton" 
+                        className="characterSheetButton"
+                        style={{ color: context.theme.color, outlineColor: context.theme.color }}
                         onClick={() => dispatch({
                         type: "ADD OBJECT",
                         key: "aspects",
@@ -153,6 +154,7 @@ const Aspects: React.FC = () => {
                     </button>
                     <button 
                         className="characterSheetButton"
+                        style={{ color: context.theme.color, outlineColor: context.theme.color }}
                         onClick={() => isModify(!modify)}>
                         Modify
                     </button>

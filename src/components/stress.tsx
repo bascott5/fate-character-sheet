@@ -47,7 +47,7 @@ const Stress: React.FC = () => {
     }, [context.stress]);
 
     return (
-        <div className="characterSheetBox">
+        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>STRESS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -129,7 +129,8 @@ const Stress: React.FC = () => {
                             </DragNDrop>
                         ))}
                         <button 
-                            className="characterSheetButton" 
+                            className="characterSheetButton"
+                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
                             onClick={() => dispatch({
                             type: "ADD OBJECT",
                             key: "stress",
@@ -146,6 +147,7 @@ const Stress: React.FC = () => {
                         </button>
                         <button 
                             className="characterSheetButton"
+                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
                             onClick={() => isModify(!modify)}>
                             Modify
                         </button>

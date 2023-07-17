@@ -14,7 +14,7 @@ const Notes: React.FC = () => {
     let [context, dispatch] = useContext(Context);
 
     return (
-        <div className="characterSheetBox">
+        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>NOTES</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -65,7 +65,8 @@ const Notes: React.FC = () => {
                             </DragNDrop>
                         ))}
                         <button 
-                            className="characterSheetButton" 
+                            className="characterSheetButton"
+                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
                             onClick={() => dispatch({
                                 type: "ADD OBJECT",
                                 key: "notes",
@@ -79,6 +80,7 @@ const Notes: React.FC = () => {
                         </button>
                         <button 
                             className="characterSheetButton"
+                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
                             onClick={() => isModify(!modify)}>
                             Modify
                         </button>

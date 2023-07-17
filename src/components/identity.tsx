@@ -12,7 +12,7 @@ const Identity: React.FC = () => {
     let [context, dispatch] = useContext(Context);
 
     return (
-        <div className="identity">
+        <div className="identity" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
            <input type="text" className="" value={ context.identity.name } onChange={(e) => dispatch({
                 type: "HANDLE INPUT IDENTITY",
                 key: "name",

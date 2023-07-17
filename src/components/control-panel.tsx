@@ -6,8 +6,8 @@ const ControlPanel: React.FC = () => {
 
     return (
         <div>
-            <button onClick={() => localStorage.setItem("0", JSON.stringify(context))/*dispatch({ type: "WRITE JSON", name: context.identity.name })*/}>Save</button>
-            <button onClick={() => dispatch({ type: "LOAD JSON", name: context.identity.name })}>Load</button>
+            <button className={"characterSheetButton"} style={{ color: context.theme.color, outlineColor: context.theme.color }} onClick={() => localStorage.setItem("0", JSON.stringify(context))/*dispatch({ type: "WRITE JSON", name: context.identity.name })*/}>Save</button>
+            <button className={"characterSheetButton"} style={{ color: context.theme.color, outlineColor: context.theme.color }} onClick={() => dispatch({ type: "LOAD JSON", name: context.identity.name })}>Load</button>
         </div>
     )
 }

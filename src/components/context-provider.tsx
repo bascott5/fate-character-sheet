@@ -8,6 +8,8 @@ import { NoteTypes } from "./notes";
 import { IdentityTypes } from "./identity"
 import { ConsequenceTypes } from "./consequences";
 import { ConditionTypes } from "./conditions";
+import { SituationTypes } from "./situation-aspects";
+import { ThemeTypes } from "./option-container";
 
 interface Props {
     children: JSX.Element[]
@@ -21,6 +23,7 @@ interface InitStateTypes {
         "isStress": boolean,
         "isConsequences": boolean,
         "isConditions": boolean,
+        "isSituationAspects": boolean,
         "isNotes": boolean
     }
     "identity": IdentityTypes,
@@ -30,18 +33,20 @@ interface InitStateTypes {
     "stress": StressTypes[],
     "consequences": ConsequenceTypes[],
     "conditions": ConditionTypes[],
+    "situationAspects": SituationTypes[];
     "notes": NoteTypes[],
+    "theme": ThemeTypes
 }
 
-export type ObjectTypes = AspectTypes | SkillTypes | StuntTypes | StressTypes | ConsequenceTypes | NoteTypes
+export type ObjectTypes = AspectTypes | SkillTypes | StuntTypes | StressTypes | ConsequenceTypes | ConditionTypes | SituationTypes | NoteTypes
 
 export type Action = 
     | { type: "TOGGLE", key: string, value: boolean }
     | { type: "TOGGLE BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean }
     | { type: "TOGGLE NESTED BOX", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: boolean[], nestedPropertyIndex: number }
     | { type: "TOGGLE STRESS", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: object[], nestedPropertyIndex: number, nestedPropertyKey: string, nestedPropertyValue: boolean }
-    | { type: "ADD BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] | object[] }
-    | { type: "DELETE BOX", key: string, value: AspectTypes[] | StressTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] | object[] }
+    | { type: "ADD BOX", key: string, value: AspectTypes[] | StressTypes[] | SituationTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] | object[] }
+    | { type: "DELETE BOX", key: string, value: AspectTypes[] | StressTypes[] | SituationTypes[], propertyKey: string, propertyIndex: number, propertyValue: boolean[] | object[] }
     | { type: "HANDLE INPUT IDENTITY", key: string, event: string | number}
     | { type: "HANDLE INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, event: string | number }
     | { type: "HANDLE NESTED INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: object[], nestedPropertyKey: string, nestedPropertyIndex: number, event: string | number }
@@ -49,6 +54,7 @@ export type Action =
     | { type: "DELETE OBJECT", key: string, value: object[], propertyKey: object }
     | { type: "CHANGE INDEX", key: string, value: ObjectTypes[], propertyIndex: number, indexB: number }
     | { type: "CHANGE HEIGHT", key: string, value: object[], boxHeight: number | undefined, propertyIndex: number }
+    | { type: "SET THEME", payload: ThemeTypes }
     | { type: "LOAD JSON", name: string }
 
 export let initState: InitStateTypes = {
@@ -59,6 +65,7 @@ export let initState: InitStateTypes = {
         isStress: false,
         isConsequences: false,
         isConditions: false,
+        isSituationAspects: false,
         isNotes: false
     },
     identity: {
@@ -73,7 +80,9 @@ export let initState: InitStateTypes = {
     stress: [],
     consequences: [],
     conditions: [],
-    notes: []
+    situationAspects: [],
+    notes: [],
+    theme: { theme: "", color: "" }
 }
 
 export const Context = createContext<[InitStateTypes, React.Dispatch<Action>]>([initState, () => initState]);
@@ -222,6 +231,11 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                             ["height"]: action.boxHeight
                         } : {...key}
                     })
+                }
+            case "SET THEME":
+                return {
+                    ...state,
+                    ["theme"]: action.payload
                 }
             case "LOAD JSON":
                 return JSON.parse(localStorage.getItem(action.name))
