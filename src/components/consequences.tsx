@@ -16,7 +16,7 @@ const Consequences: React.FC = () => {
     let [context, dispatch] = useContext(Context);
 
     return (
-        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
+        <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>CONSEQUENCES</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (

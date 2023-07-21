@@ -81,18 +81,13 @@ const Dropdown: React.FC<Props> = ({ chapter, index }: Props) => {
 
     return (
         <div>
-			<div className="dropdown">
+			<div className="navbarDropdown">
+				<button className="navbarButton" onClick={() => isOpen(!open)}><h4>{open ? "-" : "+"}</h4></button>
 				<Link href={"/content/fate-core/" + link}>
-						<h4 style={{ zIndex: 1 }}>{ chapter }</h4>
+						<h4>{ chapter }</h4>
 				</Link>
-				<button onClick={() => isOpen(!open)}><h4>{open ? "-" : "+"}</h4></button>
 			</div>
-            {
-                open ?
-					<div className="linkContainer">{ pages }</div>
-            	:
-                	null
-            }
+            {open ? <div className="navbarSection">{ pages }</div> : null}
 		</div>
     );
 }

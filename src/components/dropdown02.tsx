@@ -22,18 +22,18 @@ const DropdownTwo: React.FC<PropTypes> = ({ title, arr, func }: PropTypes ) => {
         return () => {
             document.removeEventListener("mousedown", outsideClickHandler)
         }
-    }, [container])
+    }, [container]);
 
     const elementSelectionHandler = (element: ThemeTypes) => {
-        func(element)
+        func(element);
         isOpen(false);
     }
 
     return (
-        <div ref={ container }>
-            <button onClick={() => isOpen(!open)}>{ title }</button>
+        <div className="dropdown" ref={ container }>
+            <button className="dropdownContainer" onClick={() => isOpen(!open)}>{ title }</button>
             {arr.map(element => (
-                <button style={{ display: open ? "block" : "none" }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
+                <button className="dropdownContainer" style={{ display: open ? "block" : "none" }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
             ))}
         </div>
     )

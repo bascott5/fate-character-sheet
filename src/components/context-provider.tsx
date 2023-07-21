@@ -82,7 +82,7 @@ export let initState: InitStateTypes = {
     conditions: [],
     situationAspects: [],
     notes: [],
-    theme: { theme: "", color: "" }
+    theme: { theme: "Blue", color: "cornflowerblue" }
 }
 
 export const Context = createContext<[InitStateTypes, React.Dispatch<Action>]>([initState, () => initState]);
@@ -238,7 +238,7 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                     ["theme"]: action.payload
                 }
             case "LOAD JSON":
-                return JSON.parse(localStorage.getItem(action.name))
+                return JSON.parse(localStorage.getItem(action.name) || "{}")
             default:
                 return {...state};
         }

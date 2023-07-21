@@ -46,7 +46,7 @@ const Aspects: React.FC = () => {
     }, [context.aspects]);
 
     return (
-        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
+        <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>ASPECTS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -171,7 +171,7 @@ const Aspects: React.FC = () => {
                     <p>{ aspect.notes.toUpperCase() }</p>
                     {aspect.freeInvokes.map((invoke, invokeIndex) => (
                     <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }}>
-                        <rect className="box" style={{ fill: invoke ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
+                        <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                             type: "TOGGLE NESTED BOX",
                             key: "aspects",
                             value: context.aspects,

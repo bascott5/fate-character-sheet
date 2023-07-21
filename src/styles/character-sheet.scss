@@ -1,17 +1,195 @@
+//https://developer.mozilla.org/en-US/docs/Web/CSS/@import
+
+//general
 body {
     background-color: whitesmoke;
 }
 
-.identity {
-    color: cornflowerblue;
-    float: left;
+.button {
+    color: white;
+    font-weight: bold;
+    position: relative;
+    outline-style: none;
+    border: none;
+    border-radius: 5px;
     padding: 10px;
-    margin: 25px 150vh 25px 25px;
-    .input {
-        display: block;
-        visibility: hidden;
+    margin: 0px 0px 25px 25px;
+}
+
+.button:hover {
+    filter: brightness(75%);
+}
+
+.button:active {
+    filter: brightness(50%)
+}
+
+.buttonAlt {
+    background-color: white;
+    font-weight: bold;
+    position: relative;
+    outline-style: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0px 0px 25px 25px;
+}
+
+.box {
+    outline: solid;
+    outline-color: black;
+
+}
+
+//https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Organizing
+/*.button .main {
+    background-color: white;
+    position: relative;
+    outline-style: solid;
+    outline-width: thick;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0px 0px 25px 25px;
+}
+
+.button .alt {
+    background-color: white;
+    position: relative;
+    outline-style: solid;
+    outline-width: thick;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0px 25px 25px 25px;
+}*/
+
+.dropdown {
+    float: right;
+    .dropdownContainer {
+        position: relative;
+    }
+    .dropdownElement {
+        position: absolute;
+    }
+}
+
+.input {
+    background-color: lightgrey;
+    border: none;
+    text-align: center;
+    margin: 0px 10px 0px 0px;
+}
+
+.nobullets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+//identity
+//https://www.w3schools.com/Css/tryit.asp?filename=trycss_border-bottom
+.identity {
+    color: white;
+    padding: 10px 0px 10px 0px;
+    margin: 10px 0px 10px 0px;
+    /*justify-content: center;
+    align-items: center;*/
+    .container {
+        display: inline-block;
+        margin: 10px 25px 10px 0px;
+    }
+    .inputName {
+        background-color: lightgrey;
+        border: none;
+        text-align: center;
+        font-size: larger;
     }
     .type {
-        display: block;
+        text-align: center;
+        margin-right: 7px;
+    }
+}
+
+//character sheet
+.characterSheet {
+    padding: 0px 150px 0px 150px;
+    .sheetContent {
+        background-color: white;
+        outline-style: solid;
+        outline-width: thick;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 25px;
+    }
+    .innerSheetContent {
+        outline-style: solid;
+        outline-width: thick;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 25px -10px 25px -10px;
+    }
+    .lesserSheetContent {
+        background-color: white;
+        outline-style: solid;
+        outline-width: thick;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 25px -10px 25px -10px;
+    }
+}
+
+//navbar
+.navbar {
+    background-color: khaki;
+    position: absolute;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100vh;
+}
+
+.logo {
+    text-align: center;
+}
+
+.navbarHeader {
+    display: inline-block;
+    float: left;
+}
+
+.navbarDropdown {
+    background-color: lightgray;
+    color: white;
+    border-color: lightgray;
+    position: flex;
+    display: inline-flex;
+    padding: 5px 100px 5px 20px;
+    width: 100%;
+}
+
+.navbarButton {
+    margin: 5px;
+}
+
+.navbarSection {
+    background-color: khaki;
+    margin: -16px 0px -16px 0px;
+    padding: 16px 0px 16px 0px;
+}
+
+.navbarToggle {
+    position: absolute;
+    z-index: 2;
+}
+
+//article
+.article {
+    .box {
+        background-color: wheat;
+        padding: 5px;
+        margin: 5px;
     }
 }

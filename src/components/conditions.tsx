@@ -47,7 +47,7 @@ const Conditions: React.FC = () => {
     }, [context.conditions]);
 
     return (
-        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
+        <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>CONDITIONS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -57,7 +57,7 @@ const Conditions: React.FC = () => {
                             <DragNDrop arr={ context.conditions } arrKey={ "conditions" } element={ condition } initIndex={ conditionIndex } isVisible={ modify }>
                                 <div>
                                     {modify ?
-                                        <div>
+                                        <div>characterSheetBox
                                             <div>
                                                 <svg>
                                                     <rect 

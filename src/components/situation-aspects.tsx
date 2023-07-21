@@ -41,7 +41,7 @@ const SituationAspects: React.FC = () => {
     }, [context.situationAspects]);
     
     return (
-        <div className="characterSheetBox">
+        <div className="sheetContent">
             <h1>SITUATION ASPECTS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -128,7 +128,7 @@ const SituationAspects: React.FC = () => {
                         <p>{ aspect.notes }</p>
                         {aspect.freeInvokes.map((invoke, invokeIndex) => (
                             <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }}>
-                                <rect className="box" style={{ fill: invoke ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
+                                <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                                     type: "TOGGLE NESTED BOX",
                                     key: "situationAspects",
                                     value: context.situationAspects,

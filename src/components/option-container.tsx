@@ -9,12 +9,13 @@ import Stunts from "@/components/stunts";
 import Consequences from "./consequences";
 import Conditions from "./conditions";
 import SituationAspects from "./situation-aspects";
+import Identity from "./identity";
 import DropdownTwo from "./dropdown02";
 
 export interface ThemeTypes {
     theme: string,
     color: string
-} //edit dispatch action
+}
 
 const OptionContainer: React.FC = () => {
     let [context, dispatch] = useContext(Context);
@@ -28,7 +29,7 @@ const OptionContainer: React.FC = () => {
     return (
         <div>
             {Object.entries(context.options).map(([key, value]) => (
-                <button className="characterSheetButton" style={{ color: context.theme.color, outlineColor: context.theme.color }} onClick={() => dispatch({ 
+                <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dispatch({ 
                     type: "TOGGLE", 
                     key: key, 
                     value: value })}>
@@ -39,17 +40,20 @@ const OptionContainer: React.FC = () => {
                 type: "SET THEME",
                 payload: { theme: element.theme, color: element.color }
             })} />
-            <div className="firstColumn">
-                {context.options.isSkills ? <Skills /> : null}
-                {context.options.isStunts ? <Stunts /> : null}
-                {context.options.isNotes ? <Notes /> : null}
-            </div>
-            <div className="secondColumn">
-                {context.options.isAspects ? <Aspects /> : null}
-                {context.options.isStress ? <Stress /> : null}
-                {context.options.isConsequences ? <Consequences /> : null}
-                {context.options.isConditions ? <Conditions /> : null}
-                {context.options.isSituationAspects ? <SituationAspects /> : null}
+            <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
+                <Identity />
+                <div className="firstColumn">
+                    {context.options.isSkills ? <Skills /> : null}
+                    {context.options.isStunts ? <Stunts /> : null}
+                    {context.options.isNotes ? <Notes /> : null}
+                </div>
+                <div className="secondColumn">
+                    {context.options.isAspects ? <Aspects /> : null}
+                    {context.options.isStress ? <Stress /> : null}
+                    {context.options.isConsequences ? <Consequences /> : null}
+                    {context.options.isConditions ? <Conditions /> : null}
+                    {context.options.isSituationAspects ? <SituationAspects /> : null}
+                </div>
             </div>
         </div>
     )

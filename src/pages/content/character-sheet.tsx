@@ -1,14 +1,12 @@
 import OptionContainer from "@/components/option-container";
 import ContextProvider from "@/components/context-provider";
-import Identity from "@/components/identity";
 import ControlPanel from "@/components/control-panel";
 
 const CharacterSheet: React.FC = () => {
     return (
-        <div className="characterSheetContainer">
+        <div className="characterSheet">
             <ContextProvider>
                 <ControlPanel />
-                <Identity />
                 <OptionContainer />
             </ContextProvider>
         </div>

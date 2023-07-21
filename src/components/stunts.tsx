@@ -29,7 +29,7 @@ const Stunts: React.FC = () => {
     }, [context.skills, context.stunts]);
 
     return (
-        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
+        <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>STUNTS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (

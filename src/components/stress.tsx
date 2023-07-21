@@ -47,7 +47,7 @@ const Stress: React.FC = () => {
     }, [context.stress]);
 
     return (
-        <div className="characterSheetBox" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
+        <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <h1>STRESS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
                 {edit ? (
@@ -163,7 +163,7 @@ const Stress: React.FC = () => {
                         {stressElement.boxes.map((box, boxIndex) => (
                             <div>
                                 <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none" }}>
-                                    <rect className="box" style={{ fill: box.highlighted ? "blue" : "white" }} height={25} width={25} onClick={() => dispatch({
+                                    <rect className="box" style={{ fill: box.highlighted ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                                         type: "TOGGLE STRESS",
                                         key: "stress",
                                         value: context.stress,
