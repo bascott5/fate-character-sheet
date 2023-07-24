@@ -7,29 +7,28 @@ interface NameTypes {
     value: object
 }
 
-const Characters: React.FC = () => {
-    const [context, dispatch] = useContext(Context);
-    const [names, setNames] = useState<NameTypes[]>([])
-    const [modify, isModify] = useState<boolean>(false);
-    for (let i = 0; i < localStorage.length; i++) {
-        setNames([...names, localStorage[i]]);
-    }
+interface PropTypes {
+    children: JSX.Element[],
+    visibility: boolean
+}
 
-    return (
+const Characters: React.FC<PropTypes> = ({ children, visibility }: PropTypes) => {
+    const [context, dispatch] = useContext(Context);
+    const [modify, isModify] = useState<boolean>(false);
+
+    return ( //incorporate component into character sheet component so it can share in the context provider and hide it when not in use
         <div>
+            {visibility ? (<div></div>) : (<div>{ children }</div>)}
             <button onClick={() => isModify(!modify)}>Modify+</button>
-            {names.map((name, nameIndex) => (
+            {Object.keys(localStorage).map((name) => (
                 <div>
                     <Link href={"/content/character-sheet"} onClick={() => dispatch({
                         type: "LOAD JSON",
-                        name: name.key
-                    })}>{ name.key }</Link>
+                        name: name
+                    })}>{ name }</Link>
                     {modify ? (
                         <svg viewBox="0 0 1500 20">
-                            <rect fill="red" onClick={() => {
-                                localStorage.removeItem(name.key);
-                                setNames(names => names.filter(nameCopy => nameCopy != name));
-                            }}/>
+                            <rect fill="red" height={10} width={10} onClick={() => localStorage.removeItem(name)} />
                         </svg>
                     ) : null}
                 </div>

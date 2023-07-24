@@ -11,7 +11,29 @@ interface Props {
 }
 
 const DragNDrop: React.FC<Props> = ({ arr, arrKey, element, initIndex, isVisible, children }: Props) => {
-    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    const [context, dispatch] = useContext(Context);
+
+    return (
+        <div>
+            <button onClick={() => dispatch({
+                type: "CHANGE INDEX",
+                key: arrKey,
+                value: arr,
+                propertyIndex: initIndex,
+                indexB: initIndex - 1
+            })}>^</button>
+            { children }
+            <button onClick={() => dispatch({
+                type: "CHANGE INDEX",
+                key: arrKey,
+                value: arr,
+                propertyIndex: initIndex,
+                indexB: initIndex + 1
+            })}>v</button>
+        </div>
+    );
+
+    /*const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [mouseDown, setMouseDown] = useState(false);
     let [context, dispatch] = useContext(Context);
     const box = useRef<HTMLDivElement | null>(null);
@@ -46,7 +68,7 @@ const DragNDrop: React.FC<Props> = ({ arr, arrKey, element, initIndex, isVisible
         })
     }, [mouseDown])
 
-    /*useEffect(() => {
+    useEffect(() => {
         if (arr.length > 1) {
             if (element != arr[arr.length - 1] && element.height < arr[initIndex + 1].height) {
                 dispatch({ 
@@ -68,13 +90,13 @@ const DragNDrop: React.FC<Props> = ({ arr, arrKey, element, initIndex, isVisible
                 [...arr]
             }
         }
-    }, [arr])*/
+    }, [arr])
 
     return (
         <div 
             ref={box}
             onMouseUp={() => setMouseDown(false)}
-            style={ mouseDown ? { zIndex: 1, position: "absolute", top: cursorPosition.y } : { position: "static" } /*&& (mouseDown && element.height < context[arrKey][initIndex + 1].height ? { position: "absolute", top: cursorPosition.y - 50 } : { position: "static" })*/}
+            style={ mouseDown ? { zIndex: 1, position: "absolute", top: cursorPosition.y } : { position: "static" } /*&& (mouseDown && element.height < context[arrKey][initIndex + 1].height ? { position: "absolute", top: cursorPosition.y - 50 } : { position: "static" })}
         >
             <svg style={ isVisible ? { display: "block" } : { display: "none" } }>
                 <rect 
@@ -86,7 +108,7 @@ const DragNDrop: React.FC<Props> = ({ arr, arrKey, element, initIndex, isVisible
             </svg>
             { children }
         </div>
-    )
+    )*/
 }
 
 export default DragNDrop;

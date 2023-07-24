@@ -31,8 +31,8 @@ const Navbar: React.FC = () => {
 			<div className="navbar" style={open ? { display: "block" } : { display: "none" }}>
 				<h1 className="logo">Fate Core</h1>
 				<div>
-					<ul><Link href={ "/content/character-sheet" }>Character Sheet</Link></ul>
-					<ul><Link href={ "/content/characters" }>Characters</Link></ul>
+					<ul><Link href={ "/content/character-sheet" } onClick={() => isOpen(false)}>Character Sheet</Link></ul>
+					<ul><Link href={ "/content/characters" } onClick={() => isOpen(false)}>Characters</Link></ul>
 				</div>
 				{ chapters }
 			</div>

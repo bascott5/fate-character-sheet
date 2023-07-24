@@ -199,28 +199,15 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                     [action.key]: action.value.filter(keyCopy => keyCopy != action.propertyKey)
                 }
             case "CHANGE INDEX":
+                let copy = [...action.value];
+
+                const temp = copy[action.propertyIndex];
+                copy[action.propertyIndex] = copy[action.indexB];
+                copy[action.indexB] = temp;
+
                 return {
                     ...state,
-                    [action.key]: action.value.map((key, keyIndex) => {
-                        return keyIndex === action.propertyIndex ? {
-                            key: action.value.splice(keyIndex, 1, action.value[keyIndex + 1])//[0]
-                        } : {...key}
-                    })
-                    
-                    /*action.value.map((key, keyIndex) => {
-                        return keyIndex === action.propertyIndex ? {
-                            key: action.value.splice(keyIndex, 1, action.value[keyIndex + 1])//[0]
-                        } : {...key}*/
-                            /*(() => {
-                                let value = [...action.value]
-
-                        let temp = value[action.indexB];
-                        value[action.indexB] = value[action.indexA];
-                        value[action.indexA] = temp;
-
-                        return { value }
-                        })
-                    })*/
+                    [action.key]: [...copy]
                 }
             case "CHANGE HEIGHT":
                 return {
@@ -238,6 +225,7 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                     ["theme"]: action.payload
                 }
             case "LOAD JSON":
+                console.log("ping")
                 return JSON.parse(localStorage.getItem(action.name) || "{}")
             default:
                 return {...state};
