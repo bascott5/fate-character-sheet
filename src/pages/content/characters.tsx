@@ -16,16 +16,16 @@ const Characters: React.FC<PropTypes> = ({ children, visibility }: PropTypes) =>
     const [context, dispatch] = useContext(Context);
     const [modify, isModify] = useState<boolean>(false);
 
-    return ( //incorporate component into character sheet component so it can share in the context provider and hide it when not in use
+    return ( //pass data of name chosen to character-sheet that triggers a useEffect that causes the JSON to load in
         <div>
             {visibility ? (<div></div>) : (<div>{ children }</div>)}
             <button onClick={() => isModify(!modify)}>Modify+</button>
             {Object.keys(localStorage).map((name) => (
                 <div>
-                    <Link href={"/content/character-sheet"} onClick={() => dispatch({
-                        type: "LOAD JSON",
-                        name: name
-                    })}>{ name }</Link>
+                    <Link href={{
+                        pathname: "/content/character-sheet",
+                        query: { name: name }
+                    }}>{ name }</Link>
                     {modify ? (
                         <svg viewBox="0 0 1500 20">
                             <rect fill="red" height={10} width={10} onClick={() => localStorage.removeItem(name)} />

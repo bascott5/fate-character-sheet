@@ -225,7 +225,6 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                     ["theme"]: action.payload
                 }
             case "LOAD JSON":
-                console.log("ping")
                 return JSON.parse(localStorage.getItem(action.name) || "{}")
             default:
                 return {...state};

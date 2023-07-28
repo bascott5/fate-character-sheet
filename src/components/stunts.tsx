@@ -19,7 +19,7 @@ const Stunts: React.FC = () => {
     let [context, dispatch] = useContext(Context);
 
     useEffect(() => {
-        for (let i = 0; i < context.skills.length; i++) {
+        for (let i = 0; i < context.skills.length; i++) { //TODO: Fix this so that the number of skills isn't determined by the number of stunts when set to true
             if (context.skills[i].text == context.stunts[i].skill) {
                 context.stunts[i].skillBonus = context.skills[i].modifier;
             } else {
