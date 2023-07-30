@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
 import DragNDrop from "./drag-n-drop";
+import Delete from "./delete";
+import AddModify from "./add-modify";
 
 interface BoxTypes {
     highlighted: boolean,
@@ -48,35 +50,22 @@ const Stress: React.FC = () => {
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
-            <h1>STRESS</h1> <button onClick={() => isEdit(!edit)} />
+            <div>
+                <svg style={{position: "absolute"}} viewBox="-135 -7 1500 35">
+                    <circle fill={context.theme.color} cx="10" cy="10" r="10" onClick={() => isEdit(!edit)} />
+                </svg>
+                <h1>STRESS</h1>
+            </div>
             <div>
                 {edit ? (
-                    <div>
-                        <h2>EDIT STRESS</h2>
+                    <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
+                        <h2 style={{ color: "white" }}>EDIT STRESS</h2>
                         {context.stress.map((stressElement, stressIndex) => (
                             <DragNDrop arr={ context.stress } arrKey={ "stress" } element={ stressElement } initIndex={ stressIndex } isVisible={ modify }>
                                 <div>
-                                    {modify ?
-                                        <div>
-                                            <div>
-                                                <svg>
-                                                    <rect 
-                                                        fill="red" 
-                                                        height={15} 
-                                                        width={15} 
-                                                        onClick={() => dispatch({
-                                                            type: "DELETE OBJECT",
-                                                            key: "stress",
-                                                            value: context.stress,
-                                                            propertyKey: stressElement
-                                                        })}
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    :
-                                        null
-                                    }
+                                    {modify ? (
+                                        <Delete arr={ context.stress } arrKey={ "stress" } element={ stressElement } />
+                                    ) : null}
                                     <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
                                     <input type="text" value={ stressElement.label } onChange={(e) => dispatch({
                                         type: "HANDLE INPUT",
@@ -128,34 +117,14 @@ const Stress: React.FC = () => {
                                 </div>
                             </DragNDrop>
                         ))}
-                        <button 
-                            className="characterSheetButton"
-                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
-                            onClick={() => dispatch({
-                            type: "ADD OBJECT",
-                            key: "stress",
-                            value: context.stress,
-                            addedValue: {
-                                label: "",
-                                boxes: [],
-                                boxesLength: 0,
-                                notes: "",
-                                height: 0
-                            }
-                        })}>
-                            +Add
-                        </button>
-                        <button 
-                            className="characterSheetButton"
-                            style={{ color: context.theme.color, outlineColor: context.theme.color }}
-                            onClick={() => isModify(!modify)}>
-                            Modify
-                        </button>
+                        <AddModify modify={ () => isModify(!modify) } arr={ context.stress } arrKey={ "stress" } newElement={{
+                            label: "",
+                            boxes: [],
+                            boxesLength: 0,
+                            notes: ""
+                        }}/>
                     </div>
-                )
-                :
-                    null
-                }
+                ) : null}
                 {context.stress.map((stressElement, stressIndex) => (
                     <div>
                         <h3 style={{ fontWeight: "bold" }}>{ stressElement.label }</h3>

@@ -188,7 +188,7 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         } : {...key}
                     })
                 }
-            case "ADD OBJECT":
+            case "ADD OBJECT": //TODO: add limit to number of objects an array can have depending on the individual array of objects
                 return {
                     ...state,
                     [action.key]: [...action.value, action.addedValue]
@@ -199,15 +199,19 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                     [action.key]: action.value.filter(keyCopy => keyCopy != action.propertyKey)
                 }
             case "CHANGE INDEX":
-                let copy = [...action.value];
+                if (action.indexB < 0 || action.indexB > action.value.length - 1) {
+                    return {...state}
+                } else {
+                    let copy = [...action.value];
 
-                const temp = copy[action.propertyIndex];
-                copy[action.propertyIndex] = copy[action.indexB];
-                copy[action.indexB] = temp;
+                    const temp = copy[action.propertyIndex];
+                    copy[action.propertyIndex] = copy[action.indexB];
+                    copy[action.indexB] = temp;
 
-                return {
-                    ...state,
-                    [action.key]: [...copy]
+                    return {
+                        ...state,
+                        [action.key]: [...copy]
+                    }
                 }
             case "CHANGE HEIGHT":
                 return {

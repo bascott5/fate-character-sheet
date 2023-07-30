@@ -7,14 +7,14 @@ interface Props {
     "element": ObjectTypes,
     "initIndex": number,
     "isVisible": boolean,
-    "children": JSX.Element | null
+    "children": JSX.Element | JSX.Element[]
 }
 
 const DragNDrop: React.FC<Props> = ({ arr, arrKey, element, initIndex, isVisible, children }: Props) => {
     const [context, dispatch] = useContext(Context);
 
     return (
-        <div>
+        <div className="lesserSheetContent">
             <button onClick={() => dispatch({
                 type: "CHANGE INDEX",
                 key: arrKey,

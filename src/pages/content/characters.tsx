@@ -16,7 +16,7 @@ const Characters: React.FC<PropTypes> = ({ children, visibility }: PropTypes) =>
     const [context, dispatch] = useContext(Context);
     const [modify, isModify] = useState<boolean>(false);
 
-    return ( //pass data of name chosen to character-sheet that triggers a useEffect that causes the JSON to load in
+    return ( //TODO: fix error on reload
         <div>
             {visibility ? (<div></div>) : (<div>{ children }</div>)}
             <button onClick={() => isModify(!modify)}>Modify+</button>

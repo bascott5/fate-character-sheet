@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from "react"
 import { Context } from "./context-provider"
 import DragNDrop from "./drag-n-drop"
+import Delete from "./delete"
+import AddModify from "./add-modify"
 
 export interface SituationTypes {
     aspect: string,
@@ -42,34 +44,21 @@ const SituationAspects: React.FC = () => {
     
     return (
         <div className="sheetContent">
-            <h1>SITUATION ASPECTS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
-                {edit ? (
-                    <div>
-                        <h2>EDIT ASPECTS</h2>
-                        {context.situationAspects.map((aspect, aspectIndex) => (
-                            <DragNDrop arr={ context.situationAspects } arrKey={ "situationAspects" } element={ aspect } initIndex={ aspectIndex } isVisible={ modify }>
-                                <div>
+                <svg style={{position: "absolute"}} viewBox="-350 -7 1500 35">
+                    <circle fill={context.theme.color} cx="10" cy="10" r="10" onClick={() => isEdit(!edit)} />
+                </svg>
+                <h1>SITUATION ASPECTS</h1>
+            </div>
+            {edit ? (
+                <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
+                    <h2 style={{ color: "white" }}>EDIT ASPECTS</h2>
+                    {context.situationAspects.map((aspect, aspectIndex) => (
+                        <DragNDrop arr={ context.situationAspects } arrKey={ "situationAspects" } element={ aspect } initIndex={ aspectIndex } isVisible={ modify }>
+                            <div>
                                 {modify ? (
-                                    <div>
-                                        <svg>
-                                            <rect 
-                                                fill="red" 
-                                                height={15} 
-                                                width={15} 
-                                                onClick={() => dispatch({
-                                                    type: "DELETE OBJECT",
-                                                    key: "situationAspects",
-                                                    value: context.situationAspects,
-                                                    propertyKey: aspect
-                                                })}
-                                            />
-                                        </svg>
-                                    </div>
-                                    )
-                                    :
-                                    null
-                                }
+                                    <Delete arr={ context.situationAspects } arrKey={ "situationAspects" } element={ aspect } />
+                                ) : null}
                                 <h3 style={{ fontWeight: "bold" }}>ASPECT</h3>
                                 <input type="text" value={ aspect.aspect } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
@@ -97,51 +86,36 @@ const SituationAspects: React.FC = () => {
                                     propertyIndex: aspectIndex,
                                     event: e.target.value
                                 })}/>
-                                </div>
-                            </DragNDrop>
-                        ))}
-                        <button 
-                        className="characterSheetButton" 
-                        onClick={() => dispatch({
-                        type: "ADD OBJECT",
-                        key: "situationAspects",
-                        value: context.situationAspects,
-                        addedValue: {
-                            aspect: "",
-                            freeInvokes: [],
-                            freeInvokeLength: 0,
-                            notes: ""
-                        }
-                    })}>
-                        +Add
-                    </button>
-                    <button 
-                        className="characterSheetButton"
-                        onClick={() => isModify(!modify)}>
-                        Modify
-                    </button>
-                    </div>
-                ) : null}
-                {context.situationAspects.map((aspect, aspectIndex) => (
-                    <div>
-                        <h3 style={{ fontWeight: "bold" }}>{ aspect.aspect }</h3>
-                        <p>{ aspect.notes }</p>
-                        {aspect.freeInvokes.map((invoke, invokeIndex) => (
-                            <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }}>
-                                <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
-                                    type: "TOGGLE NESTED BOX",
-                                    key: "situationAspects",
-                                    value: context.situationAspects,
-                                    propertyKey: "freeInvokes",
-                                    propertyIndex: aspectIndex,
-                                    propertyValue: aspect.freeInvokes,
-                                    nestedPropertyIndex: invokeIndex
-                                })}/>
-                            </svg>
-                        ))}
-                    </div>
-                ))}
-            </div>
+                            </div>
+                        </DragNDrop>
+                    ))}
+                    <AddModify modify={ () => isModify(!modify) } arr={ context.situationAspects } arrKey={ "situationAspects" } newElement={{
+                        aspect: "",
+                        freeInvokes: [],
+                        freeInvokeLength: 0,
+                        notes: ""
+                    }}/>
+                </div>
+            ) : null}
+            {context.situationAspects.map((aspect, aspectIndex) => (
+                <div>
+                    <h3 style={{ fontWeight: "bold" }}>{ aspect.aspect }</h3>
+                    <p>{ aspect.notes }</p>
+                    {aspect.freeInvokes.map((invoke, invokeIndex) => (
+                        <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }}>
+                            <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
+                                type: "TOGGLE NESTED BOX",
+                                key: "situationAspects",
+                                value: context.situationAspects,
+                                propertyKey: "freeInvokes",
+                                propertyIndex: aspectIndex,
+                                propertyValue: aspect.freeInvokes,
+                                nestedPropertyIndex: invokeIndex
+                            })}/>
+                        </svg>
+                    ))}
+                </div>
+            ))}
         </div>
     )
 }

@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
-import { dice } from "@/components/dice";
 import DragNDrop from "./drag-n-drop";
+import Delete from "./delete";
+import AddModify from "./add-modify";
 
 export interface AspectTypes {
     categoryHeader: string,
@@ -47,122 +48,89 @@ const Aspects: React.FC = () => {
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
-            <h1>ASPECTS</h1> <button onClick={() => isEdit(!edit)} />
             <div>
-                {edit ? (
-                    <div>
-                        <h2>EDIT ASPECTS</h2>
-                        {context.aspects.map((aspect, aspectIndex) => (
-                            <DragNDrop arr={ context.aspects } arrKey={ "aspects" } element={ aspect } initIndex={ aspectIndex } isVisible={ modify }>
-                                <div>
-                                    {modify ? (
-                                        <div>
-                                            <svg>
-                                                <rect 
-                                                    fill="red" 
-                                                    height={15} 
-                                                    width={15} 
-                                                    onClick={() => dispatch({
-                                                        type: "DELETE OBJECT",
-                                                        key: "aspects",
-                                                        value: context.aspects,
-                                                        propertyKey: aspect
-                                                    })}
-                                                />
-                                            </svg>
-                                        </div>
-                                        )
-                                        :
-                                        null
-                                    }
-                                    <h3 style={{ fontWeight: "bold" }}>CATEGORY HEADER &#40;OPTIONAL&#41;</h3>
-                                    <input type="text" value={ aspect.categoryHeader } onChange={(e) => dispatch({
-                                        type: "HANDLE INPUT",
-                                        key: "aspects",
-                                        value: context.aspects,
-                                        propertyKey: "categoryHeader",
-                                        propertyIndex: aspectIndex,
-                                        event: e.target.value
-                                    })}/>
-                                    <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
-                                    <input type="text" value={ aspect.label } onChange={(e) => dispatch({
-                                        type: "HANDLE INPUT",
-                                        key: "aspects",
-                                        value: context.aspects,
-                                        propertyKey: "label",
-                                        propertyIndex: aspectIndex,
-                                        event: e.target.value
-                                    })}/>
-                                    <h3 style={{ fontWeight: "bold" }}>ASPECT</h3>
-                                    <input type="text" value={ aspect.aspect } onChange={(e) => dispatch({
-                                        type: "HANDLE INPUT",
-                                        key: "aspects",
-                                        value: context.aspects,
-                                        propertyKey: "aspect",
-                                        propertyIndex: aspectIndex,
-                                        event: e.target.value
-                                    })}/>
-                                    <h3 style={{ fontWeight: "bold" }}>FLAGS</h3>
-                                    <input type="text" value={ aspect.flags } onChange={(e) => dispatch({
-                                        type: "HANDLE INPUT",
-                                        key: "aspects",
-                                        value: context.aspects,
-                                        propertyKey: "flags",
-                                        propertyIndex: aspectIndex,
-                                        event: e.target.value
-                                    })}/>
-                                    <h3 style={{ fontWeight: "bold" }}>FREE INVOKES</h3>
-                                    <input type="number" value={ aspect.freeInvokesLength } max={10} min={0} onChange={(e) => dispatch({
-                                        type: "HANDLE INPUT",
-                                        key: "aspects",
-                                        value: context.aspects,
-                                        propertyKey: "freeInvokesLength",
-                                        propertyIndex: aspectIndex,
-                                        event: e.target.valueAsNumber
-                                    })}/>
-                                    <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
-                                    <input type="text" value={ aspect.notes } onChange={(e) => dispatch({
-                                        type: "HANDLE INPUT",
-                                        key: "aspects",
-                                        value: context.aspects,
-                                        propertyKey: "notes",
-                                        propertyIndex: aspectIndex,
-                                        event: e.target.value
-                                    })}/>
-                                </div>
-                            </DragNDrop>
-                        ))}
-                    <button 
-                        className="characterSheetButton"
-                        style={{ color: context.theme.color, outlineColor: context.theme.color }}
-                        onClick={() => dispatch({
-                        type: "ADD OBJECT",
-                        key: "aspects",
-                        value: context.aspects,
-                        addedValue: {
-                            categoryHeader: "",
-                            label: "",
-                            aspect: "",
-                            flags: "",
-                            freeInvokes: [],
-                            freeInvokesLength: 0,
-                            notes: "",
-                            height: 0
-                        }
-                    })}>
-                        +Add
-                    </button>
-                    <button 
-                        className="characterSheetButton"
-                        style={{ color: context.theme.color, outlineColor: context.theme.color }}
-                        onClick={() => isModify(!modify)}>
-                        Modify
-                    </button>
-                    </div>
-                )
-                    :
-                    null
-                }
+                <svg style={{position: "absolute"}} viewBox="-160 -7 1500 35">
+                    <circle fill={context.theme.color} cx="10" cy="10" r="10" onClick={() => isEdit(!edit)} />
+                </svg>
+                <h1>ASPECTS</h1>
+            </div>
+            {edit ? (
+                <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
+                <h2 style={{ color: "white" }}>EDIT ASPECTS</h2>
+                    {context.aspects.map((aspect, aspectIndex) => (
+                        <DragNDrop arr={ context.aspects } arrKey={ "aspects" } element={ aspect } initIndex={ aspectIndex } isVisible={ modify }>
+                            <div>
+                                {modify ? (
+                                    <Delete arr={ context.aspects } arrKey={ "aspects" } element={ aspect } />
+                                ) : null}
+                                <h3 style={{ fontWeight: "bold" }}>CATEGORY HEADER &#40;OPTIONAL&#41;</h3>
+                                <input type="text" value={ aspect.categoryHeader } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "categoryHeader",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
+                                <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
+                                <input type="text" value={ aspect.label } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "label",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
+                                <h3 style={{ fontWeight: "bold" }}>ASPECT</h3>
+                                <input type="text" value={ aspect.aspect } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "aspect",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
+                                <h3 style={{ fontWeight: "bold" }}>FLAGS</h3>
+                                <input type="text" value={ aspect.flags } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "flags",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
+                                <h3 style={{ fontWeight: "bold" }}>FREE INVOKES</h3>
+                                <input type="number" value={ aspect.freeInvokesLength } max={10} min={0} onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "freeInvokesLength",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.valueAsNumber
+                                })}/>
+                                <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
+                                <input type="text" value={ aspect.notes } onChange={(e) => dispatch({
+                                    type: "HANDLE INPUT",
+                                    key: "aspects",
+                                    value: context.aspects,
+                                    propertyKey: "notes",
+                                    propertyIndex: aspectIndex,
+                                    event: e.target.value
+                                })}/>
+                            </div>
+                        </DragNDrop>
+                    ))}
+                    <AddModify modify={ () => isModify(!modify) } arr={ context.aspects } arrKey={ "aspects" } newElement={{
+                        categoryHeader: "",
+                        label: "",
+                        aspect: "",
+                        flags: "",
+                        freeInvokes: [],
+                        freeInvokesLength: 0,
+                        notes: ""
+                    }}/>
+                </div>
+            ) : null}
             {context.aspects.map((aspect, aspectIndex) => (
                 <div>
                     <h3 style={{ fontWeight: "bold" }}>{ aspect.categoryHeader.toUpperCase() }</h3>
@@ -184,7 +152,6 @@ const Aspects: React.FC = () => {
                 ))}
                 </div>
             ))}
-            </div>
         </div>
     )
 }

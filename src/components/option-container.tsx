@@ -24,7 +24,7 @@ const OptionContainer: React.FC = () => {
         {theme: "Red", color: "tomato" }, 
         {theme: "Green", color: "lightgreen" }, 
         {theme: "Purple", color: "plum" }
-    ]
+    ]; //TODO: fix spacing and create spaces between Situation Aspect
 
     return (
         <div>
