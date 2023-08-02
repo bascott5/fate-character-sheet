@@ -14,7 +14,7 @@ export interface SkillTypes {
 const Skills: React.FC = () => {
     const [edit, isEdit] = useState<boolean>(false);
     const [modify, isModify] = useState<boolean>(false);
-    let [context, dispatch] = useContext(Context); //TODO: make delete svg spacing normal
+    let [context, dispatch] = useContext(Context);
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>

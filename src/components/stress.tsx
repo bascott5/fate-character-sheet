@@ -131,7 +131,7 @@ const Stress: React.FC = () => {
                         <p>{ stressElement.notes }</p>
                         {stressElement.boxes.map((box, boxIndex) => (
                             <div>
-                                <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none" }}>
+                                <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none" }} viewBox="0 0 1500 35">
                                     <rect className="box" style={{ fill: box.highlighted ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                                         type: "TOGGLE STRESS",
                                         key: "stress",

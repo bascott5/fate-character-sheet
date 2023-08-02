@@ -12,7 +12,7 @@ export interface AspectTypes {
     freeInvokes: boolean[],
     freeInvokesLength: number,
     notes: string,
-    height: number
+    height: number //TODO: get rid of height and make new component for changing index via buttons, putting that into the modify check
 }
 
 const Aspects: React.FC = () => {
@@ -138,7 +138,7 @@ const Aspects: React.FC = () => {
                     <p style={{ fontStyle: "italic", fontWeight: "bold" }}>{ aspect.aspect }</p> <p style={aspect.flags.length == 0 ? { display: "none" } : { display: "inline-block" } }>&#40;{ aspect.flags }&#41;</p>
                     <p>{ aspect.notes.toUpperCase() }</p>
                     {aspect.freeInvokes.map((invoke, invokeIndex) => (
-                    <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }}>
+                    <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }} viewBox="0 0 1500 35">
                         <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                             type: "TOGGLE NESTED BOX",
                             key: "aspects",

@@ -68,7 +68,7 @@ const Consequences: React.FC = () => {
             ) : null}
             {context.consequences.map((consequence, consequenceIndex) => (
                 <div>
-                    <svg>
+                    <svg viewBox="0 0 1500 35">
                         <rect className="box" style={{ fill: consequence.highlighted ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                             type: "TOGGLE BOX",
                             key: "consequences",

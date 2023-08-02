@@ -12,7 +12,7 @@ const Delete: React.FC<PropTypes> = ({ arr, arrKey, element }: PropTypes) => {
 
     return (
         <div>
-            <svg>
+            <svg viewBox="0 0 1500 35">
                 <rect 
                     fill="red" 
                     height={15} 

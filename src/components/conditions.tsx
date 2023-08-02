@@ -129,7 +129,7 @@ const Conditions: React.FC = () => {
                     <p>{ condition.notes }</p>
                     {condition.boxes.map((box, boxIndex) => (
                         <div>
-                            <svg style={{ display: condition.boxesLength != 0 ? "block" : "none" }}>
+                            <svg style={{ display: condition.boxesLength != 0 ? "block" : "none" }} viewBox="0 0 1500 35">
                                 <rect className="box" style={{ fill: box.highlighted ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                                     type: "TOGGLE STRESS",
                                     key: "conditions",

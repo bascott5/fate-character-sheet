@@ -102,7 +102,7 @@ const SituationAspects: React.FC = () => {
                     <h3 style={{ fontWeight: "bold" }}>{ aspect.aspect }</h3>
                     <p>{ aspect.notes }</p>
                     {aspect.freeInvokes.map((invoke, invokeIndex) => (
-                        <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }}>
+                        <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }} viewBox="0 0 1500 35">
                             <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                                 type: "TOGGLE NESTED BOX",
                                 key: "situationAspects",

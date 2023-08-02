@@ -1,38 +1,42 @@
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Context } from "@/components/context-provider";
 
-interface NameTypes {
-    key: string,
-    value: object
-}
-
 interface PropTypes {
-    children: JSX.Element[],
-    visibility: boolean
+    children: JSX.Element[]
 }
 
-const Characters: React.FC<PropTypes> = ({ children, visibility }: PropTypes) => {
+const Characters: React.FC<PropTypes> = ({ children }: PropTypes) => {
     const [context, dispatch] = useContext(Context);
     const [modify, isModify] = useState<boolean>(false);
+    const [rendered, isRendered] = useState<boolean>(false);
 
-    return ( //TODO: fix error on reload
+    useEffect(() => {
+        window !== undefined ? isRendered(true) : isRendered(false);
+    }, [])
+
+    return (
         <div>
-            {visibility ? (<div></div>) : (<div>{ children }</div>)}
-            <button onClick={() => isModify(!modify)}>Modify+</button>
-            {Object.keys(localStorage).map((name) => (
+            {rendered ? (
                 <div>
-                    <Link href={{
-                        pathname: "/content/character-sheet",
-                        query: { name: name }
-                    }}>{ name }</Link>
-                    {modify ? (
-                        <svg viewBox="0 0 1500 20">
-                            <rect fill="red" height={10} width={10} onClick={() => localStorage.removeItem(name)} />
-                        </svg>
-                    ) : null}
+                    <button onClick={() => isModify(!modify)}>Modify+</button>
+                    {Object.keys(localStorage).map(name => (
+                        name !== "ally-supports-cache" ? (
+                            <div>
+                                <Link href={{
+                                    pathname: "/content/character-sheet",
+                                    query: { name: name }
+                                }}>{ name }</Link>
+                                {modify ? (
+                                    <svg viewBox="0 0 1500 20">
+                                        <rect fill="red" height={10} width={10} onClick={() => localStorage.removeItem(name)} />
+                                    </svg>
+                                ) : null}
+                            </div>
+                        ) : null
+                    ))}
                 </div>
-            ))}
+            ) : null}
         </div>
     )
 }
