@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react"
 import { Context } from "./context-provider"
-import DragNDrop from "./drag-n-drop"
 import Delete from "./delete"
 import AddModify from "./add-modify"
+import ChangeIndex from "./change-index"
 
 export interface SituationTypes {
     aspect: string,
@@ -54,7 +54,7 @@ const SituationAspects: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 style={{ color: "white" }}>EDIT ASPECTS</h2>
                     {context.situationAspects.map((aspect, aspectIndex) => (
-                        <DragNDrop arr={ context.situationAspects } arrKey={ "situationAspects" } element={ aspect } initIndex={ aspectIndex } isVisible={ modify }>
+                        <ChangeIndex arr={ context.situationAspects } arrKey={ "situationAspects" } initIndex={ aspectIndex } isVisible={ modify }>
                             <div>
                                 {modify ? (
                                     <Delete arr={ context.situationAspects } arrKey={ "situationAspects" } element={ aspect } />
@@ -87,7 +87,7 @@ const SituationAspects: React.FC = () => {
                                     event: e.target.value
                                 })}/>
                             </div>
-                        </DragNDrop>
+                        </ChangeIndex>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.situationAspects } arrKey={ "situationAspects" } newElement={{
                         aspect: "",

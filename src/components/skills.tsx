@@ -1,14 +1,13 @@
 import { useState, useContext } from "react"
 import { Context } from "@/components/context-provider";
 import { dice } from "@/components/dice";
-import DragNDrop from "@/components/drag-n-drop";
 import Delete from "./delete";
 import AddModify from "./add-modify";
+import ChangeIndex from "./change-index";
 
 export interface SkillTypes {
     text: string,
-    modifier: number,
-    height: number
+    modifier: number
 }
 
 const Skills: React.FC = () => {
@@ -28,7 +27,7 @@ const Skills: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 style={{ color: "white" }}>EDIT SKILLS</h2>
                     {context.skills.map((skill, skillIndex) => (
-                        <DragNDrop arr={ context.skills } arrKey={ "skills" } element={ skill } initIndex={ skillIndex } isVisible={ modify }>
+                        <ChangeIndex arr={ context.skills } arrKey={ "skills" } initIndex={ skillIndex } isVisible={ modify }>
                             <div>
                                 {modify ? (
                                     <Delete arr={ context.skills } arrKey={ "skills" } element={ skill } />
@@ -67,7 +66,7 @@ const Skills: React.FC = () => {
                                     }
                                 </p>
                             </div>
-                        </DragNDrop>
+                        </ChangeIndex>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.skills } arrKey={ "skills" } newElement={{
                         text: "",

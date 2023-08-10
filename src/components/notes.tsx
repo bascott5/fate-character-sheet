@@ -1,13 +1,12 @@
 import { useState, useContext } from "react";
 import { Context } from "@/components/context-provider";
-import DragNDrop from "./drag-n-drop";
 import Delete from "./delete";
 import AddModify from "./add-modify";
+import ChangeIndex from "./change-index";
 
 export interface NoteTypes {
     title: string,
-    description: string,
-    height: number
+    description: string
 }
 
 const Notes: React.FC = () => {
@@ -27,7 +26,7 @@ const Notes: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 style={{ color: "white" }}>EDIT NOTES</h2>
                     {context.notes.map((note, noteIndex) => (
-                        <DragNDrop arr={ context.notes } arrKey={ "notes" } element={ note } initIndex={ noteIndex } isVisible={ modify }>
+                        <ChangeIndex arr={ context.notes } arrKey={ "notes" } initIndex={ noteIndex } isVisible={ modify }>
                             <div>
                                 {modify ? (
                                     <Delete arr={ context.notes } arrKey={ "notes" } element={ note } />
@@ -51,7 +50,7 @@ const Notes: React.FC = () => {
                                     event: e.target.value
                                 })}/>
                             </div>
-                        </DragNDrop>
+                        </ChangeIndex>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.notes } arrKey={ "notes" } newElement={{
                         title: "",

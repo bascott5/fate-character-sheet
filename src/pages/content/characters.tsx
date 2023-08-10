@@ -2,11 +2,7 @@ import Link from "next/link";
 import { useState, useContext, useEffect } from "react";
 import { Context } from "@/components/context-provider";
 
-interface PropTypes {
-    children: JSX.Element[]
-}
-
-const Characters: React.FC<PropTypes> = ({ children }: PropTypes) => {
+const Characters: React.FC = () => {
     const [context, dispatch] = useContext(Context);
     const [modify, isModify] = useState<boolean>(false);
     const [rendered, isRendered] = useState<boolean>(false);

@@ -24,7 +24,7 @@ const OptionContainer: React.FC = () => {
         {theme: "Red", color: "tomato" }, 
         {theme: "Green", color: "lightgreen" }, 
         {theme: "Purple", color: "plum" }
-    ]; //TODO: fix spacing and create spaces between Situation Aspect
+    ];
 
     return (
         <div>
@@ -33,7 +33,7 @@ const OptionContainer: React.FC = () => {
                     type: "TOGGLE", 
                     key: key, 
                     value: value })}>
-                    { key.substring(2) }: { value.toString() } 
+                    { key === "isSituationAspects" ? key.substring(2, 11) + " " + key.substring(11) : key.substring(2) }: { value.toString() } 
                 </button>
             ))}
             <DropdownTwo title={ "Themes" } arr={ themes } func={(element) => dispatch({

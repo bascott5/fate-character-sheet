@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { Context } from "./context-provider";
 import { dice } from "./dice";
-import DragNDrop from "./drag-n-drop";
 import Delete from "./delete";
 import AddModify from "./add-modify";
+import ChangeIndex from "./change-index";
 
 export interface StuntTypes {
     name: string,
@@ -11,8 +11,7 @@ export interface StuntTypes {
     bonus: number,
     skill: string,
     skillBonus: number,
-    description: string,
-    height: number
+    description: string
 }
 
 const Stunts: React.FC = () => {
@@ -20,17 +19,9 @@ const Stunts: React.FC = () => {
     const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
 
-    useEffect(() => { //TODO: useEffect updates state after its displayed, showing its previous value as a result, stop that. Also rewrite as a dispatch
+    useEffect(() => {
         if (context.skills.length > 0 && context.stunts.length > 0) {
-            for (let i = 0; i < context.skills.length; i++) {
-                if (context.stunts[i] != undefined) {
-                    if (context.skills[i].text == context.stunts[i].skill) {
-                        context.stunts[i].skillBonus = context.skills[i].modifier;
-                    } else {
-                        context.stunts[i].skillBonus = 0;
-                    }
-                }
-            }
+            dispatch({ type: "CHANGE SKILL BONUS" })
         }
     }, [context.skills, context.stunts]);
 
@@ -46,7 +37,7 @@ const Stunts: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 style={{ color: "white" }}>EDIT STUNTS</h2>
                     {context.stunts.map((stunt, stuntIndex) => (
-                        <DragNDrop arr={ context.stunts } arrKey={ "stunts" } element={ stunt } initIndex={ stuntIndex } isVisible={ modify }>
+                        <ChangeIndex arr={ context.stunts } arrKey={ "stunts" } initIndex={ stuntIndex } isVisible={ modify }>
                             <div>
                                 {modify ? (
                                     <Delete arr={ context.stunts } arrKey={ "stunts" } element={ stunt } />
@@ -101,7 +92,7 @@ const Stunts: React.FC = () => {
                                     event: e.target.value
                                 })}/>
                             </div>
-                        </DragNDrop>
+                        </ChangeIndex>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.stunts } arrKey={ "stunts" } newElement={{
                         name: "",
@@ -118,7 +109,7 @@ const Stunts: React.FC = () => {
                     <p style={{ fontWeight: "bold" }}>{ stunt.name }:</p> 
                     <p>{ stunt.description }</p>
                     {stunt.rollable ? (
-                        <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>Roll { stunt.skill }: { stunt.skillBonus } + { stunt.bonus }</button>
+                        <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>Roll { stunt.skill }: { stunt.bonus } + { stunt.skillBonus }</button>
                     ) : null}
                 </div>
             ))}

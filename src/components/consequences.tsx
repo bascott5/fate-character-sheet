@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import { Context } from "./context-provider";
-import DragNDrop from "./drag-n-drop";
 import Delete from "./delete";
 import AddModify from "./add-modify";
+import ChangeIndex from "./change-index";
 
 export interface ConsequenceTypes {
     label: string,
@@ -29,7 +29,7 @@ const Consequences: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 style={{ color: "white" }}>EDIT CONSEQUENCES</h2>
                     {context.consequences.map((consequence, consequenceIndex) => (
-                        <DragNDrop arr={ context.consequences } arrKey={ "consequences" } element={ consequence } initIndex={ consequenceIndex } isVisible={ modify }>
+                        <ChangeIndex arr={ context.consequences } arrKey={ "consequences" } initIndex={ consequenceIndex } isVisible={ modify }>
                             <div>
                                 {modify ? (
                                     <Delete arr={ context.consequences } arrKey={ "consequences" } element={ consequence } />
@@ -55,7 +55,7 @@ const Consequences: React.FC = () => {
                                     })
                                 }}/>
                             </div>
-                        </DragNDrop>
+                        </ChangeIndex>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.consequences } arrKey={ "consequences" } newElement={{
                         label: "",

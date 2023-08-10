@@ -52,8 +52,9 @@ export type Action =
     | { type: "HANDLE NESTED INPUT", key: string, value: object[], propertyKey: string, propertyIndex: number, propertyValue: object[], nestedPropertyKey: string, nestedPropertyIndex: number, event: string | number }
     | { type: "ADD OBJECT", key: string, value: object[], addedValue: string | object }
     | { type: "DELETE OBJECT", key: string, value: object[], propertyKey: object }
+    | { type: "CHANGE SKILL BONUS" }
     | { type: "CHANGE INDEX", key: string, value: ObjectTypes[], propertyIndex: number, indexB: number }
-    | { type: "CHANGE HEIGHT", key: string, value: object[], boxHeight: number | undefined, propertyIndex: number }
+    /*| { type: "CHANGE HEIGHT", key: string, value: object[], propertyIndex: number, boxHeight: number | undefined }*/
     | { type: "SET THEME", payload: ThemeTypes }
     | { type: "LOAD JSON", name: string }
 
@@ -188,7 +189,7 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         } : {...key}
                     })
                 }
-            case "ADD OBJECT": //TODO: add limit to number of objects an array can have depending on the individual array of objects
+            case "ADD OBJECT":
                 return {
                     ...state,
                     [action.key]: [...action.value, action.addedValue]
@@ -213,7 +214,24 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         [action.key]: [...copy]
                     }
                 }
-            case "CHANGE HEIGHT":
+            case "CHANGE SKILL BONUS":
+                let stuntCopy = [...state.stunts];
+
+                stuntCopy.map((stunt, stuntIndex) => {
+                    state.skills.map((skill, skillIndex) => {
+                        if (skillIndex === stuntIndex && stunt != undefined) {
+                            stunt.skillBonus = skill.modifier;
+                        } else {
+                            stunt.skillBonus = 0;
+                        }
+                    })
+                })
+
+                return {
+                    ...state,
+                    stunts: [...stuntCopy]
+                }
+            /*case "CHANGE HEIGHT":
                 return {
                     ...state,
                     [action.key]: action.value.map((key, keyIndex) => {
@@ -222,7 +240,7 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                             ["height"]: action.boxHeight
                         } : {...key}
                     })
-                }
+                }*/
             case "SET THEME":
                 return {
                     ...state,

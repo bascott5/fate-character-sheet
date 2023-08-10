@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
-import DragNDrop from "./drag-n-drop";
 import Delete from "./delete";
 import AddModify from "./add-modify";
+import ChangeIndex from "./change-index";
 
 interface BoxTypes {
     highlighted: boolean,
@@ -13,8 +13,7 @@ export interface ConditionTypes {
     label: string,
     boxes: BoxTypes[],
     boxesLength: number,
-    notes: string,
-    height: number
+    notes: string
 }
 
 const Conditions: React.FC = () => {
@@ -60,7 +59,7 @@ const Conditions: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 style={{ color: "white" }}>EDIT CONDITIONS</h2>
                     {context.conditions.map((condition, conditionIndex) => (
-                        <DragNDrop arr={ context.conditions } arrKey={ "conditions" } element={ condition } initIndex={ conditionIndex } isVisible={ modify }>
+                        <ChangeIndex arr={ context.conditions } arrKey={ "conditions" } initIndex={ conditionIndex } isVisible={ modify }>
                             <div>
                                 {modify ? (
                                     <Delete arr={ context.conditions } arrKey={ "conditions" } element={ condition } />
@@ -113,7 +112,7 @@ const Conditions: React.FC = () => {
                                     event: e.target.value
                                 })}/>
                             </div>
-                        </DragNDrop>
+                        </ChangeIndex>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.conditions } arrKey={ "conditions" } newElement={{
                         label: "",

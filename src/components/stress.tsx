@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
-import DragNDrop from "./drag-n-drop";
 import Delete from "./delete";
 import AddModify from "./add-modify";
+import ChangeIndex from "./change-index";
 
 interface BoxTypes {
     highlighted: boolean,
@@ -13,8 +13,7 @@ export interface StressTypes {
     label: string,
     boxes: BoxTypes[],
     boxesLength: number,
-    notes: string,
-    height: number
+    notes: string
 }
 
 const Stress: React.FC = () => {
@@ -61,7 +60,7 @@ const Stress: React.FC = () => {
                     <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                         <h2 style={{ color: "white" }}>EDIT STRESS</h2>
                         {context.stress.map((stressElement, stressIndex) => (
-                            <DragNDrop arr={ context.stress } arrKey={ "stress" } element={ stressElement } initIndex={ stressIndex } isVisible={ modify }>
+                            <ChangeIndex arr={ context.stress } arrKey={ "stress" } initIndex={ stressIndex } isVisible={ modify }>
                                 <div>
                                     {modify ? (
                                         <Delete arr={ context.stress } arrKey={ "stress" } element={ stressElement } />
@@ -115,7 +114,7 @@ const Stress: React.FC = () => {
                                         event: e.target.value
                                     })}/>
                                 </div>
-                            </DragNDrop>
+                            </ChangeIndex>
                         ))}
                         <AddModify modify={ () => isModify(!modify) } arr={ context.stress } arrKey={ "stress" } newElement={{
                             label: "",

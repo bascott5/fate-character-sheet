@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
-import DragNDrop from "./drag-n-drop";
 import Delete from "./delete";
 import AddModify from "./add-modify";
+import ChangeIndex from "./change-index";
 
 export interface AspectTypes {
     categoryHeader: string,
@@ -11,8 +11,7 @@ export interface AspectTypes {
     flags: string,
     freeInvokes: boolean[],
     freeInvokesLength: number,
-    notes: string,
-    height: number //TODO: get rid of height and make new component for changing index via buttons, putting that into the modify check
+    notes: string //TODO: turn change index and delete into one component called modify
 }
 
 const Aspects: React.FC = () => {
@@ -58,7 +57,7 @@ const Aspects: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                 <h2 style={{ color: "white" }}>EDIT ASPECTS</h2>
                     {context.aspects.map((aspect, aspectIndex) => (
-                        <DragNDrop arr={ context.aspects } arrKey={ "aspects" } element={ aspect } initIndex={ aspectIndex } isVisible={ modify }>
+                        <ChangeIndex arr={ context.aspects } arrKey={ "aspects" } initIndex={ aspectIndex } isVisible={ modify }>
                             <div>
                                 {modify ? (
                                     <Delete arr={ context.aspects } arrKey={ "aspects" } element={ aspect } />
@@ -118,7 +117,7 @@ const Aspects: React.FC = () => {
                                     event: e.target.value
                                 })}/>
                             </div>
-                        </DragNDrop>
+                        </ChangeIndex>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.aspects } arrKey={ "aspects" } newElement={{
                         categoryHeader: "",
