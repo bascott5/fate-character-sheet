@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { useState, useContext, useEffect } from "react";
-import { Context } from "@/components/context-provider";
+import { useState, useEffect } from "react";
+import { initState } from "@/components/context-provider";
 
 const Characters: React.FC = () => {
-    const [context, dispatch] = useContext(Context);
     const [modify, isModify] = useState<boolean>(false);
     const [rendered, isRendered] = useState<boolean>(false);
 
@@ -17,7 +16,7 @@ const Characters: React.FC = () => {
                 <div>
                     <button onClick={() => isModify(!modify)}>Modify+</button>
                     {Object.keys(localStorage).map(name => (
-                        name !== "ally-supports-cache" ? (
+                        JSON.stringify(Object.keys(JSON.parse(localStorage.getItem(name) || "{}"))) == JSON.stringify(Object.keys(initState)) ? (
                             <div>
                                 <Link href={{
                                     pathname: "/content/character-sheet",

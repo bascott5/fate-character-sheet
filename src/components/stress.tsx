@@ -1,8 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
-import Delete from "./delete";
 import AddModify from "./add-modify";
-import ChangeIndex from "./change-index";
+import ModifyMenu from "./modify-menu";
 
 interface BoxTypes {
     highlighted: boolean,
@@ -60,11 +59,8 @@ const Stress: React.FC = () => {
                     <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                         <h2 style={{ color: "white" }}>EDIT STRESS</h2>
                         {context.stress.map((stressElement, stressIndex) => (
-                            <ChangeIndex arr={ context.stress } arrKey={ "stress" } initIndex={ stressIndex } isVisible={ modify }>
+                            <ModifyMenu arr={ context.stress } element={ stressElement } arrKey={ "stress" } initIndex={ stressIndex } isVisible={ modify }>
                                 <div>
-                                    {modify ? (
-                                        <Delete arr={ context.stress } arrKey={ "stress" } element={ stressElement } />
-                                    ) : null}
                                     <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
                                     <input type="text" value={ stressElement.label } onChange={(e) => dispatch({
                                         type: "HANDLE INPUT",
@@ -114,7 +110,7 @@ const Stress: React.FC = () => {
                                         event: e.target.value
                                     })}/>
                                 </div>
-                            </ChangeIndex>
+                            </ModifyMenu>
                         ))}
                         <AddModify modify={ () => isModify(!modify) } arr={ context.stress } arrKey={ "stress" } newElement={{
                             label: "",

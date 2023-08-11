@@ -3,6 +3,7 @@ import { Context } from "./context-provider";
 import Delete from "./delete";
 import AddModify from "./add-modify";
 import ChangeIndex from "./change-index";
+import ModifyMenu from "./modify-menu";
 
 export interface ConsequenceTypes {
     label: string,
@@ -29,11 +30,8 @@ const Consequences: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 style={{ color: "white" }}>EDIT CONSEQUENCES</h2>
                     {context.consequences.map((consequence, consequenceIndex) => (
-                        <ChangeIndex arr={ context.consequences } arrKey={ "consequences" } initIndex={ consequenceIndex } isVisible={ modify }>
+                        <ModifyMenu arr={ context.consequences } element={ consequence } arrKey={ "consequences" } initIndex={ consequenceIndex } isVisible={ modify }>
                             <div>
-                                {modify ? (
-                                    <Delete arr={ context.consequences } arrKey={ "consequences" } element={ consequence } />
-                                ) : null}
                                 <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
                                 <input type="text" value={ consequence.label } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
@@ -55,7 +53,7 @@ const Consequences: React.FC = () => {
                                     })
                                 }}/>
                             </div>
-                        </ChangeIndex>
+                        </ModifyMenu>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.consequences } arrKey={ "consequences" } newElement={{
                         label: "",

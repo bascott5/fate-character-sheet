@@ -3,6 +3,7 @@ import { Context } from "./context-provider";
 import Delete from "./delete";
 import AddModify from "./add-modify";
 import ChangeIndex from "./change-index";
+import ModifyMenu from "./modify-menu";
 
 interface BoxTypes {
     highlighted: boolean,
@@ -59,11 +60,8 @@ const Conditions: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 style={{ color: "white" }}>EDIT CONDITIONS</h2>
                     {context.conditions.map((condition, conditionIndex) => (
-                        <ChangeIndex arr={ context.conditions } arrKey={ "conditions" } initIndex={ conditionIndex } isVisible={ modify }>
+                        <ModifyMenu arr={ context.conditions } element={ condition } arrKey={ "conditions" } initIndex={ conditionIndex } isVisible={ modify }>
                             <div>
-                                {modify ? (
-                                    <Delete arr={ context.conditions } arrKey={ "conditions" } element={ condition } />
-                                ) : null}
                                 <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
                                 <input type="text" value={ condition.label } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
@@ -112,7 +110,7 @@ const Conditions: React.FC = () => {
                                     event: e.target.value
                                 })}/>
                             </div>
-                        </ChangeIndex>
+                        </ModifyMenu>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.conditions } arrKey={ "conditions" } newElement={{
                         label: "",

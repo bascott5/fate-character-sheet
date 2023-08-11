@@ -1,9 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { Context } from "./context-provider";
 import { dice } from "./dice";
-import Delete from "./delete";
 import AddModify from "./add-modify";
-import ChangeIndex from "./change-index";
+import ModifyMenu from "./modify-menu";
 
 export interface StuntTypes {
     name: string,
@@ -37,11 +36,8 @@ const Stunts: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 style={{ color: "white" }}>EDIT STUNTS</h2>
                     {context.stunts.map((stunt, stuntIndex) => (
-                        <ChangeIndex arr={ context.stunts } arrKey={ "stunts" } initIndex={ stuntIndex } isVisible={ modify }>
+                        <ModifyMenu arr={ context.stunts } element={ stunt } arrKey={ "stunts" } initIndex={ stuntIndex } isVisible={ modify }>
                             <div>
-                                {modify ? (
-                                    <Delete arr={ context.stunts } arrKey={ "stunts" } element={ stunt } />
-                                ) : null}
                                 <p style={{ fontWeight: "bold" }}>NAME</p>
                                 <input type="text" value={ stunt.name } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
@@ -92,7 +88,7 @@ const Stunts: React.FC = () => {
                                     event: e.target.value
                                 })}/>
                             </div>
-                        </ChangeIndex>
+                        </ModifyMenu>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.stunts } arrKey={ "stunts" } newElement={{
                         name: "",

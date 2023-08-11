@@ -1,8 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
-import Delete from "./delete";
 import AddModify from "./add-modify";
-import ChangeIndex from "./change-index";
+import ModifyMenu from "./modify-menu";
 
 export interface AspectTypes {
     categoryHeader: string,
@@ -57,11 +56,8 @@ const Aspects: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                 <h2 style={{ color: "white" }}>EDIT ASPECTS</h2>
                     {context.aspects.map((aspect, aspectIndex) => (
-                        <ChangeIndex arr={ context.aspects } arrKey={ "aspects" } initIndex={ aspectIndex } isVisible={ modify }>
+                        <ModifyMenu arr={ context.aspects } element={ aspect } arrKey={ "aspects" } initIndex={ aspectIndex } isVisible={ modify }>
                             <div>
-                                {modify ? (
-                                    <Delete arr={ context.aspects } arrKey={ "aspects" } element={ aspect } />
-                                ) : null}
                                 <h3 style={{ fontWeight: "bold" }}>CATEGORY HEADER &#40;OPTIONAL&#41;</h3>
                                 <input type="text" value={ aspect.categoryHeader } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
@@ -117,7 +113,7 @@ const Aspects: React.FC = () => {
                                     event: e.target.value
                                 })}/>
                             </div>
-                        </ChangeIndex>
+                        </ModifyMenu>
                     ))}
                     <AddModify modify={ () => isModify(!modify) } arr={ context.aspects } arrKey={ "aspects" } newElement={{
                         categoryHeader: "",
