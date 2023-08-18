@@ -10,7 +10,6 @@ import Consequences from "./consequences";
 import Conditions from "./conditions";
 import SituationAspects from "./situation-aspects";
 import Identity from "./identity";
-import DropdownTwo from "./dropdown02";
 
 export interface ThemeTypes {
     theme: string,
@@ -19,12 +18,6 @@ export interface ThemeTypes {
 
 const OptionContainer: React.FC = () => {
     let [context, dispatch] = useContext(Context);
-    const themes = [
-        {theme: "Blue", color: "cornflowerblue" }, 
-        {theme: "Red", color: "tomato" }, 
-        {theme: "Green", color: "lightgreen" }, 
-        {theme: "Purple", color: "plum" }
-    ];
 
     return (
         <div>
@@ -36,10 +29,6 @@ const OptionContainer: React.FC = () => {
                     { key === "isSituationAspects" ? key.substring(2, 11) + " " + key.substring(11) : key.substring(2) }: { value.toString() } 
                 </button>
             ))}
-            <DropdownTwo title={ "Themes" } arr={ themes } func={(element) => dispatch({
-                type: "SET THEME",
-                payload: { theme: element.theme, color: element.color }
-            })} />
             <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
                 <Identity />
                 <div className="firstColumn">

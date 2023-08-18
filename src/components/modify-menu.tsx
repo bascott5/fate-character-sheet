@@ -20,8 +20,8 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                     <svg viewBox="0 0 1500 35">
                         <rect 
                             fill="red" 
-                            height={15} 
-                            width={15} 
+                            height={20} 
+                            width={20} 
                             onClick={() => dispatch({
                                 type: "DELETE OBJECT",
                                 key: arrKey,
@@ -30,7 +30,7 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                             })} 
                         />
                     </svg>
-                    <button onClick={() => dispatch({
+                    <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dispatch({
                         type: "CHANGE INDEX",
                         key: arrKey,
                         value: arr,
@@ -41,7 +41,7 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
             ) : null}
             { children }
             {isVisible ? (
-                <button onClick={() => dispatch({
+                <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dispatch({
                     type: "CHANGE INDEX",
                     key: arrKey,
                     value: arr,

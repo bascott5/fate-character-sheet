@@ -13,7 +13,7 @@ body {
     border: none;
     border-radius: 5px;
     padding: 10px;
-    margin: 0px 0px 25px 25px;
+    margin: 25px 0px 10px 15px;
 }
 
 .button:hover {
@@ -24,21 +24,9 @@ body {
     filter: brightness(50%)
 }
 
-.buttonAlt {
-    background-color: white;
-    font-weight: bold;
-    position: relative;
-    outline-style: none;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 0px 0px 25px 25px;
-}
-
 .box {
     outline: solid;
     outline-color: black;
-
 }
 
 //https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Organizing
@@ -63,13 +51,35 @@ body {
 }*/
 
 .dropdown {
+    color: white;
+    font-weight: bold;
     float: right;
+    outline-style: none;
+    border: none;
+    position: relative;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 15px 8px 0px 15px;
     .dropdownContainer {
+        color: white;
+        font-weight: bold;
+        outline-style: none;
+        border: none;
         position: relative;
+        border-radius: 5px;
+        padding: 10px;
     }
     .dropdownElement {
-        position: absolute;
+        z-index: 1;
     }
+}
+
+.dropdown:hover {
+    filter: brightness(75%);
+}
+
+.dropdown:active {
+    filter: brightness(50%)
 }
 
 .input {
@@ -111,7 +121,7 @@ body {
 
 //character sheet
 .characterSheet {
-    padding: 0px 150px 0px 150px;
+    padding: 0px 100px 0px 100px;
     .sheetContent {
         background-color: white;
         outline-style: solid;
@@ -135,6 +145,10 @@ body {
         padding: 10px;
         margin: 25px -10px 25px -10px;
     }
+}
+
+.controlPanel {
+    float: right;
 }
 
 //navbar

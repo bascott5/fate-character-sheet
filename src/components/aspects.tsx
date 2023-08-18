@@ -10,7 +10,7 @@ export interface AspectTypes {
     flags: string,
     freeInvokes: boolean[],
     freeInvokesLength: number,
-    notes: string //TODO: turn change index and delete into one component called modify
+    notes: string
 }
 
 const Aspects: React.FC = () => {

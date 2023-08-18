@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
+import { Context } from "./context-provider";
 import { ThemeTypes } from "./option-container";
 
 interface PropTypes {
@@ -8,6 +9,7 @@ interface PropTypes {
 }
 
 const DropdownTwo: React.FC<PropTypes> = ({ title, arr, func }: PropTypes ) => {
+    const [context, dispatch] = useContext(Context);
     const [open, isOpen] = useState(false);
     const container = useRef<any>(null);
 
@@ -31,9 +33,9 @@ const DropdownTwo: React.FC<PropTypes> = ({ title, arr, func }: PropTypes ) => {
 
     return (
         <div className="dropdown" ref={ container }>
-            <button className="dropdownContainer" onClick={() => isOpen(!open)}>{ title }</button>
+            <button className="dropdownContainer" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => isOpen(!open)}>{ title }</button>
             {arr.map(element => (
-                <button className="dropdownContainer" style={{ display: open ? "block" : "none" }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
+                <button className="dropdownElement" style={{ display: open ? "block" : "none" }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
             ))}
         </div>
     )

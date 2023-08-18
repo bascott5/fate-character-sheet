@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Context } from "./context-provider";
+import DropdownTwo from "./dropdown02";
 
 interface PropTypes {
     name: string | string[] | undefined
@@ -7,6 +8,12 @@ interface PropTypes {
 
 const ControlPanel: React.FC<PropTypes> = ({ name }: PropTypes) => {
     const [context, dispatch] = useContext(Context);
+    const themes = [
+        {theme: "Blue", color: "cornflowerblue" }, 
+        {theme: "Red", color: "tomato" }, 
+        {theme: "Green", color: "lightgreen" }, 
+        {theme: "Purple", color: "plum" }
+    ];
 
     useEffect(() => {
         if (name !== undefined) {
@@ -18,8 +25,12 @@ const ControlPanel: React.FC<PropTypes> = ({ name }: PropTypes) => {
     }, [name]);
 
     return (
-        <div style={{float: "right"}}>
-            <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => localStorage.setItem(context.identity.name, JSON.stringify(context))}>Save</button>
+        <div className="controlPanel">
+            <DropdownTwo title={ "Themes" } arr={ themes } func={(element) => dispatch({
+                type: "SET THEME",
+                payload: { theme: element.theme, color: element.color }
+            })} />
+            <button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => localStorage.setItem(context.identity.name, JSON.stringify(context))}>Save</button>
         </div>
     )
 }
