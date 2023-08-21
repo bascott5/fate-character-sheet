@@ -2,7 +2,7 @@
 
 //general
 body {
-    background-color: whitesmoke;
+    background: radial-gradient(circle, rgba(2,0,36,0) 50%, lightgray 100%);
 }
 
 .button {
@@ -13,7 +13,7 @@ body {
     border: none;
     border-radius: 5px;
     padding: 10px;
-    margin: 25px 0px 10px 15px;
+    margin: 25px 0px 0px 15px;
 }
 
 .button:hover {
@@ -29,27 +29,6 @@ body {
     outline-color: black;
 }
 
-//https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Organizing
-/*.button .main {
-    background-color: white;
-    position: relative;
-    outline-style: solid;
-    outline-width: thick;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 0px 0px 25px 25px;
-}
-
-.button .alt {
-    background-color: white;
-    position: relative;
-    outline-style: solid;
-    outline-width: thick;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 0px 25px 25px 25px;
-}*/
-
 .dropdown {
     color: white;
     font-weight: bold;
@@ -59,7 +38,7 @@ body {
     position: relative;
     border-radius: 5px;
     padding: 10px;
-    margin: 15px 8px 0px 15px;
+    margin: 15px 35px 0px 15px;
     .dropdownContainer {
         color: white;
         font-weight: bold;
@@ -74,17 +53,15 @@ body {
     }
 }
 
-.dropdown:hover {
-    filter: brightness(75%);
-}
-
-.dropdown:active {
-    filter: brightness(50%)
-}
-
 .input {
-    background-color: lightgrey;
+    background-color: transparent;
     border: none;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid lightgrey 1px;
     text-align: center;
     margin: 0px 10px 0px 0px;
 }
@@ -108,8 +85,16 @@ body {
         margin: 10px 25px 10px 0px;
     }
     .inputName {
-        background-color: lightgrey;
+        background-color: transparent;
         border: none;
+        outline: none;
+        outline-style: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: solid lightgrey 1px;
+        text-align: center;
+        margin: 0px 10px 0px 50px;
         text-align: center;
         font-size: larger;
     }
@@ -135,7 +120,7 @@ body {
         outline-width: thick;
         border-radius: 5px;
         padding: 10px;
-        margin: 25px -10px 25px -10px;
+        margin: 25px -10px -25px -10px;
     }
     .lesserSheetContent {
         background-color: white;
@@ -143,7 +128,7 @@ body {
         outline-width: thick;
         border-radius: 5px;
         padding: 10px;
-        margin: 25px -10px 25px -10px;
+        margin: 0px -10px 50px -10px;
     }
 }
 
@@ -195,8 +180,14 @@ body {
 }
 
 .navbarToggle {
+    color: white;
     position: absolute;
+    font-weight: bold;
+    outline-style: none;
+    border: none;
     z-index: 2;
+    border-radius: 5px;
+
 }
 
 //article

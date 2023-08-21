@@ -1,8 +1,10 @@
 import Dropdown from '@/components/dropdown01';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import Link from 'next/link';
+import { Context } from './context-provider';
 
 const Navbar: React.FC = () => {
+	const [context, dispatch] = useContext(Context);
 	const [open, isOpen] = useState(false)
     let chapters = new Array(11);
 	const chapter = ["Basics", "Game Creation", "Character Creation", "Aspects & Fate Points", "Skills & Stunts", "Actions & Outcomes", "Challenges, Contests, & Conflicts", "Running the Game", "Scenes, Sessions, & Scenarios", "The Long Game", "Extras"];
@@ -27,7 +29,7 @@ const Navbar: React.FC = () => {
 	
 	return (
 		<div ref={ container }>
-			<button className="navbarToggle" onClick={() => isOpen(!open)}>---</button>
+			<button className="navbarToggle" style={{ backgroundColor: context.theme.color }} onClick={() => isOpen(!open)}>---</button>
 			<div className="navbar" style={open ? { display: "block" } : { display: "none" }}>
 				<h1 className="logo">Fate Core</h1>
 				<div>

@@ -51,7 +51,7 @@ const Conditions: React.FC = () => {
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <div>
-                <svg style={{position: "absolute"}} viewBox="-225 -7 1500 35">
+                <svg style={{position: "absolute", transform: "translate(255px, 8px)"}} viewBox="0 0 1500 35">
                     <circle fill={context.theme.color} cx="10" cy="10" r="10" onClick={() => isEdit(!edit)} />
                 </svg>
                 <h1>CONDITIONS</h1>

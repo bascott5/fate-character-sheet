@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Context } from "./context-provider";
 import Skills from "@/components/skills";
 import Notes from "@/components/notes";
@@ -21,14 +21,16 @@ const OptionContainer: React.FC = () => {
 
     return (
         <div>
-            {Object.entries(context.options).map(([key, value]) => (
-                <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dispatch({ 
-                    type: "TOGGLE", 
-                    key: key, 
-                    value: value })}>
-                    { key === "isSituationAspects" ? key.substring(2, 11) + " " + key.substring(11) : key.substring(2) }: { value.toString() } 
-                </button>
-            ))}
+            <div style={{ margin: "0px 0px 10px 25px" }}>
+                {Object.entries(context.options).map(([key, value]) => (
+                    <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dispatch({ 
+                        type: "TOGGLE", 
+                        key: key, 
+                        value: value })}>
+                        { key === "isSituationAspects" ? key.substring(2, 11) + " " + key.substring(11) : key.substring(2) }: { value.toString() } 
+                    </button>
+                ))}
+            </div>
             <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
                 <Identity />
                 <div className="firstColumn">

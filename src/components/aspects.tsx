@@ -47,8 +47,8 @@ const Aspects: React.FC = () => {
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <div>
-                <svg style={{position: "absolute"}} viewBox="-160 -7 1500 35">
-                    <circle fill={context.theme.color} cx="10" cy="10" r="10" onClick={() => isEdit(!edit)} />
+                <svg style={{position: "absolute", transform: "translate(180px, 8px)"}} viewBox="0 0 1500 35">
+                    <circle fill={context.theme.color}  cx="10" cy="10" r="10" onClick={() => isEdit(!edit)} />
                 </svg>
                 <h1>ASPECTS</h1>
             </div>
@@ -125,28 +125,30 @@ const Aspects: React.FC = () => {
                         notes: ""
                     }}/>
                 </div>
-            ) : null}
-            {context.aspects.map((aspect, aspectIndex) => (
-                <div>
-                    <h3 style={{ fontWeight: "bold" }}>{ aspect.categoryHeader.toUpperCase() }</h3>
-                    <p style={{ color: "blue", fontWeight: "bold" }}>{ aspect.label.toUpperCase() }</p>
-                    <p style={{ fontStyle: "italic", fontWeight: "bold" }}>{ aspect.aspect }</p> <p style={aspect.flags.length == 0 ? { display: "none" } : { display: "inline-block" } }>&#40;{ aspect.flags }&#41;</p>
-                    <p>{ aspect.notes.toUpperCase() }</p>
-                    {aspect.freeInvokes.map((invoke, invokeIndex) => (
-                    <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }} viewBox="0 0 1500 35">
-                        <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
-                            type: "TOGGLE NESTED BOX",
-                            key: "aspects",
-                            value: context.aspects,
-                            propertyKey: "freeInvokes",
-                            propertyIndex: aspectIndex,
-                            propertyValue: aspect.freeInvokes,
-                            nestedPropertyIndex: invokeIndex
-                        })}/>
-                    </svg>
+            ) : null} 
+            <div style={context.aspects.length == 0 ? { padding: "0px 0px 0px 0px" } : { padding: "20px 0px 0px 0px" }}>
+                {context.aspects.map((aspect, aspectIndex) => (
+                    <div>
+                        <h3 style={{ fontWeight: "bold" }}>{ aspect.categoryHeader.toUpperCase() }</h3>
+                        <p style={{ fontWeight: "bold", color: context.theme.color }}>{ aspect.label.toUpperCase() }</p>
+                        <p style={{ fontStyle: "italic", fontWeight: "bold" }}>{ aspect.aspect }</p> <p style={aspect.flags.length == 0 ? { display: "none" } : { display: "inline-block" } }>&#40;{ aspect.flags }&#41;</p>
+                        <p>{ aspect.notes.toUpperCase() }</p>
+                        {aspect.freeInvokes.map((invoke, invokeIndex) => (
+                        <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }} viewBox="0 0 1500 35">
+                            <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
+                                type: "TOGGLE NESTED BOX",
+                                key: "aspects",
+                                value: context.aspects,
+                                propertyKey: "freeInvokes",
+                                propertyIndex: aspectIndex,
+                                propertyValue: aspect.freeInvokes,
+                                nestedPropertyIndex: invokeIndex
+                            })}/>
+                        </svg>
+                    ))}
+                    </div>
                 ))}
-                </div>
-            ))}
+            </div>
         </div>
     )
 }

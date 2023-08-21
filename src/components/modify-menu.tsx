@@ -19,9 +19,10 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                 <div>
                     <svg viewBox="0 0 1500 35">
                         <rect 
-                            fill="red" 
-                            height={20} 
-                            width={20} 
+                            fill="red"
+                            x={ 1480 }
+                            height={ 20 } 
+                            width={ 20 } 
                             onClick={() => dispatch({
                                 type: "DELETE OBJECT",
                                 key: arrKey,
