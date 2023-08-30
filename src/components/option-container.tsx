@@ -31,8 +31,8 @@ const OptionContainer: React.FC = () => {
                     </button>
                 ))}
             </div>
-            <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
-                <Identity />
+            <Identity />
+            <div className="columnContainer">
                 <div className="firstColumn">
                     {context.options.isSkills ? <Skills /> : null}
                     {context.options.isStunts ? <Stunts /> : null}

@@ -126,7 +126,7 @@ const Aspects: React.FC = () => {
                     }}/>
                 </div>
             ) : null} 
-            <div style={context.aspects.length == 0 ? { padding: "0px 0px 0px 0px" } : { padding: "20px 0px 0px 0px" }}>
+            <div style={context.aspects.length == 0 ? { padding: "0px 0px 0px 0px" } : { padding: "0px 0px 0px 0px" }}>
                 {context.aspects.map((aspect, aspectIndex) => (
                     <div>
                         <h3 style={{ fontWeight: "bold" }}>{ aspect.categoryHeader.toUpperCase() }</h3>
