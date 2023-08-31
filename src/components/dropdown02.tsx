@@ -35,7 +35,7 @@ const DropdownTwo: React.FC<PropTypes> = ({ title, arr, func }: PropTypes ) => {
         <div className="dropdown" ref={ container }>
             <button className="dropdownContainer" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => isOpen(!open)}>{ title }</button>
             {arr.map(element => (
-                <button className="dropdownElement" style={{ display: open ? "block" : "none" }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
+                <button className="dropdownElement" style={{ display: open ? "block" : "none", backgroundColor: context.theme.color }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
             ))}
         </div>
     )

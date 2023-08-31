@@ -20,7 +20,6 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                     <svg viewBox="0 0 1500 35">
                         <rect 
                             fill="red"
-                            x={ 1480 }
                             height={ 20 } 
                             width={ 20 } 
                             onClick={() => dispatch({
@@ -31,7 +30,7 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                             })} 
                         />
                     </svg>
-                    <button className="button" style={{ float: "right", backgroundColor: context.theme.color }} onClick={() => dispatch({
+                    <button className="indexButton" style={{ backgroundColor: context.theme.color }} onClick={() => dispatch({
                         type: "CHANGE INDEX",
                         key: arrKey,
                         value: arr,
@@ -42,7 +41,7 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
             ) : null}
             { children }
             {isVisible ? (
-                <button className="button" style={{ float: "right", backgroundColor: context.theme.color }} onClick={() => dispatch({
+                <button className="indexButton" style={{ margin: "-35px 0px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dispatch({
                     type: "CHANGE INDEX",
                     key: arrKey,
                     value: arr,

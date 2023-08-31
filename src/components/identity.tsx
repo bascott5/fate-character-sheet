@@ -19,6 +19,7 @@ const Identity: React.FC = () => {
                     key: "name",
                     event: e.target.value
                 })}/>
+                <h3 className="type">NAME</h3>
             </div>
             <div className="container">
                 <input type="text" className="input" value={ context.identity.pronouns } onChange={(e) => dispatch({

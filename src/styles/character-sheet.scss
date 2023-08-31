@@ -25,6 +25,17 @@ body {
     filter: brightness(50%)
 }
 
+.indexButton {
+    float: right;
+    color: white;
+    font-weight: bold;
+    outline-style: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: -20px 0px -20px 0px;
+}
+
 .box {
     outline: solid;
     outline-color: black;
@@ -50,15 +61,20 @@ body {
         padding: 10px;
     }
     .dropdownElement {
-        z-index: 1;
+        display: none;
+        border: none;
+        color: white;
+        min-width: 70px;
+        padding: 5px 10px 5px 10px;
+    }
+    .dropdownElement:hover {
+        filter: brightness(125%)
     }
 }
 
 .input {
     background-color: transparent;
     border: none;
-    outline: none;
-    outline-style: none;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -80,29 +96,26 @@ body {
         outline-style: solid;
         outline-width: thick;
         border-radius: 5px;
-        padding: 25px 0px 25px 0px;
+        padding: 35px 0px 10px 0px;
         margin: 25px 50px 0px 50px;
     .container {
         display: inline-block;
-        margin: 10px 25px 10px 0px;
+        margin: 10px 25px 0px 0px;
     }
     .inputName {
+        position: relative;
         background-color: transparent;
         border: none;
-        outline: none;
-        outline-style: none;
         border-top: none;
         border-left: none;
         border-right: none;
         border-bottom: solid lightgrey 1px;
-        text-align: center;
-        text-align: center;
         font-size: larger;
-        margin: 0px 10px 0px 50px;
+        margin: 50px 10px 0px 50px;
     }
     .type {
         text-align: center;
-        margin-right: 7px;
+        margin-right: 6px;
     }
 }
 
