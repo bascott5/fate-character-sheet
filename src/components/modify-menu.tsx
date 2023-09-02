@@ -1,5 +1,19 @@
+import React from "react";
 import { useContext } from "react";
 import { Context, ObjectTypes } from "./context-provider";
+import Image from "next/image";
+import bluetrash from "../images/bluetrash.svg";
+import redtrash from "../images/redtrash.svg";
+import greentrash from "../images/greentrash.svg";
+import purpletrash from "../images/purpletrash.svg";
+import blueuparrow from "../images/blueuparrow.svg";
+import reduparrow from "../images/reduparrow.svg";
+import greenuparrow from "../images/greenuparrow.svg";
+import purpleuparrow from "../images/purpleuparrow.svg";
+import bluedownarrow from "../images/bluedownarrow.svg";
+import reddownarrow from "../images/reddownarrow.svg";
+import greendownarrow from "../images/greendownarrow.svg";
+import purpledownarrow from "../images/purpledownarrow.svg";
 
 interface Props {
     "arr": ObjectTypes[],
@@ -17,37 +31,72 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
         <div className="lesserSheetContent">
             {isVisible ? (
                 <div>
-                    <svg viewBox="0 0 1500 35">
-                        <rect 
-                            fill="red"
-                            height={ 20 } 
-                            width={ 20 } 
-                            onClick={() => dispatch({
-                                type: "DELETE OBJECT",
-                                key: arrKey,
-                                value: arr,
-                                propertyKey: element
-                            })} 
-                        />
-                    </svg>
-                    <button className="indexButton" style={{ backgroundColor: context.theme.color }} onClick={() => dispatch({
-                        type: "CHANGE INDEX",
-                        key: arrKey,
-                        value: arr,
-                        propertyIndex: initIndex,
-                        indexB: initIndex - 1
-                    })}>^</button>
+                    <Image 
+                        priority
+                        loading="eager"
+                        src={
+                            context.theme.theme == "Blue" ? bluetrash :
+                            context.theme.theme == "Red" ? redtrash :
+                            context.theme.theme == "Green" ? greentrash :
+                            context.theme.theme == "Purple" ? purpletrash :
+                            null
+                        }
+                        alt="Delete"
+                        width={20}
+                        height={20}
+                        onClick={() => dispatch({
+                            type: "DELETE OBJECT",
+                            key: arrKey,
+                            value: arr,
+                            propertyKey: element
+                        })}
+                    />
+                    <Image
+                        priority
+                        loading="eager"
+                        src={
+                            context.theme.theme == "Blue" ? blueuparrow :
+                            context.theme.theme == "Red" ? reduparrow :
+                            context.theme.theme == "Green" ? greenuparrow :
+                            context.theme.theme == "Purple" ? purpleuparrow :
+                            null
+                        }
+                        alt="Up!"
+                        width={20}
+                        height={20}
+                        onClick={() => dispatch({
+                            type: "CHANGE INDEX",
+                            key: arrKey,
+                            value: arr,
+                            propertyIndex: initIndex,
+                            indexB: initIndex - 1
+                        })}
+                    />
                 </div>
             ) : null}
             { children }
             {isVisible ? (
-                <button className="indexButton" style={{ margin: "-35px 0px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dispatch({
-                    type: "CHANGE INDEX",
-                    key: arrKey,
-                    value: arr,
-                    propertyIndex: initIndex,
-                    indexB: initIndex + 1
-                })}>v</button>
+                <Image
+                    priority
+                    loading="eager"
+                    src={
+                        context.theme.theme == "Blue" ? bluedownarrow :
+                        context.theme.theme == "Red" ? reddownarrow :
+                        context.theme.theme == "Green" ? greendownarrow :
+                        context.theme.theme == "Purple" ? purpledownarrow :
+                        null
+                    }
+                    alt="Down!"
+                    width={20}
+                    height={20}
+                    onClick={() => dispatch({
+                        type: "CHANGE INDEX",
+                        key: arrKey,
+                        value: arr,
+                        propertyIndex: initIndex,
+                        indexB: initIndex + 1
+                    })}
+                />
             ) : null}
         </div>
     );
