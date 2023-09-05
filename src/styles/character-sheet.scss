@@ -6,6 +6,34 @@ body {
     overflow-x: hidden;
 }
 
+.edit {
+    float: left;
+}
+
+.edit:hover {
+    filter: brightness(75%);
+}
+
+.edit:active {
+    filter: brightness(50%);
+}
+
+.trash:hover {
+    filter: brightness(75%);
+}
+
+.trash:active {
+    filter: brightness(50%);
+}
+
+.indexChanger:hover {
+    filter: brightness(75%);
+}
+
+.indexChanger:active {
+    filter: brightness(50%);
+}
+
 .button {
     color: white;
     font-weight: bold;

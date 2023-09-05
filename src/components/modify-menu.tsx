@@ -34,6 +34,7 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                     <Image 
                         priority
                         loading="eager"
+                        className="trash"
                         src={
                             context.theme.theme == "Blue" ? bluetrash :
                             context.theme.theme == "Red" ? redtrash :
@@ -42,8 +43,8 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                             null
                         }
                         alt="Delete"
-                        width={20}
-                        height={20}
+                        width={30}
+                        height={30}
                         onClick={() => dispatch({
                             type: "DELETE OBJECT",
                             key: arrKey,
@@ -54,6 +55,7 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                     <Image
                         priority
                         loading="eager"
+                        className="indexChanger"
                         src={
                             context.theme.theme == "Blue" ? blueuparrow :
                             context.theme.theme == "Red" ? reduparrow :
@@ -62,8 +64,9 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                             null
                         }
                         alt="Up!"
-                        width={20}
-                        height={20}
+                        width={30}
+                        height={30}
+                        style={{ float: "right" }}
                         onClick={() => dispatch({
                             type: "CHANGE INDEX",
                             key: arrKey,
@@ -79,6 +82,7 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                 <Image
                     priority
                     loading="eager"
+                    className="indexChanger"
                     src={
                         context.theme.theme == "Blue" ? bluedownarrow :
                         context.theme.theme == "Red" ? reddownarrow :
@@ -87,8 +91,9 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                         null
                     }
                     alt="Down!"
-                    width={20}
-                    height={20}
+                    width={30}
+                    height={30}
+                    style={{ float: "right", margin: "-30px 0px 0px 0px" }}
                     onClick={() => dispatch({
                         type: "CHANGE INDEX",
                         key: arrKey,

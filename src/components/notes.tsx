@@ -21,9 +21,12 @@ const Notes: React.FC = () => {
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <div>
+                <h1>NOTES</h1>
                 <Image
                     priority
                     loading="eager"
+                    className="edit"
+                    style={{ margin: "-56px 0px 0px 138px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -32,11 +35,10 @@ const Notes: React.FC = () => {
                         null
                     }
                     alt="Edit!"
-                    width={20}
-                    height={20}
+                    width={30}
+                    height={30}
                     onClick={() => isEdit(!edit)}
                 />
-                <h1>NOTES</h1>
             </div>
             {edit ? (
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
