@@ -21,9 +21,9 @@ const OptionContainer: React.FC = () => {
 
     return (
         <div>
-            <div style={{ margin: "0px 0px 10px 25px" }}>
+            <div style={{ margin: "0px 0px 10px 32px" }}>
                 {Object.entries(context.options).map(([key, value]) => (
-                    <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dispatch({ 
+                    <button className="button" style={{ fontFamily: "sans-serif", backgroundColor: context.theme.color }} onClick={() => dispatch({ 
                         type: "TOGGLE", 
                         key: key, 
                         value: value })}>

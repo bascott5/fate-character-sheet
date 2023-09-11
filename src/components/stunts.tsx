@@ -32,12 +32,12 @@ const Stunts: React.FC = () => {
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <div>
-                <h1>STUNTS</h1>
+                <h1 className="title">STUNTS</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-56px 0px 0px 162px" }}
+                    style={{ margin: "-54px 0px 0px 153px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -46,19 +46,19 @@ const Stunts: React.FC = () => {
                         null
                     }
                     alt="Edit!"
-                    width={30}
-                    height={30}
+                    width={25}
+                    height={25}
                     onClick={() => isEdit(!edit)}
                 />
             </div>
             {edit ? (
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
-                    <h2 style={{ color: "white" }}>EDIT STUNTS</h2>
+                    <h2 className="title" style={{ color: "white" }}>EDIT STUNTS</h2>
                     {context.stunts.map((stunt, stuntIndex) => (
                         <ModifyMenu arr={ context.stunts } element={ stunt } arrKey={ "stunts" } initIndex={ stuntIndex } isVisible={ modify }>
                             <div>
-                                <p style={{ fontWeight: "bold" }}>NAME</p>
-                                <input type="text" value={ stunt.name } onChange={(e) => dispatch({
+                                <p className="headerText">NAME</p>
+                                <input className="input" type="text" value={ stunt.name } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "stunts",
                                     value: context.stunts,
@@ -66,8 +66,8 @@ const Stunts: React.FC = () => {
                                     propertyIndex: stuntIndex,
                                     event: e.target.value
                                 })}/>
-                                <p style={{ fontWeight: "bold" }}>ROLLABLE</p>
-                                <input type="checkbox" checked={ stunt.rollable } onChange={() => dispatch({
+                                <p className="headerText">ROLLABLE</p>
+                                <input className="input" type="checkbox" checked={ stunt.rollable } onChange={() => dispatch({
                                     type: "TOGGLE BOX",
                                     key: "stunts",
                                     value: context.stunts,
@@ -77,8 +77,8 @@ const Stunts: React.FC = () => {
                                 })}/>
                                 {stunt.rollable ? (
                                     <div>
-                                        <p style={{ fontWeight: "bold" }}>BONUS</p>
-                                        <input type="number" value={ stunt.bonus } onChange={(e) => dispatch({
+                                        <p className="headerText">BONUS</p>
+                                        <input className="input" type="number" value={ stunt.bonus } onChange={(e) => dispatch({
                                             type: "HANDLE INPUT",
                                             key: "stunts",
                                             value: context.stunts,
@@ -86,8 +86,8 @@ const Stunts: React.FC = () => {
                                             propertyIndex: stuntIndex,
                                             event: e.target.valueAsNumber
                                         })}/>
-                                        <p style={{ fontWeight: "bold" }}>SKILL</p>
-                                        <input type="text" value={ stunt.skill } onChange={(e) => dispatch({
+                                        <p className="headerText">SKILL</p>
+                                        <input className="input" type="text" value={ stunt.skill } onChange={(e) => dispatch({
                                             type: "HANDLE INPUT",
                                             key: "stunts",
                                             value: context.stunts,
@@ -97,8 +97,8 @@ const Stunts: React.FC = () => {
                                         })}/>
                                     </div>
                                 ) : null}
-                                <p style={{ fontWeight: "bold" }}>DESCRIPTION</p>
-                                <input type="text" value={ stunt.description } onChange={(e) => dispatch({
+                                <p className="headerText">DESCRIPTION</p>
+                                <input className="input" type="text" value={ stunt.description } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "stunts",
                                     value: context.stunts,
@@ -121,7 +121,7 @@ const Stunts: React.FC = () => {
             ) : null}
             {context.stunts.map((stunt, stuntIndex) => (
                 <div>
-                    <p style={{ fontWeight: "bold" }}>{ stunt.name }:</p> 
+                    <p className="header">{ stunt.name }:</p> 
                     <p>{ stunt.description }</p>
                     {stunt.rollable ? (
                         <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>Roll { stunt.skill }: { stunt.bonus } + { stunt.skillBonus }</button>

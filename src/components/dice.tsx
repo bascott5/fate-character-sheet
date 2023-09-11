@@ -1,3 +1,4 @@
+// TODO: incorporate into code with unique SVG button
 export const dice = (modifier: number) => {
     let container: number[] = []
 

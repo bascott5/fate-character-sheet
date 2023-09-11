@@ -34,9 +34,11 @@ const DropdownTwo: React.FC<PropTypes> = ({ title, arr, func }: PropTypes ) => {
     return (
         <div className="dropdown" ref={ container }>
             <button className="dropdownContainer" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => isOpen(!open)}>{ title }</button>
-            {arr.map(element => (
-                <button className="dropdownElement" style={{ display: open ? "block" : "none", backgroundColor: context.theme.color }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
-            ))}
+            <div style={{ position: "absolute" }}>
+                {arr.map(element => (
+                    <button className="dropdownElement" style={{ display: open ? "block" : "none", backgroundColor: context.theme.color }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
+                ))}
+            </div>
         </div>
     )
 }

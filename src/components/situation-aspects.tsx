@@ -49,12 +49,12 @@ const SituationAspects: React.FC = () => {
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <div>
-                <h1>SITUATION ASPECTS</h1>
+                <h1 className="title">SITUATION ASPECTS</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-56px 0px 0px 398px" }}
+                    style={{ margin: "-54px 0px 0px 373px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -63,19 +63,19 @@ const SituationAspects: React.FC = () => {
                         null
                     }
                     alt="Edit!"
-                    width={30}
-                    height={30}
+                    width={25}
+                    height={25}
                     onClick={() => isEdit(!edit)}
                 />
             </div>
             {edit ? (
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
-                    <h2 style={{ color: "white" }}>EDIT ASPECTS</h2>
+                    <h2 className="title" style={{ color: "white" }}>EDIT ASPECTS</h2>
                     {context.situationAspects.map((aspect, aspectIndex) => (
                         <ModifyMenu arr={ context.situationAspects } element={ aspect } arrKey={ "situationAspects" } initIndex={ aspectIndex } isVisible={ modify }>
                             <div>
-                                <h3 style={{ fontWeight: "bold" }}>ASPECT</h3>
-                                <input type="text" value={ aspect.aspect } onChange={(e) => dispatch({
+                                <h3 className="headerText">ASPECT</h3>
+                                <input className="input" type="text" value={ aspect.aspect } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "situationAspects",
                                     value: context.situationAspects,
@@ -83,8 +83,8 @@ const SituationAspects: React.FC = () => {
                                     propertyIndex: aspectIndex,
                                     event: e.target.value
                                 })}/>
-                                <h3 style={{ fontWeight: "bold" }}>FREE INVOKES</h3>
-                                <input type="number" value={ aspect.freeInvokesLength } min={0} max={10} onChange={(e) => dispatch({
+                                <h3 className="headerText">FREE INVOKES</h3>
+                                <input className="input" type="number" value={ aspect.freeInvokesLength } min={0} max={10} onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "situationAspects",
                                     value: context.situationAspects,
@@ -92,8 +92,8 @@ const SituationAspects: React.FC = () => {
                                     propertyIndex: aspectIndex,
                                     event: e.target.valueAsNumber
                                 })}/>
-                                <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
-                                <input type="text" value={ aspect.notes } onChange={(e) => dispatch({
+                                <h3 className="headerText">NOTES</h3>
+                                <input className="input" type="text" value={ aspect.notes } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "situationAspects",
                                     value: context.situationAspects,
@@ -116,19 +116,23 @@ const SituationAspects: React.FC = () => {
                 <div>
                     <h3 style={{ fontWeight: "bold" }}>{ aspect.aspect }</h3>
                     <p>{ aspect.notes }</p>
-                    {aspect.freeInvokes.map((invoke, invokeIndex) => (
-                        <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }} viewBox="0 0 1500 35">
-                            <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
-                                type: "TOGGLE NESTED BOX",
-                                key: "situationAspects",
-                                value: context.situationAspects,
-                                propertyKey: "freeInvokes",
-                                propertyIndex: aspectIndex,
-                                propertyValue: aspect.freeInvokes,
-                                nestedPropertyIndex: invokeIndex
-                            })}/>
-                        </svg>
-                    ))}
+                    <div className="svgContainer">
+                        {aspect.freeInvokes.map((invoke, invokeIndex) => (
+                            <div className="boxContainer">
+                                <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }} viewBox="0 0 250 30">
+                                    <rect className="box" style={{ fill: invoke ? context.theme.color : "white", }} height={"25"} width={"25"} onClick={() => dispatch({
+                                        type: "TOGGLE NESTED BOX",
+                                        key: "situationAspects",
+                                        value: context.situationAspects,
+                                        propertyKey: "freeInvokes",
+                                        propertyIndex: aspectIndex,
+                                        propertyValue: aspect.freeInvokes,
+                                        nestedPropertyIndex: invokeIndex
+                                    })}/>
+                                </svg>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ))}
         </div>

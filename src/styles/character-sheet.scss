@@ -2,7 +2,7 @@
 
 //general
 body {
-    background: radial-gradient(circle, rgba(2,0,36,0) 50%, lightgray 100%);
+    background: white;
     overflow-x: hidden;
 }
 
@@ -64,11 +64,6 @@ body {
     margin: -20px 0px -20px 0px;
 }
 
-.box {
-    outline: solid;
-    outline-color: black;
-}
-
 .dropdown {
     color: white;
     font-weight: bold;
@@ -92,23 +87,14 @@ body {
         display: none;
         border: none;
         color: white;
+        position: relative;
         min-width: 70px;
         padding: 5px 10px 5px 10px;
+        margin-top: 0px;
     }
     .dropdownElement:hover {
         filter: brightness(125%)
     }
-}
-
-.input {
-    background-color: transparent;
-    border: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: solid lightgrey 1px;
-    text-align: center;
-    margin: 0px 10px 0px 0px;
 }
 
 .nobullets {
@@ -118,7 +104,6 @@ body {
 }
 
 //identity
-//https://www.w3schools.com/Css/tryit.asp?filename=trycss_border-bottom
 .identity {
         background-color: white;
         outline-style: solid;
@@ -128,7 +113,7 @@ body {
         margin: 25px 50px 0px 50px;
     .container {
         display: inline-block;
-        margin: 10px 25px 0px 0px;
+        margin: 0px 25px 0px 35px;
     }
     .inputName {
         position: relative;
@@ -138,20 +123,42 @@ body {
         border-left: none;
         border-right: none;
         border-bottom: solid lightgrey 1px;
-        font-size: larger;
-        margin: 50px 10px 0px 50px;
+        font-size: 50px;
+        margin: 0px 265px 15px 0px;
+        width: 700px;
+    }
+    .input {
+        background-color: transparent;
+        font-size: 25px;
+        text-align: center;
+        border: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: solid lightgrey 1px;
+        margin: 29px 10px 0px 0px;
+        width: 150px;
+    }
+    .valueInput {
+        background-color: transparent;
+        font-size: 50px;
+        text-align: center;
+        border: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: solid lightgrey 1px;
+        margin: 0px 10px 0px 0px;
+        width: 100px;
     }
     .type {
+        font-family: sans-serif;
         text-align: center;
-        margin-right: 6px;
+        margin: 10px -45px 25px -50px;
     }
 }
 
 //character sheet
-.sheetContainer {
-    background-color: red;
-}
-
 .characterSheet {
     padding: 0px 100px 0px 100px;
     .sheetContent {
@@ -189,6 +196,31 @@ body {
     .secondColumn {
         width: 40%;
     }
+}
+
+.title {
+    font-family: sans-serif;
+}
+
+.headerText {
+    font-family: sans-serif;
+    font-weight: bold; 
+    margin: 0px 0px 10px 0px;
+}
+
+.header {
+    font-family: sans-serif;
+    font-weight: bold;
+    margin: 0px 0px 15px 0px;
+}
+
+.paragraph {
+    font-family: serif;
+    padding: "0px 0px 15px 0px";
+}
+
+.input {
+    margin: 0px 0px 15px 0px;
 }
 
 .controlPanel {
@@ -246,14 +278,20 @@ body {
     border: none;
     z-index: 2;
     border-radius: 5px;
-
 }
 
-//article
-.article {
-    .box {
-        background-color: wheat;
-        padding: 5px;
-        margin: 5px;
+//clickable box
+.svgContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    .boxContainer {
+        flex: 0 0 auto;
+        width: 25vh;
+        margin: 0px -190px 0px 0px;
+        .box {
+            outline: solid;
+            outline-color: black;
+        }
     }
 }

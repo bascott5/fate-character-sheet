@@ -43,8 +43,8 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                             null
                         }
                         alt="Delete"
-                        width={30}
-                        height={30}
+                        width={25}
+                        height={25}
                         onClick={() => dispatch({
                             type: "DELETE OBJECT",
                             key: arrKey,
@@ -64,8 +64,8 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                             null
                         }
                         alt="Up!"
-                        width={30}
-                        height={30}
+                        width={25}
+                        height={25}
                         style={{ float: "right" }}
                         onClick={() => dispatch({
                             type: "CHANGE INDEX",
@@ -91,8 +91,8 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                         null
                     }
                     alt="Down!"
-                    width={30}
-                    height={30}
+                    width={25}
+                    height={25}
                     style={{ float: "right", margin: "-30px 0px 0px 0px" }}
                     onClick={() => dispatch({
                         type: "CHANGE INDEX",

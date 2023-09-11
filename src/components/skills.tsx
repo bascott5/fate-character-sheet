@@ -22,12 +22,12 @@ const Skills: React.FC = () => {
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <div>
-                <h1>SKILLS</h1>
+                <h1 className="title">SKILLS</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-56px 0px 0px 145px" }}
+                    style={{ margin: "-54px 0px 0px 134px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -36,14 +36,14 @@ const Skills: React.FC = () => {
                         null
                     }
                     alt="Edit!"
-                    width={30}
-                    height={30}
+                    width={25}
+                    height={25}
                     onClick={() => isEdit(!edit)}
                 />
             </div>
             {edit ? (
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
-                    <h2 style={{ color: "white" }}>EDIT SKILLS</h2>
+                    <h2 className="title" style={{ color: "white" }}>EDIT SKILLS</h2>
                     {context.skills.map((skill, skillIndex) => (
                         <ModifyMenu arr={ context.skills } element={ skill } arrKey={ "skills" } initIndex={ skillIndex } isVisible={ modify }>
                             <div>

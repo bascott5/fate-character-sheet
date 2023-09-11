@@ -21,12 +21,12 @@ const Notes: React.FC = () => {
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <div>
-                <h1>NOTES</h1>
+                <h1 className="title">NOTES</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-56px 0px 0px 138px" }}
+                    style={{ margin: "-54px 0px 0px 130px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -35,19 +35,19 @@ const Notes: React.FC = () => {
                         null
                     }
                     alt="Edit!"
-                    width={30}
-                    height={30}
+                    width={25}
+                    height={25}
                     onClick={() => isEdit(!edit)}
                 />
             </div>
             {edit ? (
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
-                    <h2 style={{ color: "white" }}>EDIT NOTES</h2>
+                    <h2 className="title" style={{ color: "white" }}>EDIT NOTES</h2>
                     {context.notes.map((note, noteIndex) => (
                         <ModifyMenu arr={ context.notes } element={ note } arrKey={ "notes" } initIndex={ noteIndex } isVisible={ modify }>
                             <div>
-                                <p style={{ fontWeight: "bold" }}>TITLE</p>
-                                <input type="text" value={ note.title } onChange={(e) => dispatch({
+                                <p className="headerText">TITLE</p>
+                                <input className="input" type="text" value={ note.title } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "notes",
                                     value: context.notes,
@@ -55,8 +55,8 @@ const Notes: React.FC = () => {
                                     propertyIndex: noteIndex,
                                     event: e.target.value
                                 })}/>
-                                <p style={{ fontWeight: "bold" }}>NOTE</p>
-                                <input type="text" value={ note.description } onChange={(e) => dispatch({
+                                <p className="headerText">NOTE</p>
+                                <input className="input" type="text" value={ note.description } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "notes",
                                     value: context.notes,
@@ -73,9 +73,9 @@ const Notes: React.FC = () => {
                     }}/>
                 </div>
             ) : null}
-            {context.notes.map((note, noteIndex) => (
+            {context.notes.map(note => (
                 <div>
-                    <p style={{ fontWeight: "bold" }}>{ note.title }</p>
+                    <p className="headerText">{ note.title }</p>
                     <p>{ note.description }</p>  
                 </div>
             ))}

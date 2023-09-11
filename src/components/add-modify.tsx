@@ -15,7 +15,7 @@ const AddModify: React.FC<PropTypes> = ({ modify, arr, arrKey, newElement }: Pro
         <div>
             <button 
                 className="button" 
-                style={{ float: "left", color: context.theme.color, outlineColor: context.theme.color }}
+                style={{ float: "left", backgroundColor: "white", color: context.theme.color, outlineColor: context.theme.color }}
                 onClick={() => dispatch({
                     type: "ADD OBJECT",
                     key: arrKey,
@@ -25,7 +25,7 @@ const AddModify: React.FC<PropTypes> = ({ modify, arr, arrKey, newElement }: Pro
             +Add</button>
             <button 
                 className="button"
-                style={{ color: context.theme.color, outlineColor: context.theme.color }}
+                style={{ backgroundColor: "white", color: context.theme.color, outlineColor: context.theme.color }}
                 onClick={ modify }>
             Modify</button>
         </div>

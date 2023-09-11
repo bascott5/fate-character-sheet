@@ -19,7 +19,6 @@ const Identity: React.FC = () => {
                     key: "name",
                     event: e.target.value
                 })}/>
-                <h3 className="type">NAME</h3>
             </div>
             <div className="container">
                 <input type="text" className="input" value={ context.identity.pronouns } onChange={(e) => dispatch({
@@ -30,7 +29,7 @@ const Identity: React.FC = () => {
                 <h3 className="type">PRONOUNS</h3>
             </div>
             <div className="container">
-                <input type="number" className="input" value={ context.identity.fatePoints } min={0} onChange={(e) => dispatch({
+                <input type="number" className="valueInput" value={ context.identity.fatePoints } min={0} onChange={(e) => dispatch({
                     type: "HANDLE INPUT IDENTITY",
                     key: "fatePoints",
                     event: e.target.valueAsNumber
@@ -38,7 +37,7 @@ const Identity: React.FC = () => {
                 <h3 className="type">FATE POINTS</h3>
             </div>
             <div className="container">
-                <input type="number" className="input" value={ context.identity.refresh } min={0} onChange={(e) => dispatch({
+                <input type="number" className="valueInput" value={ context.identity.refresh } min={0} onChange={(e) => dispatch({
                     type: "HANDLE INPUT IDENTITY",
                     key: "refresh",
                     event: e.target.valueAsNumber

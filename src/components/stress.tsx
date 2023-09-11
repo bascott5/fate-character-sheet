@@ -54,12 +54,12 @@ const Stress: React.FC = () => {
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <div>
-                <h1>STRESS</h1>
+                <h1 className="title">STRESS</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-56px 0px 0px 155px" }}
+                    style={{ margin: "-54px 0px 0px 146px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -68,20 +68,20 @@ const Stress: React.FC = () => {
                         null
                     }
                     alt="Edit!"
-                    width={30}
-                    height={30}
+                    width={25}
+                    height={25}
                     onClick={() => isEdit(!edit)}
                 />
             </div>
             <div>
                 {edit ? (
                     <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
-                        <h2 style={{ color: "white" }}>EDIT STRESS</h2>
+                        <h2 className="title" style={{ color: "white" }}>EDIT STRESS</h2>
                         {context.stress.map((stressElement, stressIndex) => (
                             <ModifyMenu arr={ context.stress } element={ stressElement } arrKey={ "stress" } initIndex={ stressIndex } isVisible={ modify }>
                                 <div>
-                                    <h3 style={{ fontWeight: "bold" }}>LABEL</h3>
-                                    <input type="text" value={ stressElement.label } onChange={(e) => dispatch({
+                                    <h3 className="headerText">LABEL</h3>
+                                    <input className="input" type="text" value={ stressElement.label } onChange={(e) => dispatch({
                                         type: "HANDLE INPUT",
                                         key: "stress",
                                         value: context.stress,
@@ -89,8 +89,8 @@ const Stress: React.FC = () => {
                                         propertyIndex: stressIndex,
                                         event: e.target.value
                                     })}/>
-                                    <h3 style={{ fontWeight: "bold" }}>TRACK LENGTH</h3>
-                                    <input type="number" value={ stressElement.boxesLength } min={0} max={10} onChange={(e) => {
+                                    <h3 className="headerText">TRACK LENGTH</h3>
+                                    <input className="input" type="number" value={ stressElement.boxesLength } min={0} max={10} onChange={(e) => {
                                         dispatch({
                                             type: "HANDLE INPUT",
                                             key: "stress",
@@ -102,9 +102,9 @@ const Stress: React.FC = () => {
                                     }}/>
                                     {stressElement.boxesLength != 0 ? (
                                         <div>
-                                            <h3 style={{ fontWeight: "bold" }}>BOX VALUES</h3>
+                                            <h3 className="headerText">BOX VALUES</h3>
                                             {context.stress[stressIndex].boxes.map((box, boxIndex) => (
-                                                <input type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
+                                                <input className="input" type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
                                                     type: "HANDLE NESTED INPUT",
                                                     key: "stress",
                                                     value: context.stress,
@@ -119,8 +119,8 @@ const Stress: React.FC = () => {
                                             }
                                         </div>
                                     ) : null}
-                                    <h3 style={{ fontWeight: "bold" }}>NOTES</h3>
-                                    <input type="text" value={ stressElement.notes } onChange={(e) => dispatch({
+                                    <h3 className="headerText">NOTES</h3>
+                                    <input className="input" type="text" value={ stressElement.notes } onChange={(e) => dispatch({
                                         type: "HANDLE INPUT",
                                         key: "stress",
                                         value: context.stress,
@@ -143,24 +143,26 @@ const Stress: React.FC = () => {
                     <div>
                         <h3 style={{ fontWeight: "bold" }}>{ stressElement.label }</h3>
                         <p>{ stressElement.notes }</p>
-                        {stressElement.boxes.map((box, boxIndex) => (
-                            <div>
-                                <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none" }} viewBox="0 0 1500 35">
-                                    <rect className="box" style={{ fill: box.highlighted ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
-                                        type: "TOGGLE STRESS",
-                                        key: "stress",
-                                        value: context.stress,
-                                        propertyKey: "boxes",
-                                        propertyIndex: stressIndex,
-                                        propertyValue: stressElement.boxes,
-                                        nestedPropertyIndex: boxIndex,
-                                        nestedPropertyKey: "highlighted",
-                                        nestedPropertyValue: box.highlighted
-                                    })}/>
-                                    <text x="8" y="17" style={{ pointerEvents: "none" }} font-family="Verdana" font-size="15" fill="grey">{ box.value.toString() }</text>
-                                </svg>
-                            </div>
-                        ))}
+                        <div className="svgContainer">
+                            {stressElement.boxes.map((box, boxIndex) => (
+                                <div className="boxContainer">
+                                    <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none" }} viewBox="0 0 250 30">
+                                        <rect className="box" style={{ fill: box.highlighted ? context.theme.color : "white" }} height={"25"} width={"25"} onClick={() => dispatch({
+                                            type: "TOGGLE STRESS",
+                                            key: "stress",
+                                            value: context.stress,
+                                            propertyKey: "boxes",
+                                            propertyIndex: stressIndex,
+                                            propertyValue: stressElement.boxes,
+                                            nestedPropertyIndex: boxIndex,
+                                            nestedPropertyKey: "highlighted",
+                                            nestedPropertyValue: box.highlighted
+                                        })}/>
+                                        <text x="8" y="17" style={{ pointerEvents: "none" }} font-size="15" fill={ box.highlighted ? "lightgrey" : "grey" }>{ box.value.toString() }</text>
+                                    </svg>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 ))}
             </div>

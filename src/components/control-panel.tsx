@@ -9,10 +9,10 @@ interface PropTypes {
 const ControlPanel: React.FC<PropTypes> = ({ name }: PropTypes) => {
     const [context, dispatch] = useContext(Context);
     const themes = [
-        {theme: "Blue", color: "cornflowerblue" }, 
-        {theme: "Red", color: "tomato" }, 
-        {theme: "Green", color: "lightgreen" }, 
-        {theme: "Purple", color: "plum" }
+        { theme: "Blue", color: "cornflowerblue" }, 
+        { theme: "Red", color: "tomato" }, 
+        { theme: "Green", color: "lightgreen" }, 
+        { theme: "Purple", color: "plum" }
     ];
 
     useEffect(() => {
@@ -24,6 +24,7 @@ const ControlPanel: React.FC<PropTypes> = ({ name }: PropTypes) => {
         }
     }, [name]);
 
+    // TODO: include load inside the control panel
     return (
         <div className="controlPanel">
             <DropdownTwo title={ "Themes" } arr={ themes } func={(element) => dispatch({
