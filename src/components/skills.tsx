@@ -46,7 +46,7 @@ const Skills: React.FC = () => {
                     <h2 className="title" style={{ color: "white" }}>EDIT SKILLS</h2>
                     {context.skills.map((skill, skillIndex) => (
                         <ModifyMenu arr={ context.skills } element={ skill } arrKey={ "skills" } initIndex={ skillIndex } isVisible={ modify }>
-                            <div>
+                            <div style={{  }}>
                                 <input className="input" type="text" value={ skill.text } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "skills",
@@ -55,7 +55,7 @@ const Skills: React.FC = () => {
                                     propertyIndex: skillIndex,
                                     event: e.target.value
                                 })}/>
-                                <input className="input" type="number" value={ skill.modifier } onChange={(e) => dispatch({
+                                <input className="input" style={{ width: "50px", margin: "0px 0px 0px 5px" }} type="number" value={ skill.modifier } onChange={(e) => dispatch({
                                     type: "HANDLE INPUT",
                                     key: "skills",
                                     value: context.skills,
@@ -63,22 +63,21 @@ const Skills: React.FC = () => {
                                     propertyIndex: skillIndex,
                                     event: e.target.valueAsNumber
                                 })}/>
-                                <p>
-                                    {
-                                        skill.modifier === -4 ? "Horrifying (-4)" :
-                                        skill.modifier === -3 ? "Catastrophic (-3)" :
-                                        skill.modifier === -2 ? "Terrible (-2)" :
-                                        skill.modifier === -1 ? "Poor (-1)" :
-                                        skill.modifier === 0 ? "Mediocre (0)" :
-                                        skill.modifier === 1 ? "Average (+1)" :
-                                        skill.modifier === 2 ? "Fair (+2)" :
-                                        skill.modifier === 3 ? "Good (+3)" :
-                                        skill.modifier === 4 ? "Great (+4)" :
-                                        skill.modifier === 5 ? "Superb (+5)" :
-                                        skill.modifier === 6 ? "Fantastic (+6)" :
-                                        skill.modifier === 7 ? "Epic (+7)" :
-                                        skill.modifier === 8 ? "Legendary (+8)" : null
-                                    }
+                                <p style={{ position: "relative", display: "inline-block", margin: "0px 5px 0px" }}>{
+                                        skill.modifier === -4 ? "Horrifying" :
+                                        skill.modifier === -3 ? "Catastrophic" :
+                                        skill.modifier === -2 ? "Terrible" :
+                                        skill.modifier === -1 ? "Poor" :
+                                        skill.modifier === 0 ? "Mediocre" :
+                                        skill.modifier === 1 ? "Average" :
+                                        skill.modifier === 2 ? "Fair" :
+                                        skill.modifier === 3 ? "Good" :
+                                        skill.modifier === 4 ? "Great" :
+                                        skill.modifier === 5 ? "Superb" :
+                                        skill.modifier === 6 ? "Fantastic" :
+                                        skill.modifier === 7 ? "Epic" :
+                                        skill.modifier === 8 ? "Legendary" : null
+                                    } &#40;{ skill.modifier > 0 ? "+" : null}{ skill.modifier }&#41;
                                 </p>
                             </div>
                         </ModifyMenu>
@@ -91,22 +90,23 @@ const Skills: React.FC = () => {
             ) : null}
             {context.skills.map(skill => (
                 <div>
-                    <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dice(skill.modifier)}>
-                        {skill.text}: {
-                            skill.modifier === -4 ? "Horrifying (-4)" :
-                            skill.modifier === -3 ? "Catastrophic (-3)" :
-                            skill.modifier === -2 ? "Terrible (-2)" :
-                            skill.modifier === -1 ? "Poor (-1)" :
-                            skill.modifier === 0 ? "Mediocre (0)" :
-                            skill.modifier === 1 ? "Average (+1)" :
-                            skill.modifier === 2 ? "Fair (+2)" :
-                            skill.modifier === 3 ? "Good (+3)" :
-                            skill.modifier === 4 ? "Great (+4)" :
-                            skill.modifier === 5 ? "Superb (+5)" :
-                            skill.modifier === 6 ? "Fantastic (+6)" :
-                            skill.modifier === 7 ? "Epic (+7)" :
-                            skill.modifier === 8 ? "Legendary (+8)" : null
-                        }
+                    <button className="button" style={{ margin: "20px 0px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dice(skill.modifier)}>
+                        { skill.text }{ skill.text != "" ? ": " : null } 
+                            {
+                                skill.modifier === -4 ? "Horrifying" :
+                                skill.modifier === -3 ? "Catastrophic" :
+                                skill.modifier === -2 ? "Terrible" :
+                                skill.modifier === -1 ? "Poor" :
+                                skill.modifier === 0 ? "Mediocre" :
+                                skill.modifier === 1 ? "Average" :
+                                skill.modifier === 2 ? "Fair" :
+                                skill.modifier === 3 ? "Good" :
+                                skill.modifier === 4 ? "Great" :
+                                skill.modifier === 5 ? "Superb" :
+                                skill.modifier === 6 ? "Fantastic" :
+                                skill.modifier === 7 ? "Epic" :
+                                skill.modifier === 8 ? "Legendary" : null
+                            } &#40;{ skill.modifier > 0 ? "+" : ""}{ skill.modifier }&#41;
                     </button>
                 </div>
             ))}

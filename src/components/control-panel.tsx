@@ -11,8 +11,8 @@ const ControlPanel: React.FC<PropTypes> = ({ name }: PropTypes) => {
     const themes = [
         { theme: "Blue", color: "cornflowerblue" }, 
         { theme: "Red", color: "tomato" }, 
-        { theme: "Green", color: "lightgreen" }, 
-        { theme: "Purple", color: "plum" }
+        { theme: "Green", color: "springgreen" }, 
+        { theme: "Purple", color: "violet" }
     ];
 
     useEffect(() => {
