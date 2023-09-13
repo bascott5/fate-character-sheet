@@ -119,10 +119,9 @@ const Stunts: React.FC = () => {
                     }}/>
                 </div>
             ) : null}
-            {context.stunts.map((stunt, stuntIndex) => (
+            {context.stunts.map(stunt => (
                 <div>
-                    <p className="header">{ stunt.name }:</p> 
-                    <p>{ stunt.description }</p>
+                    <p style={{ display: "inline-block", margin: "18px 0px 0px 0px", fontWeight: "bold" }}>{ stunt.name }:</p> <p style={{ display: "inline-block" }}>{ stunt.description }</p>
                     {stunt.rollable ? (
                         <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>Roll { stunt.skill }: { stunt.bonus } + { stunt.skillBonus }</button>
                     ) : null}

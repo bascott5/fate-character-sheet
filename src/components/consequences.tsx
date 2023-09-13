@@ -83,17 +83,21 @@ const Consequences: React.FC = () => {
             ) : null}
             {context.consequences.map((consequence, consequenceIndex) => (
                 <div>
-                    <svg viewBox="0 0 1500 35">
-                        <rect className="box" style={{ fill: consequence.highlighted ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
-                            type: "TOGGLE BOX",
-                            key: "consequences",
-                            value: context.consequences,
-                            propertyKey: "highlighted",
-                            propertyIndex: consequenceIndex,
-                            propertyValue: consequence.highlighted
-                        })}/>
-                        <text x="8" y="17" font-family="Verdana" font-size="15" fill="grey">{ consequence.value.toString() }</text>
-                    </svg>
+                    <div className="svgContainer" style={{ margin: "20px 0px 0px 0px" }}>
+                        <div className="boxContainer">
+                            <svg viewBox="0 0 250 30">
+                                <rect className="box" style={{ fill: consequence.highlighted ? context.theme.color : "white" }} height={"25"} width={"25"} onClick={() => dispatch({
+                                    type: "TOGGLE BOX",
+                                    key: "consequences",
+                                    value: context.consequences,
+                                    propertyKey: "highlighted",
+                                    propertyIndex: consequenceIndex,
+                                    propertyValue: consequence.highlighted
+                                })}/>
+                                <text style={{ pointerEvents: "none" }} x="8" y="17" font-family="Verdana" font-size="15" fill={ consequence.highlighted ? "lightgrey" : "grey" }>{ consequence.value.toString() }</text>
+                            </svg>
+                        </div>
+                    </div>
                     <h3 className="headerText">{ consequence.label }</h3>
                     <h3 className="headerText" style={{ display: consequence.label != "" ? "block" : "none" }}>LABEL</h3>
                     {consequence.highlighted ? (

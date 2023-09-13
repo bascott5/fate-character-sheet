@@ -93,7 +93,7 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                     alt="Down!"
                     width={25}
                     height={25}
-                    style={{ float: "right", margin: "-30px 0px 0px 0px" }}
+                    style={{ float: "right", margin: "-25px 0px 0px 0px" }}
                     onClick={() => dispatch({
                         type: "CHANGE INDEX",
                         key: arrKey,

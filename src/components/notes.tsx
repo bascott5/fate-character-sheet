@@ -75,7 +75,7 @@ const Notes: React.FC = () => {
             ) : null}
             {context.notes.map(note => (
                 <div>
-                    <p className="headerText">{ note.title }</p>
+                    <p className="headerText" style={{ margin: "18px 0px 0px 0px" }}>{ note.title }</p>
                     <p>{ note.description }</p>  
                 </div>
             ))}
