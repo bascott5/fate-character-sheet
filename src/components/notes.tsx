@@ -20,13 +20,12 @@ const Notes: React.FC = () => {
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
-            <div>
-                <h1 className="title">NOTES</h1>
+            <div style={{ margin: "0px 0px 50px 0px" }}>
+                <h1 className="title" style={{ margin: "0px 0px 0px 0px" }}>NOTES</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-54px 0px 0px 130px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -74,8 +73,8 @@ const Notes: React.FC = () => {
                 </div>
             ) : null}
             {context.notes.map(note => (
-                <div>
-                    <p className="headerText" style={{ margin: "18px 0px 0px 0px" }}>{ note.title }</p>
+                <div style={ Object.values(note).toString() == "," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 0px 0px" } }>
+                    <p className="headerText">{ note.title }</p>
                     <p>{ note.description }</p>  
                 </div>
             ))}

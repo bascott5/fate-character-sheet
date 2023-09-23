@@ -53,13 +53,12 @@ const Conditions: React.FC = () => {
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
-            <div>
-                <h1 className="title">CONDITIONS</h1>
+            <div style={{ margin: "0px 0px 50px 0px" }}>
+                <h1 className="title" style={{ margin: "0px 0px 0px 0px" }}>CONDITIONS</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-54px 0px 0px 237px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -103,7 +102,7 @@ const Conditions: React.FC = () => {
                                     <div>
                                         <h3 className="headerText">BOX VALUES</h3>
                                         {condition.boxes.map((box, boxIndex) => (
-                                            <input className="input" type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
+                                            <input className="input" style={{ color: context.theme.color, width: "40px", margin: "0px 10px 10px 0px" }} type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
                                                 type: "HANDLE NESTED INPUT",
                                                 key: "conditions",
                                                 value: context.conditions,
@@ -138,7 +137,7 @@ const Conditions: React.FC = () => {
                 </div>
             ) : null}
             {context.conditions.map((condition, conditionIndex) => (
-                <div>
+                <div style={ Object.values(condition).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 0px 0px" } }>
                     <h3 style={{ fontWeight: "bold" }}>{ condition.label }</h3>
                     <p>{ condition.notes }</p>
                     <div className="svgContainer">
@@ -156,7 +155,7 @@ const Conditions: React.FC = () => {
                                     nestedPropertyKey: "highlighted",
                                     nestedPropertyValue: box.highlighted
                                 })}/>
-                                <text x="8" y="17" style={{ pointerEvents: "none" }} font-family="Verdana" font-size="15" fill="grey">{ box.value.toString() }</text>
+                                <text x={box.value < 10 ? "9" : "3"} y="17" style={{ pointerEvents: "none" }} font-family="Verdana" font-size="15" fill={ box.highlighted ? "lightgrey" : "dimgrey" }>{ box.value.toString() }</text>
                             </svg>
                         </div>
                     ))}

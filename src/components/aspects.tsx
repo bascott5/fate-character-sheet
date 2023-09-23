@@ -52,13 +52,12 @@ const Aspects: React.FC = () => {
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
-            <div>
-                <h1 className="title">ASPECTS</h1>
+            <div style={{ margin: "0px 0px 50px 0px" }}>
+                <h1 className="title" style={{ margin: "0px 0px 0px 0px" }}>ASPECTS</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-54px 0px 0px 172px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -148,7 +147,7 @@ const Aspects: React.FC = () => {
             ) : null} 
             <div>
                 {context.aspects.map((aspect, aspectIndex) => (
-                    <div>
+                    <div style={Object.values(aspect).toString() == ",,,,,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 0px 0px" }}>
                         <h3 className="header">{ aspect.categoryHeader.toUpperCase() }</h3>
                         <p className="header" style={{ color: context.theme.color }}>{ aspect.label.toUpperCase() }</p>
                         <p className="header" style={{ fontStyle: "italic", fontWeight: "bold" }}>{ aspect.aspect }</p> 

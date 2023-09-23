@@ -31,13 +31,12 @@ const Stunts: React.FC = () => {
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
-            <div>
-                <h1 className="title">STUNTS</h1>
+            <div style={{ margin: "0px 0px 50px 0px" }}>
+                <h1 className="title" style={{ margin: "0px 0px 0px 0px" }}>STUNTS</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-54px 0px 0px 153px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -67,7 +66,7 @@ const Stunts: React.FC = () => {
                                     event: e.target.value
                                 })}/>
                                 <p className="headerText">ROLLABLE</p>
-                                <input className="input" type="checkbox" checked={ stunt.rollable } onChange={() => dispatch({
+                                <input style={{ margin: "0px 0px 15px 0px" }} type="checkbox" checked={ stunt.rollable } onChange={() => dispatch({
                                     type: "TOGGLE BOX",
                                     key: "stunts",
                                     value: context.stunts,
@@ -120,10 +119,10 @@ const Stunts: React.FC = () => {
                 </div>
             ) : null}
             {context.stunts.map(stunt => (
-                <div>
-                    <p style={{ display: "inline-block", margin: "18px 0px 0px 0px", fontWeight: "bold" }}>{ stunt.name }:</p> <p style={{ display: "inline-block" }}>{ stunt.description }</p>
+                <div style={ Object.values(stunt).toString() == ",false,0,,0," ? { display: "none" } : edit ? { margin: "10px 0px 0px 0px" } : { margin: "-45px 0px 0px 0px" }}>
+                    <p style={{ display: "inline-block", fontWeight: "bold" }}>{ stunt.name }{ stunt.name != "" ? ": " : null }</p> <p style={{ display: "inline-block" }}>{ stunt.description }</p>
                     {stunt.rollable ? (
-                        <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>Roll { stunt.skill }: { stunt.bonus } + { stunt.skillBonus }</button>
+                        <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>{ stunt.skill }{ stunt.skill != "" ? ": " : null } { stunt.bonus } + { stunt.skillBonus }</button>
                     ) : null}
                 </div>
             ))}

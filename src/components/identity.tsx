@@ -14,14 +14,14 @@ const Identity: React.FC = () => {
     return (
         <div className="identity" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
             <div className="container">
-                <input type="text" className="inputName" value={ context.identity.name } onChange={(e) => dispatch({
+                <input type="text" className="inputName" value={ context.identity.name } style={{ color: context.theme.color }} onChange={(e) => dispatch({
                     type: "HANDLE INPUT IDENTITY",
                     key: "name",
                     event: e.target.value
                 })}/>
             </div>
             <div className="container">
-                <input type="text" className="input" value={ context.identity.pronouns } onChange={(e) => dispatch({
+                <input type="text" className="input" value={ context.identity.pronouns } style={{ color: context.theme.color }} onChange={(e) => dispatch({
                     type: "HANDLE INPUT IDENTITY",
                     key: "pronouns",
                     event: e.target.value
@@ -29,7 +29,7 @@ const Identity: React.FC = () => {
                 <h3 className="type">PRONOUNS</h3>
             </div>
             <div className="container">
-                <input type="number" className="valueInput" value={ context.identity.fatePoints } min={0} onChange={(e) => dispatch({
+                <input type="number" className="valueInput" value={ context.identity.fatePoints } style={{ color: context.theme.color }} min={0} onChange={(e) => dispatch({
                     type: "HANDLE INPUT IDENTITY",
                     key: "fatePoints",
                     event: e.target.valueAsNumber
@@ -37,7 +37,7 @@ const Identity: React.FC = () => {
                 <h3 className="type">FATE POINTS</h3>
             </div>
             <div className="container">
-                <input type="number" className="valueInput" value={ context.identity.refresh } min={0} onChange={(e) => dispatch({
+                <input type="number" className="valueInput" value={ context.identity.refresh } style={{ color: context.theme.color }} min={0} onChange={(e) => dispatch({
                     type: "HANDLE INPUT IDENTITY",
                     key: "refresh",
                     event: e.target.valueAsNumber

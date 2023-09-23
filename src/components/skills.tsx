@@ -21,13 +21,12 @@ const Skills: React.FC = () => {
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
-            <div>
-                <h1 className="title">SKILLS</h1>
+            <div style={{ margin: "0px 0px 50px 0px" }}>
+                <h1 className="title" style={{ margin: "0px 0px 0px 0px" }}>SKILLS</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-54px 0px 0px 134px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -89,8 +88,8 @@ const Skills: React.FC = () => {
                 </div>
             ) : null}
             {context.skills.map(skill => (
-                <div>
-                    <button className="button" style={{ margin: "20px 0px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dice(skill.modifier)}>
+                <div style={ Object.values(skill).toString() == ",0" ? { display: "none" } : { display: "inline-block" }}>
+                    <button className="button" style={edit ? { margin: "28px 10px 0px 0px", backgroundColor: context.theme.color } : { margin: "-15px 10px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dice(skill.modifier)}>
                         { skill.text }{ skill.text != "" ? ": " : null } 
                             {
                                 skill.modifier === -4 ? "Horrifying" :

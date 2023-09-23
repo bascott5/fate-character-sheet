@@ -23,13 +23,12 @@ const Consequences: React.FC = () => {
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
-            <div>
-                <h1 className="title">CONSEQUENCES</h1>
+            <div style={{ margin: "0px 0px 50px 0px" }}>
+                <h1 className="title" style={{ margin: "0px 0px 0px 0px" }}>CONSEQUENCES</h1>
                 <Image
                     priority
                     loading="eager"
                     className="edit"
-                    style={{ margin: "-54px 0px 0px 302px" }}
                     src={
                         context.theme.theme == "Blue" ? blueedit :
                         context.theme.theme == "Red" ? rededit :
@@ -82,8 +81,8 @@ const Consequences: React.FC = () => {
                 </div>
             ) : null}
             {context.consequences.map((consequence, consequenceIndex) => (
-                <div>
-                    <div className="svgContainer" style={{ margin: "20px 0px 0px 0px" }}>
+                <div style={ Object.values(consequence).toString() == ",1,false,false," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 0px 0px" } } >
+                    <div className="svgContainer">
                         <div className="boxContainer">
                             <svg viewBox="0 0 250 30">
                                 <rect className="box" style={{ fill: consequence.highlighted ? context.theme.color : "white" }} height={"25"} width={"25"} onClick={() => dispatch({
@@ -94,12 +93,11 @@ const Consequences: React.FC = () => {
                                     propertyIndex: consequenceIndex,
                                     propertyValue: consequence.highlighted
                                 })}/>
-                                <text style={{ pointerEvents: "none" }} x="8" y="17" font-family="Verdana" font-size="15" fill={ consequence.highlighted ? "lightgrey" : "grey" }>{ consequence.value.toString() }</text>
+                                <text style={{ pointerEvents: "none" }} x={consequence.value < 10 ? "9" : "3"} y="17" font-family="Verdana" font-size="15" fill={ consequence.highlighted ? "lightgrey" : "dimgrey" }>{ consequence.value.toString() }</text>
                             </svg>
                         </div>
                     </div>
                     <h3 className="headerText">{ consequence.label }</h3>
-                    <h3 className="headerText" style={{ display: consequence.label != "" ? "block" : "none" }}>LABEL</h3>
                     {consequence.highlighted ? (
                         <div>
                             <input type="text" value={ consequence.recoveringText } onChange={(e) => dispatch({

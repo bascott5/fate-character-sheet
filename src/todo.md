@@ -4,6 +4,7 @@
         [] Get UI right inside each component
         [x] Change size of SVGS
         [] Change font of all text
+    [] Dynamic background?
 [] Add dice rolling mechanic
 [] Style loading page
 [] Remake UI to not include pages and have everything be from one interface
