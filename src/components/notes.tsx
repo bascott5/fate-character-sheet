@@ -73,9 +73,9 @@ const Notes: React.FC = () => {
                 </div>
             ) : null}
             {context.notes.map(note => (
-                <div style={ Object.values(note).toString() == "," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 0px 0px" } }>
-                    <p className="headerText">{ note.title }</p>
-                    <p>{ note.description }</p>  
+                <div style={ Object.values(note).toString() == "," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
+                    <p className="headerText" style={{ margin: "0px 0px 10px 0px" }}>{ note.title }</p>
+                    <p className="paragraph">{ note.description }</p>  
                 </div>
             ))}
         </div>

@@ -1,10 +1,10 @@
 # Priority
 [] Make sure everything looks pretty
-    [] Get text and svgs properly formatted
-        [] Get UI right inside each component
+    [x] Get text and svgs properly formatted
+        [x] Get UI right inside each component
         [x] Change size of SVGS
-        [] Change font of all text
-    [] Dynamic background?
+        [x] Change font of all text
+    [x] Dynamic background
 [] Add dice rolling mechanic
 [] Style loading page
 [] Remake UI to not include pages and have everything be from one interface

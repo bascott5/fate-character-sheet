@@ -102,7 +102,7 @@ const Conditions: React.FC = () => {
                                     <div>
                                         <h3 className="headerText">BOX VALUES</h3>
                                         {condition.boxes.map((box, boxIndex) => (
-                                            <input className="input" style={{ color: context.theme.color, width: "40px", margin: "0px 10px 10px 0px" }} type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
+                                            <input className="input" style={{ width: "40px", margin: "0px 10px 10px 0px" }} type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
                                                 type: "HANDLE NESTED INPUT",
                                                 key: "conditions",
                                                 value: context.conditions,
@@ -137,9 +137,9 @@ const Conditions: React.FC = () => {
                 </div>
             ) : null}
             {context.conditions.map((condition, conditionIndex) => (
-                <div style={ Object.values(condition).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 0px 0px" } }>
-                    <h3 style={{ fontWeight: "bold" }}>{ condition.label }</h3>
-                    <p>{ condition.notes }</p>
+                <div style={ Object.values(condition).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
+                    <h3 style={{ fontWeight: "bold", margin: "0px 0px 10px 0px" }}>{ condition.label }</h3>
+                    <p className="paragraph">{ condition.notes }</p>
                     <div className="svgContainer">
                     {condition.boxes.map((box, boxIndex) => (
                         <div className="boxContainer">

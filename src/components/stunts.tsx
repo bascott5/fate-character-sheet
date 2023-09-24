@@ -119,10 +119,10 @@ const Stunts: React.FC = () => {
                 </div>
             ) : null}
             {context.stunts.map(stunt => (
-                <div style={ Object.values(stunt).toString() == ",false,0,,0," ? { display: "none" } : edit ? { margin: "10px 0px 0px 0px" } : { margin: "-45px 0px 0px 0px" }}>
-                    <p style={{ display: "inline-block", fontWeight: "bold" }}>{ stunt.name }{ stunt.name != "" ? ": " : null }</p> <p style={{ display: "inline-block" }}>{ stunt.description }</p>
+                <div style={ Object.values(stunt).toString() == ",false,0,,0," ? { display: "none" } : edit ? { margin: "10px 0px 0px 0px" } : { margin: "-45px 0px 50px 0px" }}>
+                    <p style={{ display: "inline-block", fontWeight: "bold" }}>{ stunt.name }{ stunt.name != "" ? ": " : null }</p> <p className="paragraph" style={{ display: "inline-block" }}>{ stunt.description }</p>
                     {stunt.rollable ? (
-                        <button className="button" style={{ backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>{ stunt.skill }{ stunt.skill != "" ? ": " : null } { stunt.bonus } + { stunt.skillBonus }</button>
+                        <button className="button" style={{ display: "block", margin: "0px 0px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>{ stunt.skill }{ stunt.skill != "" ? ": " : null } { stunt.bonus } + { stunt.skillBonus }</button>
                     ) : null}
                 </div>
             ))}

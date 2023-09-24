@@ -1,6 +1,7 @@
 import OptionContainer from "@/components/option-container";
 import ContextProvider from "@/components/context-provider";
 import ControlPanel from "@/components/control-panel";
+import Background from "../../components/background";
 import { useRouter } from "next/router";
 
 const CharacterSheet: React.FC = () => {
@@ -10,6 +11,7 @@ const CharacterSheet: React.FC = () => {
     return (
         <div className="characterSheet">
             <ContextProvider>
+                <Background />
                 <ControlPanel name={ { name }.name } />
                 <OptionContainer />
             </ContextProvider>

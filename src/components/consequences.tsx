@@ -7,6 +7,13 @@ import blueedit from "../images/blueedit.svg";
 import rededit from "../images/rededit.svg";
 import greenedit from "../images/greenedit.svg";
 import purpleedit from "../images/purpleedit.svg";
+import bluecheckmark from "../images/bluecheckmark.svg";
+import redcheckmark from "../images/redcheckmark.svg";
+import purplecheckmark from "../images/purplecheckmark.svg";
+import bluetrash from "../images/bluetrash.svg";
+import redtrash from "../images/redtrash.svg";
+import greentrash from "../images/greentrash.svg";
+import purpletrash from "../images/purpletrash.svg";
 
 export interface ConsequenceTypes {
     label: string,
@@ -81,7 +88,7 @@ const Consequences: React.FC = () => {
                 </div>
             ) : null}
             {context.consequences.map((consequence, consequenceIndex) => (
-                <div style={ Object.values(consequence).toString() == ",1,false,false," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 0px 0px" } } >
+                <div style={ Object.values(consequence).toString() == ",1,false,false," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } } >
                     <div className="svgContainer">
                         <div className="boxContainer">
                             <svg viewBox="0 0 250 30">
@@ -100,7 +107,7 @@ const Consequences: React.FC = () => {
                     <h3 className="headerText">{ consequence.label }</h3>
                     {consequence.highlighted ? (
                         <div>
-                            <input type="text" value={ consequence.recoveringText } onChange={(e) => dispatch({
+                            <input className="input" type="text" value={ consequence.recoveringText } onChange={(e) => dispatch({
                                 type: "HANDLE INPUT",
                                 key: "consequences",
                                 value: context.consequences,
@@ -108,14 +115,28 @@ const Consequences: React.FC = () => {
                                 propertyIndex: consequenceIndex,
                                 event: e.target.value
                             })}/>
-                            <button style={{ color: consequence.recovering ? "blue" : "red" }} onClick={() => dispatch({
-                                type: "TOGGLE BOX",
-                                key: "consequences",
-                                value: context.consequences,
-                                propertyKey: "recovering",
-                                propertyIndex: consequenceIndex,
-                                propertyValue: consequence.recovering
-                            })}>_/</button>
+                            <Image 
+                                priority
+                                loading="eager"
+                                style={{ margin: "0px 0px -5px 0px" }}
+                                src={ 
+                                    context.theme.theme == "Blue" ? consequence.recovering ? bluecheckmark : bluetrash :
+                                    context.theme.theme == "Red" ? consequence.recovering ? redcheckmark : redtrash :
+                                    context.theme.theme == "Purple" ? consequence.recovering ? purplecheckmark : purpletrash :
+                                    null
+                                }
+                                alt={consequence.recovering ? "Checked!" : "Unchecked!"}
+                                width={20}
+                                height={20}
+                                onClick={() => dispatch({
+                                    type: "TOGGLE BOX",
+                                    key: "consequences",
+                                    value: context.consequences,
+                                    propertyKey: "recovering",
+                                    propertyIndex: consequenceIndex,
+                                    propertyValue: consequence.recovering
+                                })}
+                            />
                         </div>
                     ) : null}
                 </div>

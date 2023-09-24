@@ -112,9 +112,9 @@ const SituationAspects: React.FC = () => {
                 </div>
             ) : null}
             {context.situationAspects.map((aspect, aspectIndex) => (
-                <div style={ Object.values(aspect).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 0px 0px" } }>
-                    <h3 style={{ fontWeight: "bold" }}>{ aspect.aspect }</h3>
-                    <p>{ aspect.notes }</p>
+                <div style={ Object.values(aspect).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
+                    <h3 style={{ fontWeight: "bold", margin: "0px 0px 10px 0px" }}>{ aspect.aspect }</h3>
+                    <p className="paragraph">{ aspect.notes }</p>
                     <div className="svgContainer">
                         {aspect.freeInvokes.map((invoke, invokeIndex) => (
                             <div className="boxContainer">

@@ -77,7 +77,9 @@ const ModifyMenu: React.FC<Props> = ({ arr, element, arrKey, initIndex, isVisibl
                     />
                 </div>
             ) : null}
-            { children }
+            <div style={ isVisible ? { backgroundColor: "white", opacity: 0.5, pointerEvents: "none", width: "75%" } : {} }>
+                { children }
+            </div>
             {isVisible ? (
                 <Image
                     priority

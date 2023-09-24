@@ -4,6 +4,16 @@ body {
     overflow-x: hidden;
 }
 
+.background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
 .edit {
     display: inline-block;
     float: right;
@@ -205,10 +215,6 @@ body {
     display: inline-block;
 }
 
-.edit {
-    
-}
-
 .headerText {
     font-family: sans-serif;
     font-weight: bold; 
@@ -218,12 +224,13 @@ body {
 .header {
     font-family: sans-serif;
     font-weight: bold;
-    margin: 0px 0px 15px 0px;
+    margin: 0px 0px 10px 0px;
 }
 
 .paragraph {
-    font-family: serif;
-    padding: "0px 0px 15px 0px";
+    color: dimgrey;
+    font-family: sans-serif;
+    margin: 0px 0px 10px 0px;
 }
 
 .input {
@@ -236,7 +243,7 @@ body {
     border-bottom: solid lightgrey 1px;
     font-size: 15px;
     margin: 0px 0px 15px 0px;
-    width: 150px;
+    width: 175px;
 }
 
 .controlPanel {
@@ -308,7 +315,7 @@ body {
         margin: 0px -190px 0px 0px;
         .box {
             outline: solid;
-            outline-color: black;
+            outline-color: dimgrey;
         }
     }
 }

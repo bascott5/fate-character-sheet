@@ -11,30 +11,26 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs1" />
+  <circle
+     style="fill:#ee82ee;fill-opacity:1;stroke-width:1"
+     id="path1"
+     cx="35.465298"
+     cy="35.465302"
+     r="35.465302" />
   <g
-     id="layer1"
-     transform="translate(-130.90012,-82.587311)">
-    <circle
-       style="fill:#dda0dd;fill-opacity:1;stroke-width:1"
-       id="path1"
-       cx="166.36542"
-       cy="118.05261"
-       r="35.465302" />
-    <g
-       id="g2"
-       transform="matrix(0.77529613,0.77529613,-0.77529613,0.77529613,179.04888,-48.808195)">
-      <path
-         style="fill:#ffffff;fill-opacity:1;stroke-width:1.01166"
-         d="m 100.74776,142.96755 7.76777,-13.45438 -15.828282,1.1e-4 z"
-         id="path2" />
-      <rect
-         style="fill:#ffffff;fill-opacity:1;stroke-width:1.08997"
-         id="rect2"
-         width="15.828003"
-         height="33.643742"
-         x="92.687386"
-         y="94.041367"
-         ry="0" />
-    </g>
+     id="g2"
+     transform="matrix(0.77529613,0.77529613,-0.77529613,0.77529613,48.14876,-131.39551)">
+    <path
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.01166"
+       d="m 100.74776,142.96755 7.76777,-13.45438 -15.828282,1.1e-4 z"
+       id="path2" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.08997"
+       id="rect2"
+       width="15.828003"
+       height="33.643742"
+       x="92.687386"
+       y="94.041367"
+       ry="0" />
   </g>
 </svg>
