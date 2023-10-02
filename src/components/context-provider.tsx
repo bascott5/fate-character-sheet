@@ -15,6 +15,11 @@ interface Props {
     children: JSX.Element[]
 }
 
+interface Dice {
+    currentRoll: 0,
+    modifier: 0
+}
+
 interface InitStateTypes {
     "options": {
         "isAspects": boolean,
@@ -35,6 +40,7 @@ interface InitStateTypes {
     "conditions": ConditionTypes[],
     "situationAspects": SituationTypes[];
     "notes": NoteTypes[],
+    "dice": Dice,
     "theme": ThemeTypes
 }
 
@@ -55,6 +61,7 @@ export type Action =
     | { type: "CHANGE SKILL BONUS" }
     | { type: "CHANGE INDEX", key: string, value: ObjectTypes[], propertyIndex: number, indexB: number }
     /*| { type: "CHANGE HEIGHT", key: string, value: object[], propertyIndex: number, boxHeight: number | undefined }*/
+    | { type: "SET CURRENT ROLL", payload: number | number[] }
     | { type: "SET THEME", payload: ThemeTypes }
     | { type: "LOAD JSON", name: string }
 
@@ -83,6 +90,7 @@ export let initState: InitStateTypes = {
     conditions: [],
     situationAspects: [],
     notes: [],
+    dice: { currentRoll: 0, modifier: 0 },
     theme: { theme: "Blue", color: "cornflowerblue" }
 }
 
@@ -241,6 +249,14 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                         } : {...key}
                     })
                 }*/
+            case "SET CURRENT ROLL":
+                return {
+                    ...state,
+                    ["dice"]: {
+                        ...state.dice,
+                        ["currentRoll"]: action.payload
+                    }
+                }
             case "SET THEME":
                 return {
                     ...state,
