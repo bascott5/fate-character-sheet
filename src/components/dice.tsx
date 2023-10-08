@@ -1,5 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./context-provider";
+import Image from "next/image";
+import bluedice from "../images/bluedice.svg";
+import reddice from "../images/reddice.svg";
+import purpledice from "../images/purpledice.svg";
 
 interface PropTypes {
     children: JSX.Element
@@ -55,9 +59,9 @@ const Dice: React.FC = ({ children }: PropTypes) => {
 
     return (
         <div>
-            <div style={rolling ? { backgroundColor: "rgba(0, 0, 0, 0.5)", position: "fixed", width: "100%", height: "100%", top: 0, left: 0, right: 0, bottom: 0, zIndex: 2 } : null} />
+            <div className={rolling ? "overlay" : ""} />
             {rolling ? (
-                <div style={{ backgroundColor: "white", position: "absolute", margin: "0 0 auto", padding: "15px 100px 15px 25px", borderRadius: "5px", top: "40%", left: "41%", zIndex: rolling ? 5 : 2 }}>
+                <div className="overlayContent" style={{ zIndex: rolling ? 5 : 2 }}>
                     <h1 style={{ fontFamily: "sans-serif", color: context.theme.color }}>Insert Bonus</h1>
                     <input className="input" style={{ color: context.theme.color, width: "200px", fontSize: "25px" }} type="number" value={ bonus } onChange={(e) => setBonus(e.target.valueAsNumber)}/>
                     <button className="button" style={{ backgroundColor: context.theme.color, right: -80 }} onClick={() => {
@@ -77,13 +81,28 @@ const Dice: React.FC = ({ children }: PropTypes) => {
                 <div style={{ position: "fixed", right: 30, top: 750, display: "flex", flexDirection: "column" }}>
                     {rolled ? (
                         <div>
-                            <p style={{ flex: "0", position: "relative", color: context.theme.color, backgroundColor: "white", outlineColor: "black", padding: "25px 0px 25px 0px", margin: "0px 0px 25px 0px", borderRadius: "10px", border: "1px solid dimgrey", textAlign: "center", fontSize: "25px", fontFamily: "sans-serif" }} placeholder="">{ context.dice.currentRoll }</p>
+                            <p style={{ flex: "0", position: "relative", color: context.theme.color, backgroundColor: "white", outlineColor: "black", padding: "25px 0px 25px 0px", margin: "10px 0px 5px 0px", borderRadius: "10px", border: "1px solid dimgrey", textAlign: "center", fontSize: "25px", fontFamily: "sans-serif" }} placeholder="">{ context.dice.currentRoll }</p>
                         </div>
                     ) : null}
-                    <button style={{ flex: "0", position: "relative", margin: rolled ? "0px 25px 0px 25px" : "107px 25px 0px 25px", padding: "5px", width: "50px" }} onClick={() => {
-                        setBonus(0);
-                        isRolling(true);
-                    }}>Roll!</button>
+                    <Image 
+                        priority
+                        loading="eager"
+                        className="dice"
+                        style={{ margin: rolled ? "0px 25px 0px 25px" : "97px 25px 0px 25px" }}
+                        src={
+                            context.theme.theme == "Blue" ? bluedice :
+                            context.theme.theme == "Red" ? reddice :
+                            context.theme.theme == "Purple" ? purpledice :
+                            null
+                        }
+                        alt="Roll!"
+                        width={40}
+                        height={40}
+                        onClick={() => {
+                            setBonus(0);
+                            isRolling(true);
+                        }}
+                    />
                 </div>
             </div>
         </div>

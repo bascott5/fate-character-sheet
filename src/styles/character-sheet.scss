@@ -198,6 +198,60 @@ body {
     }
 }
 
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+.overlayContent {
+    background-color: white;
+    position: fixed;
+    margin: 0 0 auto;
+    padding: 15px 100px 15px 25px;
+    border-radius: 5px;
+    top: 40%;
+    left: 41%;
+}
+
+.rollContainer {
+    position: fixed;
+    right: 30;
+    top: 750;
+    display: flex;
+    flex-direction: column;
+}
+
+.rollResult {
+    flex: 0;
+    position: relative;
+    background-color: white;
+    outline-color: black;
+    padding: 25px 0px 25px 0px;
+    margin: 10px 0px 5px 0px;
+    border-radius: 10px;
+    border: 1px solid dimgrey;
+    text-align: center;
+    font-size: 25px;
+    font-family: sans-serif;
+}
+
+.dice {
+    flex: 0;
+    position: relative;
+    padding: 5px;
+}
+
+.dice:hover {
+    filter: brightness(75%);
+}
+
 .columnContainer {
     display: flex;
     flex-wrap: wrap;
