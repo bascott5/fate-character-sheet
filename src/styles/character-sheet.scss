@@ -252,6 +252,10 @@ body {
     filter: brightness(75%);
 }
 
+.dice:active {
+    filter: brightness(50%)
+}
+
 .columnContainer {
     display: flex;
     flex-wrap: wrap;

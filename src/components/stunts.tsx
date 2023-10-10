@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { Context } from "./context-provider";
 import { dice } from "./dice";
 import AddModify from "./add-modify";
@@ -22,12 +22,6 @@ const Stunts: React.FC = () => {
     const [edit, isEdit] = useState<boolean>(false);
     const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
-
-    /*useEffect(() => {
-        if (context.skills.length > 0 && context.stunts.length > 0) {
-            dispatch({ type: "CHANGE SKILL BONUS" })
-        }
-    }, [context.skills, context.stunts]);*/
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
@@ -89,14 +83,17 @@ const Stunts: React.FC = () => {
                                             dispatch({ type: "CHANGE SKILL BONUS" });
                                         }}/>
                                         <p className="headerText">SKILL</p>
-                                        <input className="input" type="text" value={ stunt.skill } onChange={(e) => dispatch({
-                                            type: "HANDLE INPUT",
-                                            key: "stunts",
-                                            value: context.stunts,
-                                            propertyKey: "skill",
-                                            propertyIndex: stuntIndex,
-                                            event: e.target.value
-                                        })}/>
+                                        <input className="input" type="text" value={ stunt.skill } onChange={(e) => {
+                                            dispatch({
+                                                type: "HANDLE INPUT",
+                                                key: "stunts",
+                                                value: context.stunts,
+                                                propertyKey: "skill",
+                                                propertyIndex: stuntIndex,
+                                                event: e.target.value
+                                            });
+                                            dispatch({ type: "CHANGE SKILL BONUS" });
+                                        }}/>
                                     </div>
                                 ) : null}
                                 <p className="headerText">DESCRIPTION</p>

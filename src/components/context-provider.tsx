@@ -225,7 +225,17 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
             case "CHANGE SKILL BONUS":
                 let stuntCopy = [...state.stunts];
 
-                stuntCopy.map((stunt, stuntIndex) => {
+                for (let i = 0; i < stuntCopy.length; i++) {
+                    for (let j = 0; j < state.skills.length; j++) {
+                        if (stuntCopy[i].skill == state.skills[j].text) {
+                            stuntCopy[i].skillBonus = state.skills[j].modifier;
+                        } else {
+                            stuntCopy[i].skillBonus = 0;
+                        }
+                    }
+                }
+
+                /*stuntCopy.map((stunt, stuntIndex) => {
                     state.skills.map((skill, skillIndex) => {
                         if (skillIndex === stuntIndex && stunt != undefined) {
                             stunt.skillBonus = skill.modifier;
@@ -233,7 +243,7 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                             stunt.skillBonus = 0;
                         }
                     })
-                })
+                })*/
 
                 return {
                     ...state,
