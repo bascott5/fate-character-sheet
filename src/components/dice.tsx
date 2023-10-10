@@ -22,7 +22,7 @@ const Dice: React.FC = ({ children }: PropTypes) => {
 
         if (timer !== 0) {
             isRolled(true);
-            setTimer(5000);
+            setTimer(2500);
             time = setTimeout(() => isRolled(false), 5000); 
         }
 

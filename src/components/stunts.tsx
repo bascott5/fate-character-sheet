@@ -23,11 +23,11 @@ const Stunts: React.FC = () => {
     const [modify, isModify] = useState<boolean>(false);
     let [context, dispatch] = useContext(Context);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (context.skills.length > 0 && context.stunts.length > 0) {
             dispatch({ type: "CHANGE SKILL BONUS" })
         }
-    }, [context.skills, context.stunts]);
+    }, [context.skills, context.stunts]);*/
 
     return (
         <div className="sheetContent" style={{ color: context.theme.color, outlineColor: context.theme.color }}>
@@ -77,14 +77,17 @@ const Stunts: React.FC = () => {
                                 {stunt.rollable ? (
                                     <div>
                                         <p className="headerText">BONUS</p>
-                                        <input className="input" type="number" value={ stunt.bonus } onChange={(e) => dispatch({
-                                            type: "HANDLE INPUT",
-                                            key: "stunts",
-                                            value: context.stunts,
-                                            propertyKey: "bonus",
-                                            propertyIndex: stuntIndex,
-                                            event: e.target.valueAsNumber
-                                        })}/>
+                                        <input className="input" type="number" value={ stunt.bonus } onChange={(e) => {
+                                            dispatch({
+                                                type: "HANDLE INPUT",
+                                                key: "stunts",
+                                                value: context.stunts,
+                                                propertyKey: "bonus",
+                                                propertyIndex: stuntIndex,
+                                                event: e.target.valueAsNumber
+                                            });
+                                            dispatch({ type: "CHANGE SKILL BONUS" });
+                                        }}/>
                                         <p className="headerText">SKILL</p>
                                         <input className="input" type="text" value={ stunt.skill } onChange={(e) => dispatch({
                                             type: "HANDLE INPUT",
@@ -122,7 +125,7 @@ const Stunts: React.FC = () => {
                 <div style={ Object.values(stunt).toString() == ",false,0,,0," ? { display: "none" } : edit ? { margin: "10px 0px 0px 0px" } : { margin: "-45px 0px 50px 0px" }}>
                     <p style={{ display: "inline-block", fontWeight: "bold" }}>{ stunt.name }{ stunt.name != "" ? ": " : null }</p> <p className="paragraph" style={{ display: "inline-block" }}>{ stunt.description }</p>
                     {stunt.rollable ? (
-                        <button className="button" style={{ display: "block", margin: "0px 0px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>{ stunt.skill }{ stunt.skill != "" ? ": " : null } { stunt.bonus } + { stunt.skillBonus }</button>
+                        <button className="button" style={{ display: "block", margin: "0px 0px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>{ stunt.skill }{ stunt.skill != "" ? ": " : null } { stunt.bonus } { stunt.skillBonus >= 0 ? "+" : "-" } { stunt.skillBonus >= 0 ? stunt.skillBonus : -stunt.skillBonus }</button>
                     ) : null}
                 </div>
             ))}

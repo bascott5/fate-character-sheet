@@ -46,22 +46,28 @@ const Skills: React.FC = () => {
                     {context.skills.map((skill, skillIndex) => (
                         <ModifyMenu arr={ context.skills } element={ skill } arrKey={ "skills" } initIndex={ skillIndex } isVisible={ modify }>
                             <div style={{  }}>
-                                <input className="input" type="text" value={ skill.text } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "skills",
-                                    value: context.skills,
-                                    propertyKey: "text",
-                                    propertyIndex: skillIndex,
-                                    event: e.target.value
-                                })}/>
-                                <input className="input" style={{ width: "50px", margin: "0px 0px 0px 5px" }} type="number" value={ skill.modifier } onChange={(e) => dispatch({
-                                    type: "HANDLE INPUT",
-                                    key: "skills",
-                                    value: context.skills,
-                                    propertyKey: "modifier",
-                                    propertyIndex: skillIndex,
-                                    event: e.target.valueAsNumber
-                                })}/>
+                                <input className="input" type="text" value={ skill.text } onChange={(e) => {
+                                    dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "skills",
+                                        value: context.skills,
+                                        propertyKey: "text",
+                                        propertyIndex: skillIndex,
+                                        event: e.target.value
+                                    });
+                                    dispatch({ type: "CHANGE SKILL BONUS" });
+                                }}/>
+                                <input className="input" style={{ width: "50px", margin: "0px 0px 0px 5px" }} type="number" value={ skill.modifier } onChange={(e) => {
+                                    dispatch({
+                                        type: "HANDLE INPUT",
+                                        key: "skills",
+                                        value: context.skills,
+                                        propertyKey: "modifier",
+                                        propertyIndex: skillIndex,
+                                        event: e.target.valueAsNumber
+                                    });
+                                    dispatch({ type: "CHANGE SKILL BONUS" });
+                                }}/>
                                 <p style={{ position: "relative", display: "inline-block", margin: "0px 5px 0px" }}>{
                                         skill.modifier === -4 ? "Horrifying" :
                                         skill.modifier === -3 ? "Catastrophic" :
