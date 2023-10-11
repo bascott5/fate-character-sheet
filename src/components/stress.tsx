@@ -139,13 +139,13 @@ const Stress: React.FC = () => {
                     </div>
                 ) : null}
                 {context.stress.map((stressElement, stressIndex) => (
-                    <div style={ Object.values(stressElement).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
+                    <div style={ Object.values(stressElement).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px -21px 0px" } : { margin: "-15px 0px 35px 0px" } }>
                         <h3 style={{ fontWeight: "bold", margin: "0px 0px 10px 0px" }}>{ stressElement.label }</h3>
                         <p className="paragraph">{ stressElement.notes }</p>
                         <div className="svgContainer">
                             {stressElement.boxes.map((box, boxIndex) => (
                                 <div className="boxContainer">
-                                    <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none" }} viewBox="0 0 250 30">
+                                    <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none", margin: "10px 0px 25px 0px" }} viewBox="0 0 250 30">
                                         <rect className="box" style={{ fill: box.highlighted ? context.theme.color : "white" }} height={"25"} width={"25"} onClick={() => dispatch({
                                             type: "TOGGLE STRESS",
                                             key: "stress",

@@ -147,10 +147,10 @@ const Aspects: React.FC = () => {
             ) : null} 
             <div style={{ margin: "0px 0px 0px 0px" }}>
                 {context.aspects.map((aspect, aspectIndex) => (
-                    <div style={Object.values(aspect).toString() == ",,,,,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" }}>
+                    <div style={Object.values(aspect).toString() == ",,,,,0," ? { display: "none" } : edit ? { margin: "-47px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" }}>
                         <h2 className="header">{ aspect.categoryHeader.toUpperCase() }</h2>
                         <h3 className="header" style={{ color: context.theme.color }}>{ aspect.label.toUpperCase() }</h3>
-                        <p className="header" style={{ fontStyle: "italic", fontWeight: "bold", display: "inline-block", margin: "0px 0px 10px 0px" }}>{ aspect.aspect }</p> <p className="paragraph" style={ aspect.flags.length == 0 ? { display: "none", margin: "0px 0px 0px 0px" } : { display: "inline-block", margin: "0px 0px 0px 0px" } }>&#40;{ aspect.flags }&#41;</p>
+                        <p className="header" style={{ fontStyle: "italic", fontWeight: "bold", display: "inline-block", margin: "35px 0px 10px 0px" }}>{ aspect.aspect }</p> <p className="paragraph" style={ aspect.flags.length == 0 ? { display: "none", margin: "0px 0px 0px 0px" } : { display: "inline-block", margin: "0px 0px 0px 0px" } }>&#40;{ aspect.flags }&#41;</p>
                         <p className="paragraph" style={{ margin: "0px 0px 10px 0px" }} >{ aspect.notes.toUpperCase() }</p>
                         <div className="svgContainer">
                             {aspect.freeInvokes.map((invoke, invokeIndex) => (

@@ -155,12 +155,15 @@ const ContextProvider: React.FC<Props> = ({ children }: Props) => {
                     })
                 }
             case "DELETE BOX":
+                let copy = [...action.propertyValue];
+                copy.pop();
+
                 return {
                     ...state,
                     [action.key]: action.value.map((key, keyIndex) => {
                         return keyIndex === action.propertyIndex ? {
                             ...key,
-                            [action.propertyKey]: action.propertyValue.splice(action.propertyValue.length - 1, 1)
+                            [action.propertyKey]: [...copy]
                         } : {...key}
                     })
                 }
