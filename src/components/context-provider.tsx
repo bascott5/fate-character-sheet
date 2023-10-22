@@ -67,14 +67,14 @@ export type Action =
 
 export let initState: InitStateTypes = {
     options: {
-        isAspects: false,
-        isSkills: false,
-        isStunts: false,
-        isStress: false,
-        isConsequences: false,
-        isConditions: false,
-        isSituationAspects: false,
-        isNotes: false
+        isAspects: true,
+        isSkills: true,
+        isStunts: true,
+        isStress: true,
+        isConsequences: true,
+        isConditions: true,
+        isSituationAspects: true,
+        isNotes: true
     },
     identity: {
         name: "",
