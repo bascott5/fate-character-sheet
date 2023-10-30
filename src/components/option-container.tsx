@@ -21,16 +21,6 @@ const OptionContainer: React.FC = () => {
 
     return (
         <div>
-            <div style={{ margin: "0px 0px 10px 32px" }}>
-                {Object.entries(context.options).map(([key, value]) => (
-                    <button className="button" style={{ fontFamily: "sans-serif", backgroundColor: context.theme.color }} onClick={() => dispatch({ 
-                        type: "TOGGLE", 
-                        key: key, 
-                        value: value })}>
-                        { key === "isSituationAspects" ? key.substring(2, 11) + " " + key.substring(11) : key.substring(2) }: { value.toString() } 
-                    </button>
-                ))}
-            </div>
             <Identity />
             <div className="columnContainer">
                 <div className="firstColumn">

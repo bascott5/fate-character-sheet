@@ -119,11 +119,12 @@ body {
         outline-style: solid;
         outline-width: thick;
         border-radius: 5px;
-        padding: 35px 0px 10px 0px;
-        margin: 25px 50px 0px 50px;
+        height: 150px;
+        padding: 0px 0px 10px 0px;
+        margin: 95px 50px 0px 50px;
     .container {
         display: inline-block;
-        margin: 0px 25px 0px 35px;
+        margin: 35px 25px 0px 0px;
     }
     .inputName {
         position: relative;
@@ -134,7 +135,7 @@ body {
         border-right: none;
         border-bottom: solid lightgrey 1px;
         font-size: 50px;
-        margin: 0px 265px 15px 0px;
+        margin: 0px 265px 15px 85px;
         width: 700px;
     }
     .input {
@@ -158,7 +159,7 @@ body {
         border-left: none;
         border-right: none;
         border-bottom: solid lightgrey 1px;
-        margin: 0px 10px 0px 0px;
+        margin: 0px 5px 0px 0px;
         width: 100px;
     }
     .type {
@@ -306,7 +307,8 @@ body {
 
 .controlPanel {
     float: right;
-    margin-right: 5px;
+    position: absolute;
+    margin: -85px 0px 0px 1437px;
 }
 
 //navbar

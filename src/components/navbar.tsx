@@ -29,7 +29,6 @@ const Navbar: React.FC = () => {
 	
 	return (
 		<div ref={ container }>
-			<button className="navbarToggle" style={{ backgroundColor: context.theme.color }} onClick={() => isOpen(!open)}>---</button>
 			<div className="navbar" style={open ? { display: "block" } : { display: "none" }}>
 				<h1 className="logo">Fate Core</h1>
 				<div>

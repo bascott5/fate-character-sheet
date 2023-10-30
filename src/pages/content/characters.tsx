@@ -20,7 +20,7 @@ const Characters: React.FC = () => {
             <Background />
             {rendered ? (
                 <div>
-                    <div style={{ margin: "0px 100px 0px 0px", float: "right" }}>
+                    <div style={{ margin: "2px 145px 0px 0px", float: "right" }}>
                         <Link href={{ pathname: "/content/character-sheet" }}><button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }}>New Character</button></Link>
                         <button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => isModify(!modify)}>Modify{modify ? "-" : "+"}</button>
                     </div>
