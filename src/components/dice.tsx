@@ -6,10 +6,6 @@ import bluedice from "../images/bluedice.svg";
 import reddice from "../images/reddice.svg";
 import purpledice from "../images/purpledice.svg";
 
-interface PropTypes {
-    children: JSX.Element
-}
-
 const Dice: React.FC = () => {
     const [rolled, isRolled] = useState(false);
     const [rolling, isRolling] = useState(false);
