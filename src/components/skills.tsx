@@ -1,6 +1,7 @@
+import React from "react";
 import { useState, useContext } from "react"
-import { Context } from "@/components/context-provider";
-import { dice } from "@/components/dice";
+import { Context } from "../components/context-provider";
+import Dice from "../components/dice";
 import AddModify from "./add-modify";
 import ModifyMenu from "./modify-menu";
 import Image from "next/image";
@@ -44,7 +45,7 @@ const Skills: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 className="title" style={{ color: "white" }}>EDIT SKILLS</h2>
                     {context.skills.map((skill, skillIndex) => (
-                        <ModifyMenu arr={ context.skills } element={ skill } arrKey={ "skills" } initIndex={ skillIndex } isVisible={ modify }>
+                        <ModifyMenu key={ skillIndex } arr={ context.skills } element={ skill } arrKey={ "skills" } initIndex={ skillIndex } isVisible={ modify }>
                             <div style={{  }}>
                                 <input className="input" type="text" value={ skill.text } onChange={(e) => {
                                     dispatch({
@@ -93,9 +94,9 @@ const Skills: React.FC = () => {
                     }}/>
                 </div>
             ) : null}
-            {context.skills.map(skill => (
-                <div style={ Object.values(skill).toString() == ",0" ? { display: "none" } : { display: "inline-block" }}>
-                    <button className="button" style={edit ? { margin: "28px 10px 0px 0px", backgroundColor: context.theme.color } : { margin: "-15px 10px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dice(skill.modifier)}>
+            {context.skills.map((skill, skillIndex) => (
+                <div key={ skillIndex } style={ Object.values(skill).toString() == ",0" ? { display: "none" } : { display: "inline-block" }}>
+                    <button className="button" style={edit ? { margin: "28px 10px 0px 0px", backgroundColor: context.theme.color } : { margin: "-15px 10px 0px 0px", backgroundColor: context.theme.color }}>
                         { skill.text }{ skill.text != "" ? ": " : null } 
                             {
                                 skill.modifier === -4 ? "Horrifying" :

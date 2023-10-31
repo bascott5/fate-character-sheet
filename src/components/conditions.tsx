@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
 import AddModify from "./add-modify";
@@ -76,7 +77,7 @@ const Conditions: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 className="title" style={{ color: "white" }}>EDIT CONDITIONS</h2>
                     {context.conditions.map((condition, conditionIndex) => (
-                        <ModifyMenu arr={ context.conditions } element={ condition } arrKey={ "conditions" } initIndex={ conditionIndex } isVisible={ modify }>
+                        <ModifyMenu key={ conditionIndex } arr={ context.conditions } element={ condition } arrKey={ "conditions" } initIndex={ conditionIndex } isVisible={ modify }>
                             <div>
                                 <h3 className="headerText">LABEL</h3>
                                 <input className="input" type="text" value={ condition.label } onChange={(e) => dispatch({
@@ -102,7 +103,7 @@ const Conditions: React.FC = () => {
                                     <div>
                                         <h3 className="headerText">BOX VALUES</h3>
                                         {condition.boxes.map((box, boxIndex) => (
-                                            <input className="input" style={{ width: "40px", margin: "0px 10px 10px 0px" }} type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
+                                            <input key={ boxIndex } className="input" style={{ width: "40px", margin: "0px 10px 10px 0px" }} type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
                                                 type: "HANDLE NESTED INPUT",
                                                 key: "conditions",
                                                 value: context.conditions,
@@ -137,12 +138,12 @@ const Conditions: React.FC = () => {
                 </div>
             ) : null}
             {context.conditions.map((condition, conditionIndex) => (
-                <div style={ Object.values(condition).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
+                <div key={ conditionIndex } style={ Object.values(condition).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
                     <h3 style={{ fontWeight: "bold", margin: "0px 0px 10px 0px" }}>{ condition.label }</h3>
                     <p className="paragraph">{ condition.notes }</p>
                     <div className="svgContainer">
                     {condition.boxes.map((box, boxIndex) => (
-                        <div className="boxContainer">
+                        <div key={ boxIndex } className="boxContainer">
                             <svg style={{ display: condition.boxesLength != 0 ? "block" : "none" }} viewBox="0 0 250 30">
                                 <rect className="box" style={{ fill: box.highlighted ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                                     type: "TOGGLE STRESS",

@@ -1,5 +1,6 @@
+import React from 'react';
 import { useState } from 'react';
-import Section from '@/components/section';
+import Section from '../components/section';
 import Link from "next/link";
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 const Dropdown: React.FC<Props> = ({ chapter, index }: Props) => {
     const [open, isOpen] = useState<boolean>(false);
 
-	let pages = [];
+	let pages: string[] = [];
     let sections = new Array();
 	let link = "";
     switch (index) {
@@ -75,9 +76,9 @@ const Dropdown: React.FC<Props> = ({ chapter, index }: Props) => {
 			break;
 	}
 
-	for (let i = 0; i < sections.length; i++) {
+	/*for (let i = 0; i < sections.length; i++) {
 		pages.push(<Section sections={sections[i]} />);
-	}
+	}*/
 
     return (
         <div>

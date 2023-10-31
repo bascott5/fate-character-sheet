@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useContext } from "react";
 import { Context } from "./context-provider";
 import AddModify from "./add-modify";
@@ -12,7 +13,6 @@ import redcheckmark from "../images/redcheckmark.svg";
 import purplecheckmark from "../images/purplecheckmark.svg";
 import bluetrash from "../images/bluetrash.svg";
 import redtrash from "../images/redtrash.svg";
-import greentrash from "../images/greentrash.svg";
 import purpletrash from "../images/purpletrash.svg";
 
 export interface ConsequenceTypes {
@@ -53,7 +53,7 @@ const Consequences: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 className="title" style={{ color: "white" }}>EDIT CONSEQUENCES</h2>
                     {context.consequences.map((consequence, consequenceIndex) => (
-                        <ModifyMenu arr={ context.consequences } element={ consequence } arrKey={ "consequences" } initIndex={ consequenceIndex } isVisible={ modify }>
+                        <ModifyMenu key={ consequenceIndex } arr={ context.consequences } element={ consequence } arrKey={ "consequences" } initIndex={ consequenceIndex } isVisible={ modify }>
                             <div>
                                 <h3 className="headerText">LABEL</h3>
                                 <input className="input" type="text" value={ consequence.label } onChange={(e) => dispatch({
@@ -88,7 +88,7 @@ const Consequences: React.FC = () => {
                 </div>
             ) : null}
             {context.consequences.map((consequence, consequenceIndex) => (
-                <div style={ Object.values(consequence).toString() == ",1,false,false," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } } >
+                <div key={ consequenceIndex } style={ Object.values(consequence).toString() == ",1,false,false," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } } >
                     <div className="svgContainer">
                         <div className="boxContainer">
                             <svg viewBox="0 0 250 30">

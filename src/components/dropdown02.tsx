@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useRef, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
 import { ThemeTypes } from "./option-container";
@@ -36,7 +37,7 @@ const DropdownTwo: React.FC<PropTypes> = ({ title, arr, func }: PropTypes ) => {
             <button className="dropdownContainer" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => isOpen(!open)}>{ title }</button>
             <div style={{ position: "absolute" }}>
                 {arr.map(element => (
-                    <button className="dropdownElement" style={{ display: open ? "block" : "none", backgroundColor: context.theme.color }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
+                    <button key={ element.theme } className="dropdownElement" style={{ display: open ? "block" : "none", backgroundColor: context.theme.color }} onClick={() => elementSelectionHandler(element)}>{ element.theme }</button>
                 ))}
             </div>
         </div>

@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "./context-provider";
 import Image from "next/image";
@@ -9,7 +10,7 @@ interface PropTypes {
     children: JSX.Element
 }
 
-const Dice: React.FC = ({ children }: PropTypes) => {
+const Dice: React.FC = () => {
     const [rolled, isRolled] = useState(false);
     const [rolling, isRolling] = useState(false);
     const [timer, setTimer] = useState(5000);
@@ -17,7 +18,7 @@ const Dice: React.FC = ({ children }: PropTypes) => {
     let [context, dispatch] = useContext(Context);
 
     useEffect(() => {
-        let time;
+        let time = setTimeout(() => {}, 0);
         setTimer(0);
 
         if (timer !== 0) {
@@ -75,9 +76,6 @@ const Dice: React.FC = ({ children }: PropTypes) => {
                 </div>
             ) : null}
             <div >
-                <div>
-                    { children }
-                </div>
                 <div style={{ position: "fixed", right: 30, top: 750, display: "flex", flexDirection: "column" }}>
                     {rolled ? (
                         <div>

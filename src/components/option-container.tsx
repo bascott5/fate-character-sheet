@@ -1,11 +1,12 @@
 "use client"
+import React from "react";
 import { useContext } from "react";
 import { Context } from "./context-provider";
-import Skills from "@/components/skills";
-import Notes from "@/components/notes";
-import Stress from "@/components/stress";
-import Aspects from "@/components/aspects";
-import Stunts from "@/components/stunts";
+import Skills from "../components/skills";
+import Notes from "../components/notes";
+import Stress from "../components/stress";
+import Aspects from "../components/aspects";
+import Stunts from "../components/stunts";
 import Consequences from "./consequences";
 import Conditions from "./conditions";
 import SituationAspects from "./situation-aspects";

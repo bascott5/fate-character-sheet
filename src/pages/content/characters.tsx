@@ -1,7 +1,8 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useContext } from "react";
-import { initState } from "@/components/context-provider";
+import { initState } from "../../components/context-provider";
 import { Context } from "../../components/context-provider";
 import bluetrash from "../../images/bluetrash.svg";
 import Background from "../../components/background";
@@ -25,9 +26,9 @@ const Characters: React.FC = () => {
                         <button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => isModify(!modify)}>Modify{modify ? "-" : "+"}</button>
                     </div>
                     <div style={{ position: "absolute", display: "block" }}>
-                        {Object.keys(localStorage).map(name => (
+                        {Object.keys(localStorage).map((name, nameIndex) => (
                             JSON.stringify(Object.keys(JSON.parse(localStorage.getItem(name) || "{}"))) == JSON.stringify(Object.keys(initState)) ? (
-                                <div>
+                                <div key={ nameIndex }>
                                     <Link style={{ textDecoration: "none" }} href={{
                                         pathname: "/content/character-sheet",
                                         query: { name: name }

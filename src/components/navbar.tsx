@@ -1,4 +1,5 @@
-import Dropdown from '@/components/dropdown01';
+import React from 'react';
+import Dropdown from '../components/dropdown01';
 import { useState, useEffect, useRef, useContext } from 'react';
 import Link from 'next/link';
 import { Context } from './context-provider';

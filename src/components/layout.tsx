@@ -1,4 +1,5 @@
-import Navbar from "@/components/navbar";
+import React from "react";
+import Navbar from "../components/navbar";
 
 interface Props {
 	children: JSX.Element

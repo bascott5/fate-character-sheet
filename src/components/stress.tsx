@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
 import AddModify from "./add-modify";
@@ -77,7 +78,7 @@ const Stress: React.FC = () => {
                     <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                         <h2 className="title" style={{ color: "white" }}>EDIT STRESS</h2>
                         {context.stress.map((stressElement, stressIndex) => (
-                            <ModifyMenu arr={ context.stress } element={ stressElement } arrKey={ "stress" } initIndex={ stressIndex } isVisible={ modify }>
+                            <ModifyMenu key={ stressIndex } arr={ context.stress } element={ stressElement } arrKey={ "stress" } initIndex={ stressIndex } isVisible={ modify }>
                                 <div>
                                     <h3 className="headerText">LABEL</h3>
                                     <input className="input" type="text" value={ stressElement.label } onChange={(e) => dispatch({
@@ -103,7 +104,7 @@ const Stress: React.FC = () => {
                                         <div>
                                             <h3 className="headerText">BOX VALUES</h3>
                                             {context.stress[stressIndex].boxes.map((box, boxIndex) => (
-                                                <input className="input" style={{ width: "40px", margin: "0px 10px 10px 0px" }} type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
+                                                <input key={ boxIndex } className="input" style={{ width: "40px", margin: "0px 10px 10px 0px" }} type="number" value={ box.value } max={10} min={1} onChange={(e) => dispatch({
                                                     type: "HANDLE NESTED INPUT",
                                                     key: "stress",
                                                     value: context.stress,
@@ -139,12 +140,12 @@ const Stress: React.FC = () => {
                     </div>
                 ) : null}
                 {context.stress.map((stressElement, stressIndex) => (
-                    <div style={ Object.values(stressElement).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px -21px 0px" } : { margin: "-15px 0px 35px 0px" } }>
+                    <div key={ stressIndex } style={ Object.values(stressElement).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px -21px 0px" } : { margin: "-15px 0px 35px 0px" } }>
                         <h3 style={{ fontWeight: "bold", margin: "0px 0px 10px 0px" }}>{ stressElement.label }</h3>
                         <p className="paragraph">{ stressElement.notes }</p>
                         <div className="svgContainer">
                             {stressElement.boxes.map((box, boxIndex) => (
-                                <div className="boxContainer">
+                                <div key={ boxIndex } className="boxContainer">
                                     <svg style={{ display: stressElement.boxesLength != 0 ? "block" : "none", margin: "10px 0px 25px 0px" }} viewBox="0 0 250 30">
                                         <rect className="box" style={{ fill: box.highlighted ? context.theme.color : "white" }} height={"25"} width={"25"} onClick={() => dispatch({
                                             type: "TOGGLE STRESS",

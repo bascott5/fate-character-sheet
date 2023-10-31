@@ -1,5 +1,6 @@
+import React from "react";
 import { useState, useContext } from "react";
-import { Context } from "@/components/context-provider";
+import { Context } from "../components/context-provider";
 import AddModify from "./add-modify";
 import ModifyMenu from "./modify-menu";
 import Image from "next/image";
@@ -43,7 +44,7 @@ const Notes: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 className="title" style={{ color: "white" }}>EDIT NOTES</h2>
                     {context.notes.map((note, noteIndex) => (
-                        <ModifyMenu arr={ context.notes } element={ note } arrKey={ "notes" } initIndex={ noteIndex } isVisible={ modify }>
+                        <ModifyMenu key={ noteIndex } arr={ context.notes } element={ note } arrKey={ "notes" } initIndex={ noteIndex } isVisible={ modify }>
                             <div>
                                 <p className="headerText">TITLE</p>
                                 <input className="input" type="text" value={ note.title } onChange={(e) => dispatch({
@@ -72,8 +73,8 @@ const Notes: React.FC = () => {
                     }}/>
                 </div>
             ) : null}
-            {context.notes.map(note => (
-                <div style={ Object.values(note).toString() == "," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
+            {context.notes.map((note, noteIndex) => (
+                <div key={ noteIndex } style={ Object.values(note).toString() == "," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
                     <p className="headerText" style={{ margin: "0px 0px 10px 0px" }}>{ note.title }</p>
                     <p className="paragraph">{ note.description }</p>  
                 </div>

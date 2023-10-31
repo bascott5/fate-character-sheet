@@ -1,4 +1,5 @@
-import { useState, useContext } from "react"
+import React from "react"
+import { useContext } from "react"
 import { Context } from "./context-provider"
 
 interface PropTypes {

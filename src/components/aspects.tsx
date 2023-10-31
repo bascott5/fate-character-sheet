@@ -1,7 +1,7 @@
+import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { Context } from "./context-provider";
 import Image from "next/image";
-import Edit from "./edit";
 import AddModify from "./add-modify";
 import ModifyMenu from "./modify-menu";
 import blueedit from "../images/blueedit.svg";
@@ -75,7 +75,7 @@ const Aspects: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                 <h2 className="title" style={{ color: "white" }}>EDIT ASPECTS</h2>
                     {context.aspects.map((aspect, aspectIndex) => (
-                        <ModifyMenu arr={ context.aspects } element={ aspect } arrKey={ "aspects" } initIndex={ aspectIndex } isVisible={ modify }>
+                        <ModifyMenu key={ aspectIndex } arr={ context.aspects } element={ aspect } arrKey={ "aspects" } initIndex={ aspectIndex } isVisible={ modify }>
                             <div>
                                 <h3 className="headerText">CATEGORY HEADER &#40;OPTIONAL&#41;</h3>
                                 <input className="input" type="text" value={ aspect.categoryHeader } onChange={(e) => dispatch({
@@ -147,14 +147,14 @@ const Aspects: React.FC = () => {
             ) : null} 
             <div style={{ margin: "0px 0px 0px 0px" }}>
                 {context.aspects.map((aspect, aspectIndex) => (
-                    <div style={Object.values(aspect).toString() == ",,,,,0," ? { display: "none" } : edit ? { margin: "-47px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" }}>
+                    <div key={ aspectIndex } style={Object.values(aspect).toString() == ",,,,,0," ? { display: "none" } : edit ? { margin: "-47px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" }}>
                         <h2 className="header">{ aspect.categoryHeader.toUpperCase() }</h2>
                         <h3 className="header" style={{ color: context.theme.color }}>{ aspect.label.toUpperCase() }</h3>
                         <p className="header" style={{ fontStyle: "italic", fontWeight: "bold", display: "inline-block", margin: "35px 0px 10px 0px" }}>{ aspect.aspect }</p> <p className="paragraph" style={ aspect.flags.length == 0 ? { display: "none", margin: "0px 0px 0px 0px" } : { display: "inline-block", margin: "0px 0px 0px 0px" } }>&#40;{ aspect.flags }&#41;</p>
                         <p className="paragraph" style={{ margin: "0px 0px 10px 0px" }} >{ aspect.notes.toUpperCase() }</p>
                         <div className="svgContainer">
                             {aspect.freeInvokes.map((invoke, invokeIndex) => (
-                                <div className="boxContainer">
+                                <div key={ invokeIndex } className="boxContainer">
                                     <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }} viewBox="0 0 250 35">
                                         <rect className="box" style={{ fill: invoke ? context.theme.color : "white" }} height={25} width={25} onClick={() => dispatch({
                                             type: "TOGGLE NESTED BOX",

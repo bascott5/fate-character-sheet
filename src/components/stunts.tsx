@@ -1,6 +1,7 @@
+import React from "react";
 import { useState, useContext } from "react";
 import { Context } from "./context-provider";
-import { dice } from "./dice";
+import Dice from "./dice";
 import AddModify from "./add-modify";
 import ModifyMenu from "./modify-menu";
 import Image from "next/image";
@@ -48,7 +49,7 @@ const Stunts: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 className="title" style={{ color: "white" }}>EDIT STUNTS</h2>
                     {context.stunts.map((stunt, stuntIndex) => (
-                        <ModifyMenu arr={ context.stunts } element={ stunt } arrKey={ "stunts" } initIndex={ stuntIndex } isVisible={ modify }>
+                        <ModifyMenu key={ stuntIndex } arr={ context.stunts } element={ stunt } arrKey={ "stunts" } initIndex={ stuntIndex } isVisible={ modify }>
                             <div>
                                 <p className="headerText">NAME</p>
                                 <input className="input" type="text" value={ stunt.name } onChange={(e) => dispatch({
@@ -118,11 +119,11 @@ const Stunts: React.FC = () => {
                     }}/>
                 </div>
             ) : null}
-            {context.stunts.map(stunt => (
-                <div style={ Object.values(stunt).toString() == ",false,0,,0," ? { display: "none" } : edit ? { margin: "10px 0px 0px 0px" } : { margin: "-45px 0px 50px 0px" }}>
+            {context.stunts.map((stunt, stuntIndex) => (
+                <div key={ stuntIndex } style={ Object.values(stunt).toString() == ",false,0,,0," ? { display: "none" } : edit ? { margin: "10px 0px 0px 0px" } : { margin: "-45px 0px 50px 0px" }}>
                     <p style={{ display: "inline-block", fontWeight: "bold" }}>{ stunt.name }{ stunt.name != "" ? ": " : null }</p> <p className="paragraph" style={{ display: "inline-block" }}>{ stunt.description }</p>
                     {stunt.rollable ? (
-                        <button className="button" style={{ display: "block", margin: "0px 0px 0px 0px", backgroundColor: context.theme.color }} onClick={() => dice(stunt.skillBonus + stunt.bonus)}>{ stunt.skill }{ stunt.skill != "" ? ": " : null } { stunt.bonus } { stunt.skillBonus >= 0 ? "+" : "-" } { stunt.skillBonus >= 0 ? stunt.skillBonus : -stunt.skillBonus }</button>
+                        <button className="button" style={{ display: "block", margin: "0px 0px 0px 0px", backgroundColor: context.theme.color }}>{ stunt.skill }{ stunt.skill != "" ? ": " : null } { stunt.bonus } { stunt.skillBonus >= 0 ? "+" : "-" } { stunt.skillBonus >= 0 ? stunt.skillBonus : -stunt.skillBonus }</button>
                     ) : null}
                 </div>
             ))}

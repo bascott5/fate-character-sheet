@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { Context } from "./context-provider";
 import AddModify from "./add-modify";
@@ -71,7 +72,7 @@ const SituationAspects: React.FC = () => {
                 <div className="innerSheetContent" style={{ color: context.theme.color, backgroundColor: context.theme.color }}>
                     <h2 className="title" style={{ color: "white" }}>EDIT ASPECTS</h2>
                     {context.situationAspects.map((aspect, aspectIndex) => (
-                        <ModifyMenu arr={ context.situationAspects } element={ aspect } arrKey={ "situationAspects" } initIndex={ aspectIndex } isVisible={ modify }>
+                        <ModifyMenu key={ aspectIndex } arr={ context.situationAspects } element={ aspect } arrKey={ "situationAspects" } initIndex={ aspectIndex } isVisible={ modify }>
                             <div>
                                 <h3 className="headerText">ASPECT</h3>
                                 <input className="input" type="text" value={ aspect.aspect } onChange={(e) => dispatch({
@@ -112,12 +113,12 @@ const SituationAspects: React.FC = () => {
                 </div>
             ) : null}
             {context.situationAspects.map((aspect, aspectIndex) => (
-                <div style={ Object.values(aspect).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
+                <div key={ aspectIndex } style={ Object.values(aspect).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
                     <h3 style={{ fontWeight: "bold", margin: "0px 0px 10px 0px" }}>{ aspect.aspect }</h3>
                     <p className="paragraph">{ aspect.notes }</p>
                     <div className="svgContainer">
                         {aspect.freeInvokes.map((invoke, invokeIndex) => (
-                            <div className="boxContainer">
+                            <div key={ invokeIndex } className="boxContainer">
                                 <svg style={{ display: aspect.freeInvokesLength != 0 ? "block" : "none" }} viewBox="0 0 250 30">
                                     <rect className="box" style={{ fill: invoke ? context.theme.color : "white", }} height={"25"} width={"25"} onClick={() => dispatch({
                                         type: "TOGGLE NESTED BOX",

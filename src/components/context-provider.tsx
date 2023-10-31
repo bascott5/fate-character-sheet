@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useReducer, createContext } from "react"
 import { AspectTypes } from "./aspects";
 import { SkillTypes } from "./skills";
