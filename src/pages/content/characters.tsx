@@ -38,7 +38,7 @@ const Characters: React.FC = () => {
                                             priority
                                             loading="eager"
                                             className="trash"
-                                            style={{ float: "right", margin: "163px -1290px 0px 1200px" }}
+                                            style={{ float: "right", position: "relative", margin: "163px -1150px 0px 0px" }}
                                             src={
                                                 context.theme.theme == "Blue" ? bluetrash : null
                                             }

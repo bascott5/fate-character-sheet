@@ -140,7 +140,7 @@ const Stress: React.FC = () => {
                     </div>
                 ) : null}
                 {context.stress.map((stressElement, stressIndex) => (
-                    <div key={ stressIndex } style={ Object.values(stressElement).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px -21px 0px" } : { margin: "-15px 0px 35px 0px" } }>
+                    <div key={ stressIndex } style={ Object.values(stressElement).toString() == ",,0," ? { display: "none" } : edit ? { margin: "25px 0px 0px 0px" } : { margin: "-15px 0px 35px 0px" } }>
                         <h3 style={{ fontWeight: "bold", margin: "0px 0px 10px 0px" }}>{ stressElement.label }</h3>
                         <p className="paragraph">{ stressElement.notes }</p>
                         <div className="svgContainer">
