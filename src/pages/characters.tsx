@@ -2,10 +2,10 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useContext } from "react";
-import { initState } from "../../components/context-provider";
-import { Context } from "../../components/context-provider";
-import bluetrash from "../../images/bluetrash.svg";
-import Background from "../../components/background";
+import { initState } from "./../components/context-provider";
+import { Context } from "./../components/context-provider";
+import bluetrash from "./../images/bluetrash.svg";
+import Background from "./../components/background";
 
 const Characters: React.FC = () => {
     let [context, dispatch] = useContext(Context);
@@ -22,7 +22,7 @@ const Characters: React.FC = () => {
             {rendered ? (
                 <div>
                     <div style={{ margin: "2px 145px 0px 0px", float: "right" }}>
-                        <Link href={{ pathname: "/content/character-sheet" }}><button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }}>New Character</button></Link>
+                        <Link href={{ pathname: "/character-sheet" }}><button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }}>New Character</button></Link>
                         <button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => isModify(!modify)}>Modify{modify ? "-" : "+"}</button>
                     </div>
                     <div style={{ position: "absolute", display: "block" }}>
@@ -30,7 +30,7 @@ const Characters: React.FC = () => {
                             JSON.stringify(Object.keys(JSON.parse(localStorage.getItem(name) || "{}"))) == JSON.stringify(Object.keys(initState)) ? (
                                 <div key={ nameIndex }>
                                     <Link style={{ textDecoration: "none" }} href={{
-                                        pathname: "/content/character-sheet",
+                                        pathname: "/character-sheet",
                                         query: { name: name }
                                     }}><h1 style={{ color: context.theme.color, float: "left", margin: "150px 0px 50px 250px", fontSize: "50px", fontFamily: "sans-serif" }}>{ name }</h1></Link>
                                     {modify ? (

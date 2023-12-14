@@ -34,7 +34,7 @@ const ControlPanel: React.FC<PropTypes> = ({ name }: PropTypes) => {
                 payload: { theme: element.theme, color: element.color }
             })} />
             <button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => localStorage.setItem(context.identity.name, JSON.stringify(context))}>Save</button>
-            <Link href={ "/content/characters" }><button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }}>Load</button></Link>
+            <Link href={ "/characters" }><button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }}>Load</button></Link>
         </div>
     )
 }
