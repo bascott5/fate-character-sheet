@@ -313,7 +313,6 @@ body {
     margin: -85px 0px 0px 1437px;
 }
 
-//navbar
 .navbar {
     background-color: khaki;
     position: absolute;
@@ -329,6 +328,17 @@ body {
 
 .logo {
     text-align: center;
+}
+
+.logoContainer {
+    width: 50%;
+    margin: 80px auto;
+}
+
+.fate {
+    display: block;
+    margin: 0 auto;
+    width: 50%
 }
 
 .navbarHeader {

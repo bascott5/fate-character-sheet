@@ -20,25 +20,21 @@ const Characters: React.FC = () => {
         <div>
             <Background />
             {rendered ? (
-                <div>
-                    <div style={{ margin: "2px 145px 0px 0px", float: "right" }}>
+                <div style={{}}>
+                    <div style={{ right: 125, top: 25, position: "absolute" }}>
                         <Link href={{ pathname: "/character-sheet" }}><button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }}>New Character</button></Link>
                         <button className="button" style={{ color: context.theme.color, backgroundColor: "white", outlineColor: context.theme.color, outline: "solid" }} onClick={() => isModify(!modify)}>Modify{modify ? "-" : "+"}</button>
                     </div>
-                    <div style={{ position: "absolute", display: "block" }}>
+                    <div style={{  padding: "100px 50px 50px 0px" }}>
                         {Object.keys(localStorage).map((name, nameIndex) => (
                             JSON.stringify(Object.keys(JSON.parse(localStorage.getItem(name) || "{}"))) == JSON.stringify(Object.keys(initState)) ? (
-                                <div key={ nameIndex }>
-                                    <Link style={{ textDecoration: "none" }} href={{
-                                        pathname: "/character-sheet",
-                                        query: { name: name }
-                                    }}><h1 style={{ color: context.theme.color, float: "left", margin: "150px 0px 50px 250px", fontSize: "50px", fontFamily: "sans-serif" }}>{ name }</h1></Link>
+                                <div key={ nameIndex } style={{ width: "85%"}}>
                                     {modify ? (
                                         <Image 
                                             priority
                                             loading="eager"
                                             className="trash"
-                                            style={{ float: "right", position: "relative", margin: "163px -1150px 0px 0px" }}
+                                            style={{ float: "right", marginTop: "15px", position: "relative" }}
                                             src={
                                                 context.theme.theme == "Blue" ? bluetrash : null
                                             }
@@ -51,6 +47,10 @@ const Characters: React.FC = () => {
                                             }}
                                         />
                                     ) : null}
+                                    <Link style={{ textDecoration: "none", width: "25%" }} href={{
+                                        pathname: "/character-sheet",
+                                        query: { name: name }
+                                    }}><h1 style={{ color: context.theme.color, margin: "50px 0px 0px 250px", fontSize: "50px", fontFamily: "sans-serif" }}>{ name }</h1></Link>
                                 </div>
                             ) : null
                         ))}
